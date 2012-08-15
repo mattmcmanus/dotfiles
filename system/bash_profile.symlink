@@ -29,3 +29,6 @@ complete -W "NSGlobalDomain" defaults
 complete -o "nospace" -W "Finder Dock Mail Safari iTunes iCal Address\ Book SystemUIServer" killall
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
+
+# Macports
+export PATH=/opt/local/bin:/opt/local/sbin:/opt/local/apache2/bin:$PATH

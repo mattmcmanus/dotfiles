@@ -68,4 +68,5 @@ set -g display-time 3000
 # index start from 1
 set -g base-index 1
 # 256 color
-set -g default-terminal "xterm-256color"
+#set -g default-terminal "xterm-256color"
+set -g default-terminal "screen-256color"

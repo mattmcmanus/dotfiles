@@ -1,8 +1,11 @@
+set t_Co=256
 set noswapfile
+
 
 " ----------------------------------------------------------------------------
 "  Text Formatting
 " ----------------------------------------------------------------------------
+
 
 set autoindent             " automatic indent new lines
 set smartindent            " be smart about it
@@ -27,11 +30,6 @@ let mapleader = ","
 " exit to normal mode with 'jj'
 inoremap jj <ESC>
 
-
-" reflow paragraph with Q in normal and visual mode
-nnoremap Q gqap
-vnoremap Q gq
-
 " sane movement with wrap turned on
 nnoremap j gj
 nnoremap k gk
@@ -54,7 +52,7 @@ set nolazyredraw           " turn off lazy redraw
 set number                 " line numbers
 set wildmenu               " turn on wild menu
 set wildmode=list:longest,full
-set ch=2                   " command line height
+"set ch=2                   " command line height
 set backspace=2            " allow backspacing over everything in insert mode
 set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
 set shortmess=filtIoOA     " shorten messages
@@ -75,11 +73,68 @@ set nohlsearch             " don't highlight searches
 set visualbell             " shut the fuck up
 
 
-" ---------------------------------------------------------------------------
-"  Strip all trailing whitespace in file
-" ---------------------------------------------------------------------------
+" VUNDLE
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
-function! StripWhitespace ()
-    exec ':%s/ \+$//gc'
-endfunction
-map ,s :call StripWhitespace ()<CR>
+Bundle 'gmarik/vundle'
+
+
+" --------------------------------------------------------------------------
+" Git
+Bundle 'tpope/vim-fugitive' 
+Bundle 'scrooloose/nerdtree'
+" Crazy cool status line
+Bundle 'Lokaltog/vim-powerline' 
+Bundle 'mileszs/ack.vim' 
+" Sidebar funciton list
+Bundle 'vim-scripts/taglist.vim'
+" Quick file search
+Bundle 'wincent/Command-T'
+
+" --------------------------------------------------------------------------
+" Syntax highlighting
+" --------------------------------------------------------------------------
+Bundle 'tpope/vim-markdown'
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'tpope/vim-surround'
+Bundle 'avakhov/vim-yaml'
+Bundle 'juvenn/mustache.vim'
+Bundle 'nono/vim-handlebars'
+Bundle 'digitaltoad/vim-jade'
+Bundle 'itspriddle/vim-jquery'
+Bundle 'leshill/vim-json'
+Bundle 'tpope/vim-rails'
+
+
+" --------------------------------------------------------------------------
+" Syntax Tools and Helpers
+" --------------------------------------------------------------------------
+"Bundle 'jiangmiao/simple-javascript-indenter'
+Bundle 'tsaleh/vim-align'
+Bundle 'scrooloose/syntastic'
+Bundle 'hallettj/jslint.vim'
+"Enables repeat. Dep for other plugins
+Bundle 'tpope/vim-repeat' 
+" Surround text in things. ex: cs'" 
+Bundle 'tpope/vim-surround' 
+
+" SnipMate stuff
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "honza/snipmate-snippets"
+Bundle "garbas/vim-snipmate"
+
+" Colors
+Bundle 'scottymoon/vim-twilight'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'Lucius'
+Bundle 'Mustang2'
+Bundle 'cschlueter/vim-clouds'
+Bundle 'tomasr/molokai'
+Bundle 'gregsexton/Muon'
+
+
+syntax enable
+set background=dark
+colorscheme wombat256mod 
