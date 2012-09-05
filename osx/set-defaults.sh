@@ -53,6 +53,9 @@ defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
 # Disable opening and closing window animations
 defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
 
+#Disable window animations and Get Info animations in Finder:
+defaults write com.apple.finder DisableAllAnimations -bool true
+
 # Increase window resize speed for Cocoa applications
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 
