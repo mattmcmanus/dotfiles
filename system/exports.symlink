@@ -12,10 +12,14 @@ export HISTCONTROL=ignoredups
 # Make some commands not show up in history
 export HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help"
 
+
 # Node Config
-PATH=$PATH:~/local/bin
+PATH=~/local/bin:$PATH
 PATH=$PATH:~/.dotfiles/bin
 export PATH
+
+#macports
+export PATH=/opt/local/bin:/opt/local/sbin:/opt/local/apache2/bin:/opt/local/lib/php/pear/bin:$PATH
 
 PREFIX=~/local
 export PREFIX
