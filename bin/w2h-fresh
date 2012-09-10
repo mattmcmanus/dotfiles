@@ -1,0 +1,6 @@
+#!/bin/sh
+
+svn up
+./symfony w2h:sync-prod
+./symfony project:permissions
+./symfony cc
