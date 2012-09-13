@@ -18,6 +18,8 @@ PATH=~/local/bin:$PATH
 PATH=$PATH:~/.dotfiles/bin
 export PATH
 
+export NODE_ENV="development"
+
 #macports
 export PATH=/opt/local/bin:/opt/local/sbin:/opt/local/apache2/bin:/opt/local/lib/php/pear/bin:$PATH
 

@@ -1,6 +1,23 @@
 #!/bin/sh
 
-svn up
-./symfony w2h:sync-prod
-./symfony project:permissions
-./symfony cc
+echo ' --> SVN Update'
+svn up -q
+
+echo ' --> W2H: Syncing Prod'
+./symfony w2h:sync-prod -q
+
+echo ' --> Doctrine: Migrate'
+./symfony doctrine:migrate -q
+
+echo ' --> Doctrine: Build all classes'
+./symfony doctrine:build --all-classes -q
+
+echo ' --> W2H: Project Permissions'
+./symfony project:permissions -q
+
+echo ' --> W2H: Cleaing Cache'
+./symfony cc -q
+
+echo '- - - - - - - - - - - - - - - - - - - - - - - -'
+echo '   COMPLETE. So clean, so fresh. GO TO WORK!'
+echo '- - - - - - - - - - - - - - - - - - - - - - - -'
