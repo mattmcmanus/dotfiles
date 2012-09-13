@@ -15,7 +15,7 @@ echo ' --> Doctrine: Build all classes'
 echo ' --> W2H: Project Permissions'
 ./symfony project:permissions -q
 
-echo ' --> W2H: Cleaing Cache'
+echo ' --> W2H: Cleaning Cache'
 ./symfony cc -q
 
 echo '- - - - - - - - - - - - - - - - - - - - - - - -'
