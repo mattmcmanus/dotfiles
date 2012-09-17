@@ -38,3 +38,7 @@ for f in $(command ls ~/.node-completion); do
   test -f "$f" && . "$f"
 done
 # }}}
+
+if [ -e ~/i.symfony_complete ]; then
+  . ~/.symfony_complete
+fi
