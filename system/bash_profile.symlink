@@ -39,6 +39,6 @@ for f in $(command ls ~/.node-completion); do
 done
 # }}}
 
-if [ -e ~/i.symfony_complete ]; then
+if [ -e ~/.symfony_complete ]; then
   . ~/.symfony_complete
 fi
