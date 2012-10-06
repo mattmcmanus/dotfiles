@@ -113,3 +113,5 @@ alias mysqlstop='/opt/local/bin/mysqladmin5 -u root -proot shutdown'
 # SVN
 alias svn-upi='svn up --ignore-externals'
 alias svn-sadd="svn stat | grep ? | awk '{ print \$2 }' | xargs svn add"
+alias svn-sti='svn st --ignore-externals'
+alias svn-ee='svn pe svn:externals .'

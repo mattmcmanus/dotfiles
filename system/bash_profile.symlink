@@ -30,5 +30,15 @@ complete -o "nospace" -W "Finder Dock Mail Safari iTunes iCal Address\ Book Syst
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
 
-# Macports
-export PATH=/opt/local/bin:/opt/local/sbin:/opt/local/apache2/bin:$PATH
+# {{{
+# Node Completion - Auto-generated, do not touch.
+shopt -s progcomp
+for f in $(command ls ~/.node-completion); do
+  f="$HOME/.node-completion/$f"
+  test -f "$f" && . "$f"
+done
+# }}}
+
+if [ -e ~/.symfony_complete ]; then
+  . ~/.symfony_complete
+fi
