@@ -5,7 +5,7 @@ export MANPAGER="less -X"
 # Highlight section titles in manual pages
 export LESS_TERMCAP_md="$ORANGE"
 
-export CDPATH=.:~:~/www:~/www/waytohealth:~/www/waytohealth/versions/cpap:~/www/waytohealth/versions/rc4
+export CDPATH=.:~:~/www:~/www/waytohealth:~/www/waytohealth/versions
 
 # Larger bash history (allow 32³ entries; default is 500)
 export HISTSIZE=32768

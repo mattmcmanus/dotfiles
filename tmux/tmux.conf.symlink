@@ -17,6 +17,12 @@ bind k select-pane -U
 unbind l
 bind l select-pane -R
 
+# Enable mouse support (works in iTerm)
+set-window-option -g mode-mouse on
+set-option -g mouse-select-pane on
+set-option -g mouse-resize-pane on
+set-option -g mouse-select-window on
+
 # move between tmux sessions (tmux > 1.4)
 bind P switch-client -p
 bind N switch-client -n
@@ -25,6 +31,7 @@ bind L switch-client -l
 # reassign ; from last-pane to last-window
 unbind \;
 bind \; last-window
+bind C-a last-window
 
 # reassign ' from select-window to last-pane, and use ' for last-pane
 unbind "'"
@@ -57,13 +64,16 @@ setw -g window-status-format " #I:#W "
 #--Usability--------------------------------------------------------------------
 set-option -g status-keys vi
 set-window-option -g mode-keys vi
-# keep tmux msgs around longer
-set -g display-time 3000
+set -g history-limit 500000 # scrollback buffer size increase
+set -g display-time 3000 # keep tmux msgs around longer
 # set -g set-titles off
 # Set window notifications
 #set-window-option -g monitor-activity on
 #set -g visual-activity on
 #setw -g automatic-rename off
+
+# Allows for faster key repetition
+set -s escape-time 0
 
 # index start from 1
 set -g base-index 1

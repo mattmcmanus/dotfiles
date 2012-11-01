@@ -19,6 +19,7 @@ alias l="ls -Gl"
 
 # List all files colorized in long format, including dot files
 alias la="ls -Gla"
+alias ll="ls -Gla"
 
 # List only directories
 alias lsd='ls -l | grep "^d"'
@@ -111,7 +112,16 @@ alias mysqlstart='sudo /opt/local/bin/mysqld_safe5 &'
 alias mysqlstop='/opt/local/bin/mysqladmin5 -u root -proot shutdown'
 
 # SVN
-alias svn-upi='svn up --ignore-externals'
-alias svn-sadd="svn stat | grep ? | awk '{ print \$2 }' | xargs svn add"
-alias svn-sti='svn st --ignore-externals'
-alias svn-ee='svn pe svn:externals .'
+alias svnupi='svn up --ignore-externals'
+alias svnadd="svn stat | grep ? | awk '{ print \$2 }' | xargs svn add"
+alias svndelete-untracked="svn stat | grep ? | awk '{ print \$2 }' | xargs rm -fR"
+alias svnsti='svn st --ignore-externals | grep -v ^X'
+alias svnstp='svn st --ignore-externals | grep -v ^X && svn st plugins/wayToHealthPlugin'
+alias svnee='svn pe svn:externals .'
+alias svndiff='svn diff | vim -R -'
+
+#symfony
+alias sfsynccontent='./symfony project:sync-content frontend dev from staging@staging'
+
+# NPM
+alias npmpatch='npm version patch && npm publish && git push && git push --tags'
