@@ -23,7 +23,7 @@ export PATH
 export NODE_ENV="development"
 
 #macports
-export PATH=/opt/local/bin:/opt/local/sbin:/opt/local/apache2/bin:/opt/local/lib/php/pear/bin:$PATH
+export PATH=/opt/local/bin:/opt/local/sbin:/opt/local/apache2/bin:/opt/local/lib/php/pear/bin:/usr/local/bin:$PATH
 
 PREFIX=~/local
 export PREFIX

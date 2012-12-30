@@ -116,12 +116,41 @@ alias svnupi='svn up --ignore-externals'
 alias svnadd="svn stat | grep ? | awk '{ print \$2 }' | xargs svn add"
 alias svndelete-untracked="svn stat | grep ? | awk '{ print \$2 }' | xargs rm -fR"
 alias svnsti='svn st --ignore-externals | grep -v ^X'
-alias svnstp='svn st --ignore-externals | grep -v ^X && svn st plugins/wayToHealthPlugin'
+alias svnstp='svn st --ignore-externals | grep -v ^X; svn st plugins/wayToHealthPlugin'
 alias svnee='svn pe svn:externals .'
 alias svndiff='svn diff | vim -R -'
 
 #symfony
 alias sfsynccontent='./symfony project:sync-content frontend dev from staging@staging'
+alias sfdgmd='./symfony doctrine:generate-migrations-diff'
 
 # NPM
 alias npmpatch='npm version patch && npm publish && git push && git push --tags'
+
+# GIT
+alias g='git'
+alias ga='git add'
+alias gp='git push'
+alias gpa='gp --all'
+alias gu='git pull'
+alias gl='git log'
+alias gg='gl --decorate --oneline --graph --date-order --all'
+alias gs='git status'
+alias gst='gs'
+alias gd='git diff'
+alias gdc='gd --cached'
+alias gm='git commit -m'
+alias gma='git commit -am'
+alias gb='git branch'
+alias gba='git branch -a'
+function gc() { git checkout "${@:-master}"; } # Checkout master by default
+alias gco='gc'
+alias gcb='gc -b'
+alias gr='git remote'
+alias grv='gr -v'
+#alias gra='git remote add'
+alias grr='git remote rm'
+alias gcl='git clone'
+
+
+alias datafart='curl --data-binary @- datafart.com'
