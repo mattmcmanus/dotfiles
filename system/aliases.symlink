@@ -113,19 +113,22 @@ alias mysqlstop='/opt/local/bin/mysqladmin5 -u root -proot shutdown'
 
 # SVN
 alias svnupi='svn up --ignore-externals'
+alias svnupp='svn up --ignore-externals; svn up plugins/wayToHealthPlugin'
 alias svnadd="svn stat | grep ? | awk '{ print \$2 }' | xargs svn add"
 alias svndelete-untracked="svn stat | grep ? | awk '{ print \$2 }' | xargs rm -fR"
 alias svnsti='svn st --ignore-externals | grep -v ^X'
 alias svnstp='svn st --ignore-externals | grep -v ^X; svn st plugins/wayToHealthPlugin'
 alias svnee='svn pe svn:externals .'
-alias svndiff='svn diff | vim -R -'
+function svndiff() { vimdiff <(svn cat "$1") "$1"; }
 
 #symfony
 alias sfsynccontent='./symfony project:sync-content frontend dev from staging@staging'
 alias sfdgmd='./symfony doctrine:generate-migrations-diff'
+alias sfdbac='./symfony doctrine:build --all-classes'
 
 # NPM
-alias npmpatch='npm version patch && npm publish && git push && git push --tags'
+alias npmpatch='npm version patch && npm publish && git push origin && git push origin --tags'
+alias npmminor='npm version minor && npm publish && git push origin && git push origin --tags'
 
 # GIT
 alias g='git'

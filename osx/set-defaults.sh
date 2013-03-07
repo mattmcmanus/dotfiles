@@ -55,6 +55,8 @@ defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
 
 #Disable window animations and Get Info animations in Finder:
 defaults write com.apple.finder DisableAllAnimations -bool true
+# Disable Mission contol animation
+defaults write com.apple.dock expose-animation-duration -float 0
 
 # Increase window resize speed for Cocoa applications
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
@@ -208,8 +210,8 @@ defaults write com.apple.terminal StringEncodings -array 4
 
 # Enable “focus follows mouse” for Terminal.app and all X11 apps
 # This means you can hover over a window and start typing in it without clicking first
-#defaults write com.apple.terminal FocusFollowsMouse -bool true
-#defaults write org.x.X11 wm_ffm -bool true
+defaults write com.apple.terminal FocusFollowsMouse -bool true
+defaults write org.x.X11 wm_ffm -bool true
 
 # Disable the Ping sidebar in iTunes
 defaults write com.apple.iTunes disablePingSidebar -bool true

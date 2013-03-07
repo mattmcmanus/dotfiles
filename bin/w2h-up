@@ -1,7 +1,9 @@
 #!/bin/sh
 
 echo ' --> SVN Update'
-svn up -q
+svn up -q --ignore-externals
+svn up -q plugins/wayToHealthPlugin/
+svn up -q plugins/wayToHealthSchemaOverridesPlugin/
 
 echo ' --> W2H: Syncing Prod'
 ./symfony w2h:sync-prod -q
