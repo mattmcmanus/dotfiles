@@ -29,9 +29,7 @@ complete -W "NSGlobalDomain" defaults
 complete -o "nospace" -W "Finder Dock Mail Safari iTunes iCal Address\ Book SystemUIServer" killall
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-[ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
 
-if [ -e ~/.symfony_complete ]; then
-  . ~/.symfony_complete
-fi
-[[ -s /Users/matt/.nvm/nvm.sh ]] && . /Users/matt/.nvm/nvm.sh # This loads NVM
+[ -e ~/.symfony_complete ]; && . ~/.symfony_complete
+
+[[ -s ~/.nvm/nvm.sh ]] && . ~/.nvm/nvm.sh # This loads NVM

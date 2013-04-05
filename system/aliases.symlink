@@ -119,7 +119,7 @@ alias svndelete-untracked="svn stat | grep ? | awk '{ print \$2 }' | xargs rm -f
 alias svnsti='svn st --ignore-externals | grep -v ^X'
 alias svnstp='svn st --ignore-externals | grep -v ^X; svn st plugins/wayToHealthPlugin'
 alias svnee='svn pe svn:externals .'
-function svndiff() { vimdiff <(svn cat "$1") "$1"; }
+function svndiff() { svn diff "$1" | vim -R -; }
 
 #symfony
 alias sfsynccontent='./symfony project:sync-content frontend dev from staging@staging'
