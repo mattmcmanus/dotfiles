@@ -117,6 +117,8 @@ install_dotfiles () {
 setup_gitconfig
 install_dotfiles
 
+[ ! -d ~/.vim/bundle/vundle ] && git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+
 # If we are on a mac, lets install and setup homebrew
 [ "$(uname -s)" == "Darwin" ] && sh $HOME/.dotfiles/osx/set-defaults.sh
 
