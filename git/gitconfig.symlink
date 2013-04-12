@@ -30,7 +30,7 @@
 
 [core]
 	# Use custom `.gitignore` and `.gitattributes`
-	excludesfile = /opt/boxen/config/git/gitignore
+	excludesfile = ~/.gitignore_global
 	attributesfile = ~/.gitattributes
 	# Treat spaces before tabs, lines that are indented with 8 or more spaces, and all kinds of trailing whitespace as an error
 	whitespace = space-before-tab,indent-with-non-tab,trailing-space
@@ -83,6 +83,3 @@
 
 [hub]
 protocol = https
-
-[credential]
-helper = /opt/boxen/bin/boxen-git-credential
