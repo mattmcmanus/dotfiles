@@ -32,5 +32,6 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 [ -e ~/.symfony_complete ] && . ~/.symfony_complete
 
-[[ -s ~/.nvm/nvm.sh ]] && . ~/.nvm/nvm.sh # This loads NVM
+[[ -s ~/.nvm/nvm.sh ]] && . ~/.nvm/nvm.sh && nvm use 0.10 # This loads NVM
 [[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
+
