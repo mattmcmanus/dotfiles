@@ -12,7 +12,7 @@ export HISTSIZE=32768
 export HISTFILESIZE=$HISTSIZE
 export HISTCONTROL=ignoredups
 # Make some commands not show up in history
-export HISTIGNORE="cd:cd -:pwd;exit:date:* --help"
+export HISTIGNORE="cd:cd -:pwd;exit:date"
 
 
 # Node Config
@@ -21,12 +21,3 @@ PATH=$PATH:~/.dotfiles/bin
 export PATH
 
 export NODE_ENV="development"
-
-#macports
-export PATH=/opt/local/bin:/opt/local/sbin:/opt/local/apache2/bin:/opt/local/lib/php/pear/bin:/usr/local/bin:$PATH
-
-PREFIX=~/local
-export PREFIX
-
-N_PREFIX=~/local
-export N_PREFIX
