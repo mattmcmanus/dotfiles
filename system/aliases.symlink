@@ -174,15 +174,15 @@ function each() {
   done;
 }
 
+alias ggs='each "git s"'
+alias ggp='each "git pull"'
+
 function nt() { 
   nodemon -w ../ $1 | bunyan -l warn -o short 
 }
 function nodeb() {
   nodemon $1 | bunyan -l debug -o short 
 }
-
-alias ggs='each "git s"'
-alias ggp='each "git pull"'
 
 
 # Vagrant Special Sauce
