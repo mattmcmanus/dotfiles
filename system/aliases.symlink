@@ -104,7 +104,7 @@ alias pumpitup="osascript -e 'set volume 10'"
 alias hax="growlnotify -a 'Activity Monitor' 'System error' -m 'WTF R U DOIN'"
 
 
-#alias pear="php /usr/lib/php/pear/pearcmd.php" 
+#alias pear="php /usr/lib/php/pear/pearcmd.php"
 #alias pecl="php /usr/lib/php/pear/peclcmd.php"
 
 alias mysqlstart='sudo /opt/local/bin/mysqld_safe5 &'
@@ -131,8 +131,9 @@ alias sfdbac='./symfony doctrine:build --all-classes'
 
 
 # NPM
-function npmv() { 
-  npm test && npm version "$1" && npm publish && git push origin && git push origin --tags
+function npmv() {
+  #npm test &&
+  npm version "$1" && npm publish && git push origin && git push origin --tags
 }
 alias npmpatch='npmv "patch"'
 alias npmminor='npmv "minor"'
@@ -140,7 +141,7 @@ alias npmminor='npmv "minor"'
 alias ngc='npm test && git commit'
 
 # GIT
-
+alias git=hub
 alias g='git'
 alias ga='git add'
 alias gp='git push'
@@ -178,11 +179,11 @@ function each() {
 alias ggs='each "git s"'
 alias ggp='each "git pull"'
 
-function nt() { 
-  nodemon -w ../ $1 | bunyan -l warn -o short 
+function nt() {
+  nodemon -w ../ $1 | bunyan -l warn -o short
 }
 function nodeb() {
-  nodemon $1 | bunyan -l debug -o short 
+  nodemon $1 | bunyan -l debug -o short
 }
 
 

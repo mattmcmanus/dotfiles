@@ -30,11 +30,11 @@ complete -o "nospace" -W "Finder Dock Mail Safari iTunes iCal Address\ Book Syst
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-[[ -s ~/.nvm/nvm.sh ]] && . ~/.nvm/nvm.sh && nvm use 0.10 # This loads NVM
-[[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
-
 # Homebrew bash completion
 [[ -f /usr/local/bin/brew ]] &&  [ -f $(brew --prefix)/etc/bash_completion ] && . $(brew --prefix)/etc/bash_completion
 
 [ -f "$HOME/.bash_completion/symfony" ] && . "$HOME/.bash_completion/symfony"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+[[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
+
+[[ -s /Users/matt/.nvm/nvm.sh ]] && . /Users/matt/.nvm/nvm.sh # This loads NVM

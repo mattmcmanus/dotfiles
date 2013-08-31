@@ -144,7 +144,7 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 # Disable Mission contol animation
-defaults write com.apple.dock expose-animation-duration -float 0
+defaults write com.apple.dock expose-animation-duration -float 1 
 
 #							Google Chrome
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
