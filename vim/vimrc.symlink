@@ -1,77 +1,29 @@
 set t_Co=256
 set noswapfile
 
+set nocompatible                " choose no compatibility with legacy vi
+syntax enable
+set encoding=utf-8
+set showcmd                     " display incomplete commands
+filetype plugin indent on       " load file type plugins + indentation
 
-" ----------------------------------------------------------------------------
-"  Text Formatting
-" ----------------------------------------------------------------------------
+" Appearance
+set background=dark
+colorscheme wombat256mod 
+set number                      " line numbers
 
+" Whitespace
+set nowrap                      " don't wrap lines
+set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
+set expandtab                   " use spaces, not tabs (optional)
+set backspace=indent,eol,start  " backspace through everything in insert mode
 
-set autoindent             " automatic indent new lines
-set smartindent            " be smart about it
-inoremap # X<BS>#
-set nowrap                 " do not wrap lines
-set softtabstop=2          " yep, two
-set shiftwidth=2           " ..
-set tabstop=4
-set expandtab              " expand tabs to spaces
-set nosmarttab             " fuck tabs
-set formatoptions+=n       " support for numbered/bullet lists
-"set textwidth=80           " wrap at 80 chars by default
-set virtualedit=block      " allow virtual edit in visual block ..
-
-" ----------------------------------------------------------------------------
-"  Remapping
-" ----------------------------------------------------------------------------
-
-" lead with ,
-let mapleader = ","
-
-" exit to normal mode with 'jj'
-inoremap jj <ESC>
-
-" sane movement with wrap turned on
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
-nnoremap <Down> gj
-nnoremap <Up> gk
-vnoremap <Down> gj
-vnoremap <Up> gk
-inoremap <Down> <C-o>gj
-inoremap <Up> <C-o>gk
-
-" ----------------------------------------------------------------------------
-"  UI
-" ----------------------------------------------------------------------------
-
-set ruler                  " show the cursor position all the time
-set noshowcmd              " don't display incomplete commands
-set nolazyredraw           " turn off lazy redraw
-set number                 " line numbers
-set wildmenu               " turn on wild menu
-set wildmode=list:longest,full
-"set ch=2                   " command line height
-set backspace=2            " allow backspacing over everything in insert mode
-set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
-set shortmess=filtIoOA     " shorten messages
-set report=0               " tell us about changes
-set nostartofline          " don't jump to the start of line when scrolling
-
-
-" ----------------------------------------------------------------------------
-" Visual Cues
-" ----------------------------------------------------------------------------
-
-set showmatch              " brackets/braces that is
-set mat=5                  " duration to show matching brace (1/10 sec)
-set incsearch              " do incremental searching
-set laststatus=2           " always show the status line
-set ignorecase             " ignore case when searching
-set nohlsearch             " don't highlight searches
-set visualbell             " shut the fuck up
-
+" Searching
+set hlsearch                    " highlight matches
+set incsearch                   " incremental searching
+set ignorecase                  " searches are case insensitive...
+set smartcase                   " ... unless they contain at least one capital letter
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_mofules/*     " Linux/MacOSX
 
 " VUNDLE
 set rtp+=~/.vim/bundle/vundle/
@@ -79,18 +31,13 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 
-
-" --------------------------------------------------------------------------
-" Git
-Bundle 'tpope/vim-fugitive' 
 Bundle 'scrooloose/nerdtree'
-" Crazy cool status line
 Bundle 'Lokaltog/vim-powerline' 
-Bundle 'mileszs/ack.vim' 
-" Sidebar funciton list
-Bundle 'vim-scripts/taglist.vim'
-" Quick file search
-Bundle 'wincent/Command-T'
+Bundle 'mileszs/ack.vim'
+
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-surround' 
+Bundle 'kien/ctrlp.vim'
 
 " --------------------------------------------------------------------------
 " Syntax highlighting
@@ -100,41 +47,10 @@ Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-surround'
 Bundle 'avakhov/vim-yaml'
 Bundle 'juvenn/mustache.vim'
-Bundle 'nono/vim-handlebars'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'itspriddle/vim-jquery'
 Bundle 'leshill/vim-json'
 Bundle 'tpope/vim-rails'
 
 
-" --------------------------------------------------------------------------
-" Syntax Tools and Helpers
-" --------------------------------------------------------------------------
-"Bundle 'jiangmiao/simple-javascript-indenter'
-Bundle 'tsaleh/vim-align'
-Bundle 'scrooloose/syntastic'
-Bundle 'hallettj/jslint.vim'
-"Enables repeat. Dep for other plugins
-Bundle 'tpope/vim-repeat' 
-" Surround text in things. ex: cs'" 
-Bundle 'tpope/vim-surround' 
-
-" SnipMate stuff
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "honza/snipmate-snippets"
-Bundle "garbas/vim-snipmate"
-
-" Colors
-Bundle 'scottymoon/vim-twilight'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'Lucius'
-Bundle 'Mustang2'
-Bundle 'cschlueter/vim-clouds'
-Bundle 'tomasr/molokai'
-Bundle 'gregsexton/Muon'
-
-
-syntax enable
-set background=dark
-colorscheme wombat256mod 
+set runtimepath^=~/.vim/bundle/ctrlp.vim
