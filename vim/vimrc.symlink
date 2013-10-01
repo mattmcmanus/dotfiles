@@ -7,10 +7,11 @@ set encoding=utf-8
 set showcmd                     " display incomplete commands
 filetype plugin indent on       " load file type plugins + indentation
 
-" Appearance
+" Appearance!
 set background=dark
 colorscheme wombat256mod 
 set number                      " line numbers
+set guifont=Bitstream_Vera_Sans_Mono:h14
 
 " Whitespace
 set nowrap                      " don't wrap lines
@@ -23,11 +24,24 @@ set hlsearch                    " highlight matches
 set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_mofules/*     " Linux/MacOSX
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*     " Linux/MacOSX
+
+" More bash-like tab completion
+set wildmode=longest,list,full
+set wildmenu
 
 " VUNDLE
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+
+" Key Mappings
+let mapleader = ","
+nnoremap <Tab> :b#<CR>
+nnoremap <c-w>- :split<CR>
+nnoremap <c-w>\| :vsplit<CR>
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = ''
 
 Bundle 'gmarik/vundle'
 
@@ -38,19 +52,37 @@ Bundle 'mileszs/ack.vim'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-surround' 
 Bundle 'kien/ctrlp.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'kana/vim-textobj-user'
+Bundle 'nelstrom/vim-textobj-rubyblock'
+Bundle 'sjl/gundo.vim'
+Bundle 'abolish.vim'
+
+Bundle 'Lokaltog/vim-distinguished'
+Bundle 'carlhuda/janus'
+Bundle 'twilight'
 
 " --------------------------------------------------------------------------
 " Syntax highlighting
 " --------------------------------------------------------------------------
 Bundle 'tpope/vim-markdown'
 Bundle 'vim-ruby/vim-ruby'
-Bundle 'tpope/vim-surround'
 Bundle 'avakhov/vim-yaml'
 Bundle 'juvenn/mustache.vim'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'itspriddle/vim-jquery'
 Bundle 'leshill/vim-json'
 Bundle 'tpope/vim-rails'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'slim-template/vim-slim'
+Bundle 'nono/vim-handlebars'
+
+" indent guides
+"let g:indent_guides_enable_on_vim_startup = 1
+"let g:indent_guides_color_change_percent = 3
+"let g:indent_guides_start_level = 2
+"let g:indent_guides_guide_size = 1
+"Bundle 'nathanaelkane/vim-indent-guides'
 
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
