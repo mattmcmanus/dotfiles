@@ -22,7 +22,7 @@
 
 [core]
 		# Use custom `.gitignore` and `.gitattributes`
-		excludesfile = ~/.gitignore_global
+	excludesfile = /Users/matt/.gitignore_global
 		attributesfile = ~/.gitattributes
 		# Treat spaces before tabs, lines that are indented with 8 or more spaces, and all kinds of trailing whitespace as an error
 		whitespace = space-before-tab,indent-with-non-tab,trailing-space
@@ -67,11 +67,17 @@
 		insteadOf = "gist:"
 
 [user]
-		name = Matt McManus
-		email = mattmcmanus@gmail.com
+	name = Matt McManus
+	email = matt@mcmanus.io
 
 [push]
 		default = matching
 
 [hub]
 		protocol = https
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
