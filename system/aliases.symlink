@@ -20,6 +20,9 @@ alias l="ls -Gl"
 alias la="ls -Gla"
 alias ll="ls -Gla"
 
+# Make the tree command less noisy
+alias tree="tree -CAFa -I 'CVS|*.*.package|.svn|.git' --dirsfirst"
+
 # List only directories
 alias lsd='ls -l | grep "^d"'
 
