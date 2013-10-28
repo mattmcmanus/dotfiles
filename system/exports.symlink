@@ -14,10 +14,19 @@ export HISTCONTROL=ignoredups
 # Make some commands not show up in history
 export HISTIGNORE="cd:cd -:pwd;exit:date"
 
+# RVM
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+### Added by the Heroku Toolbelt
+PATH="/usr/local/heroku/bin:$PATH"
 
 # Node Config
 PATH=~/local/bin:$PATH
 PATH=$PATH:~/.dotfiles/bin
+
+PATH="/usr/local/bin:$PATH"
+PATH="/usr/local/sbin:$PATH"
+
 export PATH
 
 export NODE_ENV="development"

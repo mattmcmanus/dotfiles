@@ -3,6 +3,7 @@
 		l = log --pretty=oneline -n 20 --graph
 		# View the current working tree status using the short format
 		s = status -sb
+		st = status
 		# Diff
 		d = diff --patch-with-stat
 		# Pull in remote changes for the current repository and all its submodules
@@ -12,7 +13,8 @@
 		# Commit all changes
 		ca = !git add . && git add -u && git commit -a
 		# Switch to a branch, creating it if necessary
-		go = checkout -B
+		go = checkout -b
+    co = checkout
 		# Undo a `git push`
 		undopush = push -f origin HEAD^:master
 
@@ -68,10 +70,16 @@
 
 [user]
 	name = Matt McManus
-	email = matt@mcmanus.io
+	email = matt@mcmans.io
+
+[pull]
+  rebase = true
 
 [push]
-		default = matching
+		default = current
+
+[rerere]
+  enabled = true
 
 [hub]
 		protocol = https

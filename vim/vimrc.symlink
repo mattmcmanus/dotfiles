@@ -9,7 +9,7 @@ filetype plugin indent on       " load file type plugins + indentation
 
 " Appearance!
 set background=dark
-colorscheme wombat256mod 
+colorscheme wombat256mod
 set number                      " line numbers
 set guifont=Bitstream_Vera_Sans_Mono:h14
 
@@ -26,8 +26,12 @@ set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*     " Linux/MacOSX
 
+" Highlight white space and tabs
+set list
+set listchars=tab:→\ ,trail:☢
+
 " More bash-like tab completion
-set wildmode=longest,list,full
+set wildmode=list:longest,full
 set wildmenu
 
 " VUNDLE
@@ -36,21 +40,40 @@ call vundle#rc()
 
 " Key Mappings
 let mapleader = ","
-nnoremap <Tab> :b#<CR>
+nnoremap <leader><leader> :b#<CR>
 nnoremap <c-w>- :split<CR>
 nnoremap <c-w>\| :vsplit<CR>
+nnoremap <leader><CR> :set hlsearch!<CR>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = ''
 
+
+" Stripe with whitespace dummy
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    silent! %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+" Remove any trailing whitespace that is in the file
+autocmd BufRead,BufWrite * if ! &bin | :call <SID>StripTrailingWhitespaces() | endif
+
+
 Bundle 'gmarik/vundle'
 
 Bundle 'scrooloose/nerdtree'
-Bundle 'Lokaltog/vim-powerline' 
+Bundle 'Lokaltog/vim-powerline'
 Bundle 'mileszs/ack.vim'
 
 Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-surround' 
+Bundle 'tpope/vim-surround'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'kana/vim-textobj-user'
@@ -59,7 +82,6 @@ Bundle 'sjl/gundo.vim'
 Bundle 'abolish.vim'
 
 Bundle 'Lokaltog/vim-distinguished'
-Bundle 'carlhuda/janus'
 Bundle 'twilight'
 
 " --------------------------------------------------------------------------
@@ -76,6 +98,9 @@ Bundle 'tpope/vim-rails'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'slim-template/vim-slim'
 Bundle 'nono/vim-handlebars'
+Bundle 'moll/vim-node'
+Bundle 'pangloss/vim-javascript'
+Bundle 'tpope/vim-haml'
 
 " indent guides
 "let g:indent_guides_enable_on_vim_startup = 1
