@@ -10,6 +10,9 @@ filetype plugin indent on       " load file type plugins + indentation
 " Appearance!
 set background=dark
 colorscheme wombat256mod
+if has("gui_macvim")
+  colorscheme wombat256mod
+endif
 set number                      " line numbers
 set guifont=Bitstream_Vera_Sans_Mono:h14
 
@@ -43,6 +46,7 @@ let mapleader = ","
 nnoremap <leader><leader> :b#<CR>
 nnoremap <c-w>- :split<CR>
 nnoremap <c-w>\| :vsplit<CR>
+nnoremap <c-w>/ :NERDTreeToggle<CR>
 nnoremap <leader><CR> :set hlsearch!<CR>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -101,6 +105,8 @@ Bundle 'nono/vim-handlebars'
 Bundle 'moll/vim-node'
 Bundle 'pangloss/vim-javascript'
 Bundle 'tpope/vim-haml'
+Bundle 'wavded/vim-stylus'
+Bundle 'plasticboy/vim-markdown'
 
 " indent guides
 "let g:indent_guides_enable_on_vim_startup = 1
