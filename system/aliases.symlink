@@ -106,6 +106,8 @@ alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume 10'"
 alias hax="growlnotify -a 'Activity Monitor' 'System error' -m 'WTF R U DOIN'"
 
+alias tmux="TERM=screen-256color-bce tmux"
+
 
 #alias pear="php /usr/lib/php/pear/pearcmd.php"
 #alias pecl="php /usr/lib/php/pear/peclcmd.php"

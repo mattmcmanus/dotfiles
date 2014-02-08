@@ -30,3 +30,5 @@ PATH="/usr/local/sbin:$PATH"
 export PATH
 
 export NODE_ENV="development"
+
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"

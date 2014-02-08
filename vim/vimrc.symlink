@@ -1,21 +1,23 @@
+set nocompatible                " choose no compatibility with legacy vi
+filetype off
+"
+" VUNDLE
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+
 set t_Co=256
 set noswapfile
 
-set nocompatible                " choose no compatibility with legacy vi
-syntax enable
 set encoding=utf-8
 set showcmd                     " display incomplete commands
-filetype plugin indent on       " load file type plugins + indentation
-
-" Appearance!
+"
+"" Appearance!
 set background=dark
-colorscheme wombat256mod
-if has("gui_macvim")
-  colorscheme wombat256mod
-endif
+colorscheme Tomorrow-Night
 set number                      " line numbers
-set guifont=Bitstream_Vera_Sans_Mono:h14
-
+set guifont=Bitstream_Vera_Sans_Mono:h15
+"
 " Whitespace
 set nowrap                      " don't wrap lines
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
@@ -37,9 +39,7 @@ set listchars=tab:→\ ,trail:☢
 set wildmode=list:longest,full
 set wildmenu
 
-" VUNDLE
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+let &colorcolumn=join(range(80,999),",")
 
 " Key Mappings
 let mapleader = ","
@@ -48,9 +48,19 @@ nnoremap <c-w>- :split<CR>
 nnoremap <c-w>\| :vsplit<CR>
 nnoremap <c-w>/ :NERDTreeToggle<CR>
 nnoremap <leader><CR> :set hlsearch!<CR>
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = ''
+
+" CtrlP Setup
+"let g:ctrlp_map = '<c-p>'
+"let g:ctrlp_cmd = 'CtrlP'
+"let g:ctrlp_working_path_mode = ''
+let g:ctrlp_map = '<leader>f'
+nnoremap <silent> <leader>f :CtrlPCurWD<CR>
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+let g:ctrlp_use_caching = 0
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+" Default to filename searches - so that appctrl will find application
+" controller
+let g:ctrlp_by_filename = 1
 
 
 " Stripe with whitespace dummy
@@ -70,27 +80,24 @@ endfunction
 autocmd BufRead,BufWrite * if ! &bin | :call <SID>StripTrailingWhitespaces() | endif
 
 
-Bundle 'gmarik/vundle'
-
 Bundle 'scrooloose/nerdtree'
-Bundle 'Lokaltog/vim-powerline'
+"Bundle 'Lokaltog/vim-powerline'
 Bundle 'mileszs/ack.vim'
-
+"
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-surround'
 Bundle 'kien/ctrlp.vim'
+Bundle 'rking/ag.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'kana/vim-textobj-user'
 Bundle 'nelstrom/vim-textobj-rubyblock'
 Bundle 'sjl/gundo.vim'
 Bundle 'abolish.vim'
+Bundle 'msanders/snipmate.vim'
+Bundle 'airblade/vim-gitgutter'
 
-Bundle 'Lokaltog/vim-distinguished'
-Bundle 'twilight'
-
-" --------------------------------------------------------------------------
-" Syntax highlighting
-" --------------------------------------------------------------------------
+"" Syntax highlighting
+"" --------------------------------------------------------------------------
 Bundle 'tpope/vim-markdown'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'avakhov/vim-yaml'
@@ -100,13 +107,13 @@ Bundle 'itspriddle/vim-jquery'
 Bundle 'leshill/vim-json'
 Bundle 'tpope/vim-rails'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'slim-template/vim-slim'
 Bundle 'nono/vim-handlebars'
 Bundle 'moll/vim-node'
 Bundle 'pangloss/vim-javascript'
 Bundle 'tpope/vim-haml'
 Bundle 'wavded/vim-stylus'
 Bundle 'plasticboy/vim-markdown'
+Bundle 'slim-template/vim-slim'
 
 " indent guides
 "let g:indent_guides_enable_on_vim_startup = 1
@@ -117,3 +124,5 @@ Bundle 'plasticboy/vim-markdown'
 
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+filetype plugin indent on       " load file type plugins + indentation
