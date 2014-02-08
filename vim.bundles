@@ -1,0 +1,46 @@
+set nocompatible
+
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" Let Vundle manage Vundle
+Bundle 'gmarik/vundle'
+
+Bundle 'scrooloose/nerdtree'
+"Bundle 'Lokaltog/vim-powerline'
+Bundle 'mileszs/ack.vim'
+"
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-surround'
+Bundle 'kien/ctrlp.vim'
+Bundle 'rking/ag.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'kana/vim-textobj-user'
+Bundle 'nelstrom/vim-textobj-rubyblock'
+Bundle 'sjl/gundo.vim'
+Bundle 'abolish.vim'
+Bundle 'msanders/snipmate.vim'
+Bundle 'airblade/vim-gitgutter'
+
+"" Syntax highlighting
+"" --------------------------------------------------------------------------
+Bundle 'tpope/vim-markdown'
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'avakhov/vim-yaml'
+Bundle 'juvenn/mustache.vim'
+Bundle 'digitaltoad/vim-jade'
+Bundle 'itspriddle/vim-jquery'
+Bundle 'leshill/vim-json'
+Bundle 'tpope/vim-rails'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'nono/vim-handlebars'
+Bundle 'moll/vim-node'
+Bundle 'pangloss/vim-javascript'
+Bundle 'tpope/vim-haml'
+Bundle 'wavded/vim-stylus'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'slim-template/vim-slim'
+
+filetype on
+
