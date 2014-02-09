@@ -38,3 +38,5 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 [[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
 
 [[ -s /Users/matt/.nvm/nvm.sh ]] && . /Users/matt/.nvm/nvm.sh # This loads NVM
+
+[ -f `brew --prefix`/etc/bash_completion ] && . `brew --prefix`/etc/bash_completion
