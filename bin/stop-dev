@@ -1,4 +1,0 @@
-#!/bin/sh
-
-sudo apachectl stop
-sudo /opt/local/bin/mysqld_safe5

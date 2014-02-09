@@ -1,4 +1,0 @@
-#!/bin/sh
-
-sudo apachectl start
-mysql.server start
