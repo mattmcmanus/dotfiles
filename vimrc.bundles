@@ -22,6 +22,7 @@ Bundle 'sjl/gundo.vim'
 Bundle 'abolish.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'ignu/javascript_spec_navigator.vim'
 
 "" Syntax highlighting
 "" --------------------------------------------------------------------------

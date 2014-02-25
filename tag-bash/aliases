@@ -129,16 +129,6 @@ alias sfdgmd='./symfony doctrine:generate-migrations-diff'
 alias sfdbac='./symfony doctrine:build --all-classes'
 
 
-# NPM
-function npmv() {
-  #npm test &&
-  npm version "$1" && npm publish && git push origin && git push origin --tags
-}
-alias npmpatch='npmv "patch"'
-alias npmminor='npmv "minor"'
-
-alias ngc='npm test && git commit'
-
 # GIT
 alias git=hub
 alias g='git'
@@ -164,19 +154,20 @@ alias grv='gr -v'
 #alias gra='git remote add'
 alias grr='git remote rm'
 alias gcl='git clone'
+alias gwip='git commit -am"wip"'
 
 
-# Multiple module management
-function each() {
-  for mod in *; do
-    cd $mod;
-    eval "$1";
-    echo '';cd ..;
-  done;
+# NPM
+function npmv() {
+  #npm test &&
+  npm version "$1" && npm publish && git push origin && git push origin --tags
 }
+alias npmpatch='npmv "patch"'
+alias npmminor='npmv "minor"'
 
-alias ggs='each "git s"'
-alias ggp='each "git pull"'
+alias ngc='npm test && git commit'
+
+alias ni='npm install --save'
 
 function nt() {
   nodemon -w ../ $1 | bunyan -l warn -o short
@@ -191,3 +182,6 @@ function nodeb() {
 alias vagrantgo='vagrant up && vagrant ssh -c tmuxgo'
 
 alias datafart='curl --data-binary @- datafart.com'
+
+
+alias be='bundle exec'

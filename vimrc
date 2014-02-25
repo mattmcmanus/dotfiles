@@ -46,7 +46,13 @@ let mapleader = ","
 nnoremap <c-w>- :split<CR>
 nnoremap <c-w>\| :vsplit<CR>
 nnoremap <c-w>/ :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeFind<CR>
 nnoremap <leader><CR> :set hlsearch!<CR>
+" don't unselect after move
+vmap < <gv
+vmap > >gv
+vmap <TAB> >gv
+vmap <S-TAB> <gv
 
 " Index ctags from any project, including those outside Rails
 map <Leader>ct :!ctags -R .<CR>
@@ -80,17 +86,9 @@ endfunction
 inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
 
 " CtrlP Setup
-"let g:ctrlp_map = '<c-p>'
-"let g:ctrlp_cmd = 'CtrlP'
-"let g:ctrlp_working_path_mode = ''
 let g:ctrlp_map = '<leader>f'
 nnoremap <silent> <leader>f :CtrlPCurWD<CR>
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
-let g:ctrlp_use_caching = 0
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-" Default to filename searches - so that appctrl will find application
-" controller
-let g:ctrlp_by_filename = 1
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
@@ -98,7 +96,7 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
@@ -117,14 +115,11 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfunction
 
-" Remove any trailing whitespace that is in the file
-autocmd BufRead,BufWrite * if ! &bin | :call <SID>StripTrailingWhitespaces() | endif
-
 " indent guides
-"let g:indent_guides_enable_on_vim_startup = 1
-"let g:indent_guides_color_change_percent = 3
-"let g:indent_guides_start_level = 2
-"let g:indent_guides_guide_size = 1
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_color_change_percent = 3
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
@@ -145,3 +140,20 @@ nnoremap <C-l> <C-w>l
 
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
+
+" JSNavigate; javascript_spec_navigator.vim
+noremap <leader>z :call JsSpecNavigate()<CR>
+
+augroup WhiteSpaceKilla
+  au!
+  " Remove any trailing whitespace that is in the file
+  autocmd BufRead,BufWrite * if ! &bin | :call <SID>StripTrailingWhitespaces() | endif
+augroup end
+
+augroup NewSyntaxes
+  au!
+  " rabl is ruby
+  au BufRead,BufNewFile *.rabl setf ruby
+  au BufRead,BufNewFile *.hamlc set ft=haml
+  au BufRead,BufNewFile *.skim set ft=slim
+augroup end
