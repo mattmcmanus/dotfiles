@@ -66,6 +66,9 @@ nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
+" Save the file you forgot to open with sudo
+cnoremap sudow w !sudo tee % >/dev/null
+
 " Snippets are activated by Shift+Tab
 let g:snippetsEmu_key = "<S-Tab>"
 
@@ -88,7 +91,8 @@ inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
 " CtrlP Setup
 let g:ctrlp_map = '<leader>f'
 nnoremap <silent> <leader>f :CtrlPCurWD<CR>
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+" let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')

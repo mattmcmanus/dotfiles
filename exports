@@ -34,3 +34,5 @@ export PATH
 export NODE_ENV="development"
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+export DOCKER_HOST=tcp://127.0.0.1:4243

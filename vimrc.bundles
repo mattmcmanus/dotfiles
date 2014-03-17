@@ -10,6 +10,7 @@ Bundle 'gmarik/vundle'
 Bundle 'scrooloose/nerdtree'
 "Bundle 'Lokaltog/vim-powerline'
 Bundle 'mileszs/ack.vim'
+Bundle 'wellle/tmux-complete.vim'
 "
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-surround'
