@@ -1,3 +1,7 @@
+
+alias sssh-add='openssl pkcs8 -in ~/.ssh/id_rsa | ssh-add -'
+
+#
 # Easier navigation: .., ..., ~ and -
 alias ..="cd .."
 alias ...="cd ../.."
@@ -185,3 +189,5 @@ alias datafart='curl --data-binary @- datafart.com'
 
 
 alias be='bundle exec'
+
+alias duply-local='ulimit -n 1024; duply pictures-local backup; duply work-backups-local backup; duply code-local backup'

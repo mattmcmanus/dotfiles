@@ -7,9 +7,10 @@ call vundle#rc()
 " Let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
-Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-vinegar'
+"Bundle 'scrooloose/nerdtree'
 "Bundle 'Lokaltog/vim-powerline'
-Bundle 'mileszs/ack.vim'
+"Bundle 'mileszs/ack.vim'
 Bundle 'wellle/tmux-complete.vim'
 "
 Bundle 'tpope/vim-commentary'
@@ -24,6 +25,7 @@ Bundle 'abolish.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'ignu/javascript_spec_navigator.vim'
+Bundle 'godlygeek/tabular'
 
 "" Syntax highlighting
 "" --------------------------------------------------------------------------
@@ -43,6 +45,16 @@ Bundle 'tpope/vim-haml'
 Bundle 'wavded/vim-stylus'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'slim-template/vim-slim'
+Bundle 'othree/html5.vim'
+
+
+"" Clojure Specific bundles
+Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'guns/vim-clojure-static'
+Bundle 'tpope/vim-leiningen'
+Bundle 'tpope/vim-projectionist'
+Bundle 'tpope/vim-dispatch'
+Bundle 'tpope/vim-fireplace'
 
 filetype on
 

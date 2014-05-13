@@ -47,7 +47,8 @@ nnoremap <c-w>- :split<CR>
 nnoremap <c-w>\| :vsplit<CR>
 nnoremap <c-w>/ :NERDTreeToggle<CR>
 nnoremap <leader>n :NERDTreeFind<CR>
-nnoremap <leader><CR> :set hlsearch!<CR>
+nnoremap <leader>h :set hlsearch!<CR>
+nmap <leader>a :vsp<cr> :exe "Ag " .  expand("<cword>") . " "<cr>
 " don't unselect after move
 vmap < <gv
 vmap > >gv
@@ -91,8 +92,8 @@ inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
 " CtrlP Setup
 let g:ctrlp_map = '<leader>f'
 nnoremap <silent> <leader>f :CtrlPCurWD<CR>
-" let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
@@ -161,3 +162,33 @@ augroup NewSyntaxes
   au BufRead,BufNewFile *.hamlc set ft=haml
   au BufRead,BufNewFile *.skim set ft=slim
 augroup end
+
+augroup VimrcSo
+  au!
+  autocmd BufWritePost ~/.vimrc so ~/.vimrc
+augroup END
+
+if exists(":Tabularize")
+  " align =
+  nnoremap <Leader>a= :Tabularize /=<CR>
+  vnoremap <Leader>a= :Tabularize /=<CR>
+
+  " align :'s, but without a space before them
+  nnoremap <Leader>a: :Tabularize /:\zs/l0r1<CR>
+  vnoremap <Leader>a: :Tabularize /:\zs/l0r1<CR>
+
+  " align {
+  nnoremap <Leader>a{ :Tabularize /{<CR>
+  vnoremap <Leader>a{ :Tabularize /{<CR>
+
+  " align ,'s, but without a space before them
+  nnoremap <Leader>a, :Tabularize /,\zs/l0r1<CR>
+  vnoremap <Leader>a, :Tabularize /,\zs/l0r1<CR>
+endif
+
+
+" Rainbow Syntaxes
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces

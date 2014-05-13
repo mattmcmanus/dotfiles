@@ -14,7 +14,7 @@ sudo -v
 
 
 #					System Preferences
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Restart automatically if the computer freezes
 systemsetup -setrestartfreeze on
@@ -26,14 +26,15 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
 # Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 3
+defaults write NSGlobalDomain KeyRepeat -int 0
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
-# Disable auto-correct
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+# Enable auto-correct
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool true
 
 
 #							Safari
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Hide Safari's bookmark bar.
 defaults write com.apple.Safari ShowFavoritesBar -bool false
@@ -56,20 +57,14 @@ defaults write com.apple.Safari ProxiesInBookmarksBar "()"
 
 
 #							Menu Bar
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-# Menu bar: hide the useless Time Machine and Volume icons
-defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" "/System/Library/CoreServices/Menu Extras/AirPort.menu" "/System/Library/CoreServices/Menu Extras/Battery.menu" "/System/Library/CoreServices/Menu Extras/Clock.menu"
-
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Show remaining battery time; hide percentage
 defaults write com.apple.menuextra.battery ShowPercent -string "NO"
 defaults write com.apple.menuextra.battery ShowTime -string "YES"
 
 
 #							Finder
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-# Always show scrollbars
-defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
-
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Always open everything in Finder's list view. This is important.
 defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 
@@ -111,12 +106,6 @@ defaults write com.apple.finder QuitMenuItem -bool true
 # Disable window animations and Get Info animations in Finder
 defaults write com.apple.finder DisableAllAnimations -bool true
 
-# Show all filename extensions in Finder
-defaults write NSGlobalDomain AppleShowAllExtensions -bool false
-
-# Show status bar in Finder
-defaults write com.apple.finder ShowStatusBar -bool true
-
 # Allow text selection in Quick Look
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
@@ -141,21 +130,20 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 
 #							Mission Control
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Disable Mission contol animation
-
 defaults write com.apple.dock expose-animation-duration -float .2
 
 #							Google Chrome
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Allow installing user scripts via GitHub or Userscripts.org
 defaults write com.google.Chrome ExtensionInstallSources -array "https://*.github.com/*" "http://userscripts.org/*"
 defaults write com.google.Chrome.canary ExtensionInstallSources -array "https://*.github.com/*" "http://userscripts.org/*"
 
 #							Misc apps
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Automatically quit printer app once the print jobs complete
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
@@ -163,37 +151,14 @@ defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 # Set Help Viewer windows to non-floating mode
 defaults write com.apple.helpviewer DevMode -bool true
 
-
-
-
-
-
-
-
-
-
-
 # Disable press-and-hold for keys in favor of key repeat.
 defaults write -g ApplePressAndHoldEnabled -bool false
-
-
 
 # Increase window resize speed for Cocoa applications
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 
 # Disable Resume system-wide
 defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
-
-# Disable the “reopen windows when logging back in” option
-# This works, although the checkbox will still appear to be checked,
-# and the command needs to be entered again for every restart.
-defaults write com.apple.loginwindow TALLogoutSavesState -bool true
-defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool true
-
-# Fix for the ancient UTF-8 bug in QuickLook (http://mths.be/bbo)
-# Commented out, as this is known to cause problems when saving files in Adobe Illustrator CS5 :(
-#echo "0x08000100:0" > ~/.CFUserTextEncoding
-
 
 # Enable tap to click (Trackpad) for this user and for the login screen
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
@@ -211,10 +176,11 @@ echo -n 'a' | sudo tee /private/var/db/.AccessibilityAPIEnabled > /dev/null 2>&1
 sudo chmod 444 /private/var/db/.AccessibilityAPIEnabled
 
 # Require password immediately after sleep or screen saver begins
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
+#defaults write com.apple.screensaver askForPassword -int 1
+#defaults write com.apple.screensaver askForPasswordDelay -int 0
 
-
+# Show prompt when power button is pressed on mavericks rather than sleep
+defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool no
 
 # Show item info below desktop icons
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
@@ -226,7 +192,7 @@ defaults write com.apple.screensaver askForPasswordDelay -int 0
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
 # Empty Trash securely by default
-#defaults write com.apple.finder EmptyTrashSecurely -bool true
+defaults write com.apple.finder EmptyTrashSecurely -bool true
 
 # Enable highlight hover effect for the grid view of a stack (Dock)
 defaults write com.apple.dock mouse-over-hilte-stack -bool true
@@ -263,13 +229,13 @@ defaults write com.apple.dock showhidden -bool true
 #defaults write com.apple.dock persistent-others -array-add '{tile-data={}; tile-type="spacer-tile";}'
 
 # Disable shadow in screenshots
-defaults write com.apple.screencapture disable-shadow -bool true
+defaults write com.apple.screencapture disable-shadow -bool false
 
 # Enable the debug menu in Address Book
 defaults write com.apple.addressbook ABShowDebugMenu -bool true
 
-# Enable the debug menu in iCal
-defaults write com.apple.iCal IncludeDebugMenu -bool true
+# Disable the debug menu in iCal
+defaults write com.apple.iCal IncludeDebugMenu -bool false
 
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4
@@ -278,12 +244,6 @@ defaults write com.apple.terminal StringEncodings -array 4
 # This means you can hover over a window and start typing in it without clicking first
 #defaults write com.apple.terminal FocusFollowsMouse -bool true
 #defaults write org.x.X11 wm_ffm -bool true
-
-# Disable the Ping sidebar in iTunes
-defaults write com.apple.iTunes disablePingSidebar -bool true
-
-# Disable all the other Ping stuff in iTunes
-defaults write com.apple.iTunes disablePing -bool true
 
 # Make ⌘ + F focus the search input in iTunes
 defaults write com.apple.iTunes NSUserKeyEquivalents -dict-add "Target Search Field" "@F"
@@ -294,9 +254,6 @@ defaults write com.apple.Mail DisableSendAnimations -bool true
 
 # Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app
 defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
-
-# Enable Dashboard dev mode (allows keeping widgets on the desktop)
-defaults write com.apple.dashboard devmode -bool false
 
 # Disable the dashboard all together
 defaults write com.apple.dashboard mcx-disabled -bool true
