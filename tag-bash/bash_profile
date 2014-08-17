@@ -40,3 +40,8 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 [[ -s /Users/matt/.nvm/nvm.sh ]] && . /Users/matt/.nvm/nvm.sh # This loads NVM
 
 [ -f `brew --prefix`/etc/bash_completion ] && . `brew --prefix`/etc/bash_completion
+
+# Setting PATH for Python 3.4
+# The orginal version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
+export PATH
