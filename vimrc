@@ -91,7 +91,7 @@ inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
 
 " CtrlP Setup
 let g:ctrlp_map = '<leader>f'
-nnoremap <silent> <leader>f :CtrlPCurWD<CR>
+nnoremap <silent> <leader>f :CtrlP<CR>
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 

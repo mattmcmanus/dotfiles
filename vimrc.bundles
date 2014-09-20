@@ -10,7 +10,6 @@ Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-vinegar'
 "Bundle 'scrooloose/nerdtree'
 Bundle 'wellle/tmux-complete.vim'
-Bundle 'bling/vim-airline'
 "
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-surround'
@@ -30,7 +29,6 @@ Bundle 'justincampbell/vim-eighties'
 "" Syntax highlighting
 "" --------------------------------------------------------------------------
 Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-markdown'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'avakhov/vim-yaml'
 Bundle 'juvenn/mustache.vim'
@@ -44,7 +42,6 @@ Bundle 'moll/vim-node'
 Bundle 'pangloss/vim-javascript'
 Bundle 'tpope/vim-haml'
 Bundle 'wavded/vim-stylus'
-Bundle 'plasticboy/vim-markdown'
 Bundle 'slim-template/vim-slim'
 Bundle 'othree/html5.vim'
 
