@@ -19,10 +19,11 @@
   # Undo a `git push`
   undopush = push -f origin HEAD^:master
   # Branching
-  create-branch = !sh -c 'git push origin HEAD:refs/heads/$1 && git fetch origin && git branch --track $1 origin/$1 && cd . && git checkout $1' -
+  create-branch = !sh -c 'git fetch origin && git branch --track $1 origin/$1 && cd . && git checkout $1' -
   delete-branch = !sh -c 'git push origin :refs/heads/$1 && git remote prune origin && git branch -D $1' -
   merge-branch = !git checkout master && git merge @{-1}
   up = !git remote update -p && git merge --ff-only @{u}
+	ignore = "!gi() { curl -s http://www.gitignore.io/api/$@ ;}; gi"
 
 [branch "master"]
   mergeoptions = --no-ff
