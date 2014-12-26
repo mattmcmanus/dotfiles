@@ -13,3 +13,4 @@ Bundle 'mtscout6/vim-cjsx'
 
 Bundle 'tpope/vim-vinegar'
 let NERDTreeHijackNetrw=0
+let g:netrw_liststyle=0
