@@ -1,0 +1,3 @@
+EXCLUDES="README.md LICENSE Brewfile *:*zsh*"
+DOTFILES_DIRS="$HOME/.dotfiles $HOME/.promptworks-dotfiles"
+TAGS="bash"
