@@ -92,20 +92,16 @@ inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
 " CtrlP Setup
 let g:ctrlp_map = '<leader>f'
 nnoremap <silent> <leader>f :CtrlP<CR>
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
-"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = '\.git$\|tmp$\|\.bundle$\|public/uploads$\|public/system$\|public\/topics$\|public/user_profiles\|\.sass-cache$|node_modules$'
 
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
+" Use The SilverSearcher to find files. It means we no longer need to cache.
+let g:ag_binary = system("which ag | xargs echo -n")
+if filereadable(g:ag_binary)
+  let g:ctrlp_user_command = g:ag_binary . ' %s -l --nocolor -g ""'
 endif
+
+let g:ctrlp_use_caching = 0
 
 " Stripe with whitespace dummy
 function! <SID>StripTrailingWhitespaces()
@@ -144,8 +140,9 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
 " configure syntastic syntax checking to check on open as well as save
-let g:syntastic_check_on_open=1
-
+let g:syntastic_scss_checkers = ['scss_lint']
+let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+"
 " JSNavigate; javascript_spec_navigator.vim
 noremap <leader>z :call JsSpecNavigate()<CR>
 

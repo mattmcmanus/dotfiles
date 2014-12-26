@@ -26,8 +26,14 @@ Bundle 'ignu/javascript_spec_navigator.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'justincampbell/vim-eighties'
 
+Bundle 'chriskempson/vim-tomorrow-theme'
+
+Bundle 'editorconfig/editorconfig-vim'
+
 "" Syntax highlighting
 "" --------------------------------------------------------------------------
+Bundle 'mxw/vim-jsx'
+Bundle 'mtscout6/vim-cjsx'
 Bundle 'scrooloose/syntastic'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'avakhov/vim-yaml'
