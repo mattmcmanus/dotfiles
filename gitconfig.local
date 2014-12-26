@@ -1,0 +1,14 @@
+[alias]
+  d = diff --patch-with-stat
+  # Pull in remote changes for the current repository and all its submodules
+  ps = !"git pull; git submodule foreach git pull origin master"
+  # Clone a repository including all submodules
+  c = clone --recursive
+  up = !git remote update -p && git merge --ff-only @{u}
+
+[user]
+  name = Matt McManus
+  email = matt@mcmanus.io
+
+[hub]
+  protocol = https
