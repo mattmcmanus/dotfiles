@@ -1,59 +1,23 @@
-set nocompatible                " choose no compatibility with legacy vi
-filetype off
-set t_Co=256
-set nobackup
-set nowritebackup
-set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
-set encoding=utf-8
-set showcmd                     " display incomplete commands
-set nowrap                      " don't wrap lines
-set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
-set expandtab                   " use spaces, not tabs (optional)
-set backspace=indent,eol,start  " backspace through everything in insert mode
-set history=50
-set ruler         " show the cursor position all the time
-set incsearch     " do incremental searching
-set laststatus=2  " Always display the status line
-set autowrite     " Automatically :write before running commands
-
-"
-
-" Searching
-set hlsearch                    " highlight matches
-set incsearch                   " incremental searching
-set ignorecase                  " searches are case insensitive...
-set smartcase                   " ... unless they contain at least one capital letter
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*     " Linux/MacOSX
-
-" Highlight white space and tabs
-set list
-set list listchars=tab:»·,trail:·
+" Use Vim settings, rather then Vi settings. This setting must be as early as
+" possible, as it has side effects.
+set nocompatible
 
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
+filetype plugin indent on
 
-"" Appearance!
-set background=dark
-colorscheme Tomorrow-Night
-set number                      " line numbers
+set guioptions=egm
 set guifont=Bitstream_Vera_Sans_Mono:h15
-
-let &colorcolumn=join(range(80,999),",")
+set antialias
+set t_Co=256
+set t_ut=
+set background=dark
+colorscheme base16-default
+let base16colorspace=256
 
 " Key Mappings
-let mapleader = ","
-nnoremap <c-w>- :split<CR>
-nnoremap <c-w>\| :vsplit<CR>
-nnoremap <c-w>/ :NERDTreeToggle<CR>
-nnoremap <leader>n :NERDTreeFind<CR>
-nnoremap <leader>h :set hlsearch!<CR>
-nmap <leader>a :vsp<cr> :exe "Ag " .  expand("<cword>") . " "<cr>
-" don't unselect after move
-vmap < <gv
-vmap > >gv
-vmap <TAB> >gv
-vmap <S-TAB> <gv
+"let mapleader = ","
 
 " Index ctags from any project, including those outside Rails
 map <Leader>ct :!ctags -R .<CR>
@@ -67,43 +31,207 @@ nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
-" Save the file you forgot to open with sudo
-cnoremap sudow w !sudo tee % >/dev/null
-
 " Snippets are activated by Shift+Tab
 let g:snippetsEmu_key = "<S-Tab>"
 
-" Tab completion
-" will insert tab at beginning of line,
-" will use completion if not at beginning
-set wildmenu
-set wildmode=list:longest,list:full
-set complete=.,w,t
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
-
-" CtrlP Setup
-let g:ctrlp_map = '<leader>f'
-nnoremap <silent> <leader>f :CtrlP<CR>
-let g:ctrlp_custom_ignore = '\.git$\|tmp$\|\.bundle$\|public/uploads$\|public/system$\|public\/topics$\|public/user_profiles\|\.sass-cache$|node_modules$'
-
-
-" Use The SilverSearcher to find files. It means we no longer need to cache.
-let g:ag_binary = system("which ag | xargs echo -n")
-if filereadable(g:ag_binary)
-  let g:ctrlp_user_command = g:ag_binary . ' %s -l --nocolor -g ""'
-endif
-
 let g:ctrlp_use_caching = 0
 
-" Stripe with whitespace dummy
+" Treat <li> and <p> tags like the block tags they are
+let g:html_indent_tags = 'li\|p'
+
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+
+" JSNavigate; javascript_spec_navigator.vim
+noremap <leader>z :call JsSpecNavigate()<CR>
+
+let g:netrw_liststyle=0
+set noswapfile
+
+" vim-indent-guides {
+let g:indent_guides_auto_colors = 0
+"             " }
+
+set iskeyword+=.
+set iskeyword+=-
+
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+
+
+
+
+" From promptworks.vim
+
+set nocompatible
+
+" Put temp files in common directory
+set backupdir=~/.vim/backup
+set directory=~/.vim/backup
+
+" prevent the directory-specific vimrc files from executing potentially dangerous commands
+set secure
+
+" More bash-like tab completion
+set wildmode=longest,list,full
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/tmp/cache/*,*/*.jpg,*/*.png,*/*.pyc
+
+set smartindent
+
+" Fold by syntax, start full open
+set foldenable
+set foldlevelstart=99
+
+
+""""""""""""
+""" Tabs """
+""""""""""""
+
+" Use 2-space tabs
+set softtabstop=2
+set shiftwidth=2
+set tabstop=2
+set expandtab
+
+""""""""""""""""
+""" Spelling """
+""""""""""""""""
+
+" Use english for spellchecking
+set spl=en spell
+set nospell
+
+
+""""""""""""""
+""" Search """
+""""""""""""""
+
+" highlight search results
+set hlsearch
+
+" Ignore case on search unless search has uppercase characters
+set ignorecase
+set smartcase
+
+
+"""""""""""""""
+""" Visuals """
+"""""""""""""""
+
+" Use relative line numbers, but show the absolute number on the current line
+set relativenumber
+set number
+
+" Show whitespace as unicode chars
+set listchars=tab:‣\ ,trail:\ ,extends:…,precedes:…,nbsp:˖
+set list
+
+set colorcolumn=80
+
+" speed up macros and repeated commands
+set lazyredraw
+
+if has("mouse")
+  set mouse=a
+  set mousehide
+  set ttymouse=xterm2
+endif
+
+""""""""""""""""""""""""
+""" *** MAPPINGS *** """
+""""""""""""""""""""""""
+
+" remap jk and kj to escape in insert mode
+inoremap jk <Esc>
+inoremap kj <Esc>
+
+" Normally Y copies the whole row - not from cursor to EOL like other capitals. This makes it more consistent.
+noremap Y y$
+
+" Make K split lines (the opposite of J)
+nnoremap K i<cr><esc>k$
+
+" Make <leader>k split the line after the cursor
+nnoremap <leader>k a<cr><esc>k$
+
+" Insert new line above cursor
+nnoremap <C-K> O<Esc>j
+
+" Insert new line below cursor
+nnoremap <C-J> o<Esc>k
+
+" Insert space after cursor
+nnoremap <C-L> li <Esc>h
+
+" Insert space before cursor
+nnoremap <C-H> i <Esc>l
+
+" 'Q' runs the macro in the 'q' register, instead of opening ex mode.
+nnoremap Q @q
+
+" Fast saving
+nnoremap <leader>w :w!<cr>
+
+" Return cursor to start of edit after repeat
+nnoremap . .`[
+
+" Hit TAB twice to switch to the next window
+nnoremap <tab><tab> <C-w>w
+nnoremap <s-tab><s-tab> <C-w>W
+
+" <leader>h to clear the search highlighting
+nnoremap <leader>h :noh<CR>
+
+" Toggle showing spelling errors
+nnoremap <silent> <leader>s :set spell!<CR>
+
+" use . to repeat a change for every line in the block
+vnoremap <silent> . :normal .<CR>
+
+" Reselect visual block after indent/outdent
+vnoremap < <gv
+vnoremap > >gv
+
+" :W also saves
+cnoreabbrev W w
+
+" Force Saving Files that Require Root Permission
+cnoremap w!! %!sudo tee > /dev/null %
+
+" Maps more bash-like keys to command line mode (colon mode)
+cnoremap <C-A> <Home>
+cnoremap <C-F> <Right>
+cnoremap <C-B> <Left>
+cnoremap <M-BS> <C-w>
+
+
+
+""""""""""""""""""""""""
+""" *** COMMANDS *** """
+""""""""""""""""""""""""
+
+" run an external command and give you the results in a small new buffer
+" Example
+"   :R echo 'hi'
+command! -nargs=*  -complete=shellcmd R belowright 15new | r ! <args>
+
+
+"""""""""""""""""""""""""""""
+""" *** AUTO COMMANDS *** """
+"""""""""""""""""""""""""""""
+
+""""""""""""""""""
+""" Whitespace """
+""""""""""""""""""
+
+" Remove any trailing whitespace that is in the file
+autocmd BufRead,BufWrite * if ! &bin | :call <SID>StripTrailingWhitespaces() | endif
+
 function! <SID>StripTrailingWhitespaces()
     " Preparation: save last search, and cursor position.
     let _s=@/
@@ -116,78 +244,88 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfunction
 
-" indent guides
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_color_change_percent = 3
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
 
-set runtimepath^=~/.vim/bundle/ctrlp.vim
+"""""""""""
+""" GIT """
+"""""""""""
 
-filetype plugin indent on       " load file type plugins + indentation
+if has('autocmd')
+  au BufNewFile,BufRead COMMIT_EDITMSG setlocal spell!
+  au BufNewFile,BufRead COMMIT_EDITMSG call feedkeys('ggi', 't')
+endif
 
-" Treat <li> and <p> tags like the block tags they are
-let g:html_indent_tags = 'li\|p'
 
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
 
-" Quicker window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+"""""""""""""""""""""""
+""" *** PLUGINS *** """
+"""""""""""""""""""""""
 
-" configure syntastic syntax checking to check on open as well as save
-let g:syntastic_scss_checkers = ['scss_lint']
-let g:syntastic_ruby_checkers = ['mri', 'rubocop']
-"
-" JSNavigate; javascript_spec_navigator.vim
-noremap <leader>z :call JsSpecNavigate()<CR>
+""""""""""""""
+""" CTRL P """
+""""""""""""""
 
-augroup WhiteSpaceKilla
-  au!
-  " Remove any trailing whitespace that is in the file
-  autocmd BufRead,BufWrite * if ! &bin | :call <SID>StripTrailingWhitespaces() | endif
-augroup end
+let g:ctrlp_custom_ignore = '\.git$\|tmp$\|\.bundle$\|public/uploads$\|public/system$\|public\/topics$\|public/user_profiles\|\.sass-cache$|node_modules$'
 
-augroup NewSyntaxes
-  au!
-  " rabl is ruby
-  au BufRead,BufNewFile *.rabl setf ruby
-  au BufRead,BufNewFile *.hamlc set ft=haml
-  au BufRead,BufNewFile *.skim set ft=slim
-augroup end
 
-augroup VimrcSo
-  au!
-  autocmd BufWritePost ~/.vimrc so ~/.vimrc
-augroup END
+" Use The SilverSearcher to find files. It means we no longer need to cache.
+let g:ag_binary = system("which ag | xargs echo -n")
+if filereadable(g:ag_binary)
+  let g:ctrlp_user_command = g:ag_binary . ' %s -l --nocolor -g ""'
+endif
+
+let g:ctrlp_use_caching = 0
+
+"""""""""""""""""""""""""""""""""""""""
+""" Visual Mode */# from Scrooloose """
+"""""""""""""""""""""""""""""""""""""""
+
+function! s:VSetSearch()
+  let temp = @@
+  norm! gvy
+  let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+  let @@ = temp
+endfunction
+
+vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
+vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
+
+
+""""""""""""""""""""""
+""" Rainbow Parens """
+""""""""""""""""""""""
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+
+""""""""""""""
+""" Switch """
+""""""""""""""
+
+nnoremap <leader>- :Switch<CR>
+
+
+""""""""""""""""""
+""" Tabularize """
+""""""""""""""""""
 
 if exists(":Tabularize")
   " align =
-  nnoremap <Leader>a= :Tabularize /=<CR>
-  vnoremap <Leader>a= :Tabularize /=<CR>
+  nnoremap <Leader>a= :Tabularize /^[^=]*\zs=/l1<CR>
+  vnoremap <Leader>a= :Tabularize /^[^=]*\zs=/l1<CR>
 
-  " align :'s, but without a space before them
-  nnoremap <Leader>a: :Tabularize /:\zs/l0r1<CR>
-  vnoremap <Leader>a: :Tabularize /:\zs/l0r1<CR>
+  " align : but without a space before them
+  nnoremap <Leader>a: :Tabularize/\(:.*\)\@<!:\zs /l0<CR>
+  vnoremap <Leader>a: :Tabularize/\(:.*\)\@<!:\zs /l0<CR>
 
   " align {
-  nnoremap <Leader>a{ :Tabularize /{<CR>
-  vnoremap <Leader>a{ :Tabularize /{<CR>
+  nnoremap <Leader>a{ :Tabularize /^[^{]*\zs{/l1<CR>
+  vnoremap <Leader>a{ :Tabularize /^[^{]*\zs{/l1<CR>
 
   " align ,'s, but without a space before them
   nnoremap <Leader>a, :Tabularize /,\zs/l0r1<CR>
   vnoremap <Leader>a, :Tabularize /,\zs/l0r1<CR>
 endif
 
-
-" Rainbow Syntaxes
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-
-syntax on

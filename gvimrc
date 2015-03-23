@@ -1,7 +1,3 @@
-set anti
-set lines=999 columns=84
-set guioptions=egmrt
-
 " No audible bell
 set vb
 
