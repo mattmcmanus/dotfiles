@@ -7,7 +7,14 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
+# alias go="cd $(find . -type d | pick)"
 
+
+alias git=hub
+alias gb="git branch | cut -c 3- | pick | xargs git checkout"
+alias gbu="gb && git up"
+
+alias pspec="find spec -name *.rb | pick | tee /dev/tty | xargs rspec"
 # Shortcuts
 alias d="cd ~/Dropbox"
 alias w="cd ~/www"
@@ -59,9 +66,6 @@ alias flush="dscacheutil -flushcache"
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
-# Trim new lines and copy to clipboard
-alias c="tr -d '\n' | pbcopy"
-
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
@@ -104,7 +108,7 @@ alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume 10'"
 alias hax="growlnotify -a 'Activity Monitor' 'System error' -m 'WTF R U DOIN'"
 
-alias tmux="TERM=screen-256color-bce tmux"
+# alias tmux="TERM=screen-256color-bce tmux"
 
 
 #alias pear="php /usr/lib/php/pear/pearcmd.php"
@@ -112,53 +116,6 @@ alias tmux="TERM=screen-256color-bce tmux"
 
 alias mysqlstart='sudo /opt/local/bin/mysqld_safe5 &'
 alias mysqlstop='/opt/local/bin/mysqladmin5 -u root -proot shutdown'
-
-
-# SVN
-
-alias svnupi='svn up --ignore-externals'
-alias svnupp='svn up --ignore-externals; svn up plugins/wayToHealthPlugin'
-alias svnadd="svn stat | grep ? | awk '{ print \$2 }' | xargs svn add"
-alias svndelete-untracked="svn stat | grep ? | awk '{ print \$2 }' | xargs rm -fR"
-alias svnsti='svn st --ignore-externals | grep -v ^X'
-alias svnstp='svn st --ignore-externals | grep -v ^X; svn st plugins/wayToHealthPlugin'
-alias svnee='svn pe svn:externals .'
-function svndiff() { svn diff "$1" | vim -R -; }
-
-
-#symfony
-
-alias sfsynccontent='./symfony project:sync-content frontend dev from staging@staging'
-alias sfdgmd='./symfony doctrine:generate-migrations-diff'
-alias sfdbac='./symfony doctrine:build --all-classes'
-
-
-# GIT
-alias git=hub
-alias g='git'
-alias ga='git add'
-alias gp='git push'
-alias gpa='gp --all'
-alias gu='git pull'
-alias gl='git log'
-alias gg='gl --decorate --oneline --graph --date-order --all'
-alias gs='git status'
-alias gst='gs'
-alias gd='git diff'
-alias gdc='gd --cached'
-alias gm='git commit -m'
-alias gma='git commit -am'
-alias gb='git branch'
-alias gba='git branch -a'
-function gc() { git checkout "${@:-master}"; } # Checkout master by default
-alias gco='gc'
-alias gcb='gc -b'
-alias gr='git remote'
-alias grv='gr -v'
-#alias gra='git remote add'
-alias grr='git remote rm'
-alias gcl='git clone'
-alias gwip='git commit -am"wip"'
 
 
 # NPM
