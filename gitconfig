@@ -1,0 +1,92 @@
+[user]
+  name = Matt McManus
+  email = matt@mcmanus.io
+
+[hub]
+  protocol = https
+
+[push]
+  default = current
+
+[pull]
+  rebase = true
+[alias]
+  ap = add -p
+  aa = add --all
+  ca = commit --amend
+  ci = commit -v
+  cob = checkout -b
+  cop = checkout -p
+  co = checkout
+  cb = !sh -c 'git branch | cut -c 3- | pick | xargs git checkout' -
+  br = branch
+  create-branch = !sh -c 'git push origin HEAD:refs/heads/$1 --no-verify && git fetch origin && git branch --track $1 origin/$1 && cd . && git checkout $1' -
+  delete-branch = !sh -c 'git push origin :refs/heads/$1 && git branch -D $1' -
+  merge-branch = !git checkout master && git merge @{-1}
+  st = status
+  s = status -sb
+  pu = push
+  yolo = push -f --no-verify
+  pl = pull
+  pr = pull-request
+  gap = add -p
+  l = log
+  ll = log --stat --abbrev-commit
+  d = diff
+  su = "!f() { git submodule sync; git submodule update --init; }; f"
+  graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  upm = !sh -c 'git fetch && git rebase origin/master'
+
+[format]
+  pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset
+
+[credential]
+  helper = osxkeychain
+[rerere]
+  enabled = 1
+[color]
+  # Use colors in Git commands that are capable of colored output when outputting to the terminal
+  ui     = auto
+  diff   = auto
+  status = auto
+  branch = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+[core]
+  excludesfile = ~/.gitignore
+  autocrlf     = input
+  editor       = vim
+[fetch]
+  prune = true
+[difftool "sourcetree"]
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path =
+[mergetool "sourcetree"]
+  cmd = /opt/homebrew-cask/Caskroom/sourcetree/1.8.1/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
+[apply]
+  whitespace = nowarn
+[apply]
+  whitespace = nowarn
+[mergetool]
+  keepBackup = false
+[difftool]
+  prompt = false
+[help]
+  autocorrect = 1
+
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
