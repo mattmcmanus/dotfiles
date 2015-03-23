@@ -1,4 +1,11 @@
-set anti
+" No audible bell
+set vb
+
+" No toolbar
+set guioptions-=T
+
+" Use console dialogs
+set guioptions+=c
 
 " C-TAB and C-SHIFT-TAB cycle tabs forward and backward
 nmap <c-tab> :tabnext<cr>
