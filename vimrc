@@ -2,10 +2,78 @@
 " possible, as it has side effects.
 set nocompatible
 
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
-endif
-filetype plugin indent on
+call plug#begin('~/.vim/bundle')
+
+Plug 'sensible.vim'
+
+" Languages
+"   Ruby
+Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+Plug 'tpope/vim-rails', { 'for': 'ruby' }
+Plug 'ecomba/vim-ruby-refactoring', { 'for': 'ruby' }
+Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
+"   JavaScript
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+Plug 'jiangmiao/simple-javascript-indenter', { 'for': 'javascript' }
+Plug 'leshill/vim-json', { 'for': ['javascript','json'] }
+Plug 'itspriddle/vim-jquery', { 'for': ['javascript', 'coffee'] }
+"   HTML
+Plug 'xenoterracide/html.vim'
+Plug 'tudorprodan/html_annoyance.vim'
+"   Other
+Plug 'slim-template/vim-slim', { 'for': 'slim' }
+Plug 'tpope/vim-markdown'
+Plug 'avakhov/vim-yaml'
+Plug 'juvenn/mustache.vim'
+Plug 'nono/vim-handlebars'
+Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
+Plug 'jshint.vim', { 'for': 'javascript' }
+Plug 'mxw/vim-jsx', { 'for': 'jsx' }
+Plug 'mtscout6/vim-cjsx'
+Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
+
+Plug 'tpope/vim-vinegar'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'scrooloose/syntastic'
+Plug 'godlygeek/tabular'
+Plug 'Align'
+Plug 'tpope/vim-endwise'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'tpope/vim-repeat'
+Plug 'kana/vim-textobj-user'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'switch.vim'
+Plug 'matchit.zip'
+Plug 'sjl/gundo.vim'
+Plug 'abolish.vim'
+Plug 'danro/rename.vim'
+Plug 'bogado/file-line'
+Plug 'dockyard/vim-easydir'
+Plug 'nicholaides/words-to-avoid.vim'
+Plug 'jgdavey/vim-blockle'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'rking/ag.vim'
+Plug 'justincampbell/vim-eighties'
+
+" SnipMate and dependencies
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'honza/vim-snippets'
+Plug 'garbas/vim-snipmate'
+
+
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-commentary'
+Plug 'airblade/vim-gitgutter'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'chriskempson/base16-vim'
+
+
+call plug#end()
+
 
 set guioptions=egm
 set guifont=Bitstream_Vera_Sans_Mono:h15
@@ -13,11 +81,8 @@ set antialias
 set t_Co=256
 set t_ut=
 set background=dark
-colorscheme base16-default
 let base16colorspace=256
-
-" Key Mappings
-"let mapleader = ","
+colorscheme base16-default
 
 " Index ctags from any project, including those outside Rails
 map <Leader>ct :!ctags -R .<CR>
@@ -50,9 +115,6 @@ noremap <leader>z :call JsSpecNavigate()<CR>
 let g:netrw_liststyle=0
 set noswapfile
 
-" vim-indent-guides {
-let g:indent_guides_auto_colors = 0
-"             " }
 
 set iskeyword+=.
 set iskeyword+=-
@@ -67,9 +129,6 @@ nnoremap g# g#zz
 
 
 
-" From promptworks.vim
-
-set nocompatible
 
 " Put temp files in common directory
 set backupdir=~/.vim/backup
@@ -211,40 +270,9 @@ cnoremap <C-B> <Left>
 cnoremap <M-BS> <C-w>
 
 
-
-""""""""""""""""""""""""
-""" *** COMMANDS *** """
-""""""""""""""""""""""""
-
-" run an external command and give you the results in a small new buffer
-" Example
-"   :R echo 'hi'
-command! -nargs=*  -complete=shellcmd R belowright 15new | r ! <args>
-
-
 """""""""""""""""""""""""""""
 """ *** AUTO COMMANDS *** """
 """""""""""""""""""""""""""""
-
-""""""""""""""""""
-""" Whitespace """
-""""""""""""""""""
-
-" Remove any trailing whitespace that is in the file
-autocmd BufRead,BufWrite * if ! &bin | :call <SID>StripTrailingWhitespaces() | endif
-
-function! <SID>StripTrailingWhitespaces()
-    " Preparation: save last search, and cursor position.
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " Do the business:
-    silent! %s/\s\+$//e
-    " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
-endfunction
-
 
 """""""""""
 """ GIT """
@@ -254,12 +282,6 @@ if has('autocmd')
   au BufNewFile,BufRead COMMIT_EDITMSG setlocal spell!
   au BufNewFile,BufRead COMMIT_EDITMSG call feedkeys('ggi', 't')
 endif
-
-
-
-"""""""""""""""""""""""
-""" *** PLUGINS *** """
-"""""""""""""""""""""""
 
 """"""""""""""
 """ CTRL P """
@@ -301,13 +323,6 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 
-""""""""""""""
-""" Switch """
-""""""""""""""
-
-nnoremap <leader>- :Switch<CR>
-
-
 """"""""""""""""""
 """ Tabularize """
 """"""""""""""""""
@@ -330,3 +345,8 @@ if exists(":Tabularize")
   vnoremap <Leader>a, :Tabularize /,\zs/l0r1<CR>
 endif
 
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_color_change_percent  = 3
+let g:indent_guides_start_level           = 2
+let g:indent_guides_guide_size            = 1
