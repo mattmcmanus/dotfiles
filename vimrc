@@ -124,7 +124,7 @@ set smartcase
 """""""""""""""
 
 " Use relative line numbers, but show the absolute number on the current line
-set relativenumber
+"set relativenumber
 set number
 
 " Show whitespace as unicode chars
