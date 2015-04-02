@@ -12,6 +12,7 @@ Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'ecomba/vim-ruby-refactoring', { 'for': 'ruby' }
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
+Plug 'tpope/vim-endwise', { 'for': 'ruby' }
 "   JavaScript
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'jiangmiao/simple-javascript-indenter', { 'for': 'javascript' }
@@ -29,33 +30,33 @@ Plug 'nono/vim-handlebars'
 Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 Plug 'jshint.vim', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': 'jsx' }
-Plug 'mtscout6/vim-cjsx'
+Plug 'mtscout6/vim-cjsx', { 'for': 'cjsx' }
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 
 Plug 'tpope/vim-vinegar'
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
+Plug 'rking/ag.vim', { 'on': 'Ag' }
+Plug 'tpope/vim-commentary'
+Plug 'airblade/vim-gitgutter'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'chriskempson/base16-vim'
+
+Plug 'danro/rename.vim'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/argtextobj.vim'
 Plug 'scrooloose/syntastic'
 Plug 'godlygeek/tabular'
 Plug 'Align'
-Plug 'tpope/vim-endwise'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'tpope/vim-repeat'
-Plug 'kana/vim-textobj-user'
-Plug 'Lokaltog/vim-easymotion'
-Plug 'switch.vim'
 Plug 'matchit.zip'
-Plug 'sjl/gundo.vim'
 Plug 'abolish.vim'
-Plug 'danro/rename.vim'
 Plug 'bogado/file-line'
 Plug 'dockyard/vim-easydir'
-Plug 'nicholaides/words-to-avoid.vim'
 Plug 'jgdavey/vim-blockle'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'rking/ag.vim'
 Plug 'justincampbell/vim-eighties'
 
 " SnipMate and dependencies
@@ -64,15 +65,10 @@ Plug 'tomtom/tlib_vim'
 Plug 'honza/vim-snippets'
 Plug 'garbas/vim-snipmate'
 
-
 Plug 'editorconfig/editorconfig-vim'
-Plug 'tpope/vim-commentary'
-Plug 'airblade/vim-gitgutter'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'chriskempson/base16-vim'
-
 
 call plug#end()
+
 
 
 set guioptions=egm
@@ -350,3 +346,5 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_color_change_percent  = 3
 let g:indent_guides_start_level           = 2
 let g:indent_guides_guide_size            = 1
+
+let g:EditorConfig_core_mode = 'external_command'
