@@ -1,14 +1,75 @@
 snippet iE
 	import Ember from 'ember';
 
-snippet Er
+snippet imp
+	import ${1} from '${2}';
+
+snippet cp
+	${1:name}: function (${3:prop, value}) {
+		${5}
+	}.property(${2})${4}
+snippet tg
+	${1:this}.get("${2}")${3}
+snippet ts
+	${1:this}.set("${2}", ${3});
+
+snippet er
 	Ember.run(function() {
 		${1}
 	});
 
+#  TESTS
 snippet test
 	test('${1:test_name}', function() {
 		${2}
+	});
+
+snippet andt
+	andThen(function(){
+		${1}
+	})
+
+snippet aeq
+	assert.equal(${1:actual},${2:expected});
+
+snippet vis
+	visit('${1}');
+
+snippet fin
+	find('${1}');
+
+# BOILERPLATE
+snippet route
+	import Ember from "ember";
+
+	export default Ember.Route.extend({
+		${1}
+	});
+snippet model
+	import DS from "ember-data";
+
+	var attr = DS.attr;
+
+	export default DS.Model.extend({
+		${1}
+	});
+snippet helper
+	import Ember from "ember";
+
+	export default Ember.Handlebars.makeBoundHelper(function (${1}) {
+		${2}
+	});
+snippet mixin
+	import Ember from "ember";
+
+	export default Ember.Mixin.create({
+		${1}
+	});
+snippet controller
+	import Ember from "ember";
+
+	export default Ember.Controller.extend({
+		${1}
 	});
 
 
