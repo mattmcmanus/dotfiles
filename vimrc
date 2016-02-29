@@ -14,10 +14,13 @@ Plug 'ecomba/vim-ruby-refactoring', { 'for': 'ruby' }
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
 Plug 'tpope/vim-endwise', { 'for': 'ruby' }
 "   JavaScript
+Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
-Plug 'jiangmiao/simple-javascript-indenter', { 'for': 'javascript' }
 Plug 'leshill/vim-json', { 'for': ['javascript','json'] }
 Plug 'itspriddle/vim-jquery', { 'for': ['javascript', 'coffee'] }
+Plug 'jshint.vim', { 'for': 'javascript' }
+Plug 'mxw/vim-jsx', { 'for': 'jsx' }
+Plug 'mtscout6/vim-cjsx', { 'for': 'cjsx' }
 "   HTML
 Plug 'xenoterracide/html.vim'
 Plug 'tudorprodan/html_annoyance.vim'
@@ -26,12 +29,10 @@ Plug 'slim-template/vim-slim', { 'for': 'slim' }
 Plug 'tpope/vim-markdown'
 Plug 'avakhov/vim-yaml'
 Plug 'juvenn/mustache.vim'
-Plug 'nono/vim-handlebars'
+Plug 'mustache/vim-mustache-handlebars'
 Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
-Plug 'jshint.vim', { 'for': 'javascript' }
-Plug 'mxw/vim-jsx', { 'for': 'jsx' }
-Plug 'mtscout6/vim-cjsx', { 'for': 'cjsx' }
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
+Plug 'hail2u/vim-css3-syntax'
 
 Plug 'tpope/vim-vinegar'
 Plug 'kien/ctrlp.vim'
@@ -43,9 +44,10 @@ Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'chriskempson/base16-vim'
 
-Plug 'danro/rename.vim'
+Plug 'danro/rename.vim', { 'on': 'Rename' }
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/argtextobj.vim'
+Plug 'Townk/vim-autoclose'
 Plug 'scrooloose/syntastic'
 Plug 'godlygeek/tabular'
 Plug 'Align'
@@ -105,15 +107,14 @@ let g:html_indent_tags = 'li\|p'
 set splitbelow
 set splitright
 
+set omnifunc=csscomplete#CompleteCSS
+
 " JSNavigate; javascript_spec_navigator.vim
 noremap <leader>z :call JsSpecNavigate()<CR>
 
 let g:netrw_liststyle=0
 set noswapfile
 
-
-set iskeyword+=.
-set iskeyword+=-
 
 nnoremap n nzz
 nnoremap N Nzz
@@ -143,6 +144,7 @@ set smartindent
 set foldenable
 set foldlevelstart=99
 
+set autoread
 
 """"""""""""
 """ Tabs """
@@ -270,14 +272,19 @@ cnoremap <M-BS> <C-w>
 """ *** AUTO COMMANDS *** """
 """""""""""""""""""""""""""""
 
-"""""""""""
-""" GIT """
-"""""""""""
-
 if has('autocmd')
+  " Git
   au BufNewFile,BufRead COMMIT_EDITMSG setlocal spell!
   au BufNewFile,BufRead COMMIT_EDITMSG call feedkeys('ggi', 't')
 endif
+
+augroup VimCSS3yntax
+  autocmd!
+
+  autocmd FileType css setlocal iskeyword+=-
+  autocmd FileType scss setlocal iskeyword+=-
+  au BufNewFile,BufRead *.scss set ft=scss.css
+augroup END
 
 """"""""""""""
 """ CTRL P """
@@ -348,3 +355,12 @@ let g:indent_guides_start_level           = 2
 let g:indent_guides_guide_size            = 1
 
 let g:EditorConfig_core_mode = 'external_command'
+
+let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_html_tidy_ignore_errors = [
+    \  'plain text isn''t allowed in <head> elements',
+    \  '<base> escaping malformed URI reference',
+    \  'discarding unexpected <body>',
+    \  '<script> escaping malformed URI reference',
+    \  '</head> isn''t allowed in <body> elements'
+    \ ]
