@@ -19,6 +19,8 @@ alias pspec="find spec -name *.rb | pick | tee /dev/tty | xargs rspec"
 # Shortcuts
 alias d="cd ~/Dropbox"
 alias w="cd ~/www"
+alias api="cd ~/code/ownersup-api"
+alias client="cd ~/code/ownersup-client"
 alias g="git"
 alias v="vim"
 alias s="subl ."
@@ -26,7 +28,7 @@ alias o="open"
 alias oo="open ."
 
 # List all files colorized in long format
-alias l="ls -Gl"
+alias l="ls -1Ap"
 
 # List all files colorized in long format, including dot files
 alias la="ls -Gla"
@@ -149,3 +151,11 @@ alias datafart='curl --data-binary @- datafart.com'
 alias be='bundle exec'
 
 alias duply-local='ulimit -n 1024; duply pictures-local backup; duply work-backups-local backup; duply code-local backup'
+
+repeat() {
+    number=$1
+    shift
+    for i in `seq $number`; do
+      $@
+    done
+}
