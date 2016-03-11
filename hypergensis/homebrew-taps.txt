@@ -1,0 +1,7 @@
+thoughtbot/formulae
+caskroom/cask
+homebrew/completions
+homebrew/php
+homebrew/versions
+caskroom/fonts
+neovim/neovim

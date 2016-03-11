@@ -7,33 +7,18 @@ call plug#begin('~/.vim/bundle')
 Plug 'sensible.vim'
 
 " Languages
+Plug 'sheerun/vim-polyglot'
 "   Ruby
-Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
-Plug 'ecomba/vim-ruby-refactoring', { 'for': 'ruby' }
-Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
+Plug 'kana/vim-textobj-user' | Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
 Plug 'tpope/vim-endwise', { 'for': 'ruby' }
 "   JavaScript
-Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
-Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
-Plug 'leshill/vim-json', { 'for': ['javascript','json'] }
 Plug 'itspriddle/vim-jquery', { 'for': ['javascript', 'coffee'] }
 Plug 'jshint.vim', { 'for': 'javascript' }
-Plug 'mxw/vim-jsx', { 'for': 'jsx' }
-Plug 'mtscout6/vim-cjsx', { 'for': 'cjsx' }
-"   HTML
-Plug 'xenoterracide/html.vim'
-Plug 'tudorprodan/html_annoyance.vim'
-"   Other
-Plug 'slim-template/vim-slim', { 'for': 'slim' }
-Plug 'tpope/vim-markdown'
-Plug 'avakhov/vim-yaml'
-Plug 'juvenn/mustache.vim'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
+"   CSS
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
-Plug 'hail2u/vim-css3-syntax'
 
+" File Navigation
 Plug 'tpope/vim-vinegar'
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
@@ -42,12 +27,16 @@ Plug 'rking/ag.vim', { 'on': 'Ag' }
 Plug 'tpope/vim-commentary'
 Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'chriskempson/base16-vim'
-
 Plug 'danro/rename.vim', { 'on': 'Rename' }
+
+"   Themes
+Plug 'chriskempson/base16-vim'
+Plug 'joshdick/onedark.vim'
+
+" Text manipulation
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/argtextobj.vim'
-Plug 'Townk/vim-autoclose'
+" Plug 'Townk/vim-autoclose'
 Plug 'scrooloose/syntastic'
 Plug 'godlygeek/tabular'
 Plug 'Align'
@@ -70,8 +59,6 @@ Plug 'garbas/vim-snipmate'
 Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
-
-
 
 set guioptions=egm
 set guifont=Bitstream_Vera_Sans_Mono:h15
@@ -98,23 +85,16 @@ noremap <Leader><Right> :GitGutterNextHunk<CR>
 " Snippets are activated by Shift+Tab
 let g:snippetsEmu_key = "<S-Tab>"
 
-let g:ctrlp_use_caching = 0
-
-" Treat <li> and <p> tags like the block tags they are
-let g:html_indent_tags = 'li\|p'
-
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
 set splitright
-
-set omnifunc=csscomplete#CompleteCSS
 
 " JSNavigate; javascript_spec_navigator.vim
 noremap <leader>z :call JsSpecNavigate()<CR>
 
 let g:netrw_liststyle=0
+let g:netrw_list_hide=netrw_gitignore#Hide()
 set noswapfile
-
 
 nnoremap n nzz
 nnoremap N Nzz
@@ -122,10 +102,6 @@ nnoremap * *zz
 nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
-
-
-
-
 
 " Put temp files in common directory
 set backupdir=~/.vim/backup
@@ -190,9 +166,6 @@ set listchars=tab:‣\ ,trail:\ ,extends:…,precedes:…,nbsp:˖
 set list
 
 set colorcolumn=80
-
-" speed up macros and repeated commands
-set lazyredraw
 
 if has("mouse")
   set mouse=a
@@ -290,6 +263,7 @@ augroup END
 """ CTRL P """
 """"""""""""""
 
+let g:ctrlp_use_caching = 0
 let g:ctrlp_custom_ignore = '\.git$\|tmp$\|\.bundle$\|public/uploads$\|public/system$\|public\/topics$\|public/user_profiles\|\.sass-cache$|node_modules$'
 
 
@@ -298,8 +272,6 @@ let g:ag_binary = system("which ag | xargs echo -n")
 if filereadable(g:ag_binary)
   let g:ctrlp_user_command = g:ag_binary . ' %s -l --nocolor -g ""'
 endif
-
-let g:ctrlp_use_caching = 0
 
 """""""""""""""""""""""""""""""""""""""
 """ Visual Mode */# from Scrooloose """
@@ -359,8 +331,19 @@ let g:EditorConfig_core_mode = 'external_command'
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_html_tidy_ignore_errors = [
     \  'plain text isn''t allowed in <head> elements',
+    \  'plain text isn''t allowed in <tbody> elements',
+    \  '<button>',
     \  '<base> escaping malformed URI reference',
     \  'discarding unexpected <body>',
     \  '<script> escaping malformed URI reference',
     \  '</head> isn''t allowed in <body> elements'
     \ ]
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0

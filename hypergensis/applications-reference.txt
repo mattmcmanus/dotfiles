@@ -1,0 +1,168 @@
+1Password 5.app
+Adium.app
+Adobe
+Airfoil
+Airmail 2.app
+Alfred 2.app
+Alternote.app
+Amazon
+Amazon Cloud Drive App.app
+Amazon Music.app
+Aperture.app
+App Store.app
+Arq.app
+Atom.app
+Auditri.app
+Automator.app
+Bartender 2.app
+Byword.app
+Calculator.app
+Calendar.app
+Chess.app
+CloudApp.app
+CloudMagic Email.app
+ColorSnapper.app
+Contacts.app
+DNSCrypt Menubar.app
+DVD Player.app
+DaisyDisk.app
+Dash.app
+Dashboard.app
+Day One Classic.app
+Day One.app
+DeDRM.app
+Deliveries.app
+Dictionary.app
+DiskMaker X 5.app
+Divvy.app
+Dropbox.app
+Due.app
+Duo.app
+Evernote.app
+ExpanDrive.app
+FaceTime.app
+Fantastical 2.app
+Fantastical.app
+Firefox.app
+FirefoxDeveloperEdition.app
+Flickr Uploadr.app
+Flow.app
+Fluid Apps
+Fluid.app
+Flux.app
+Focus.app
+Font Book.app
+Fonts.app
+GPG Keychain.app
+Game Center.app
+Gifwit.app
+GitHub.app
+GitUp.app
+Gitter.app
+Gmail.app
+GoToMeeting
+GoToMeeting.app
+Google Chrome Canary.app
+Google Chrome.app
+Google Drive.app
+Google Photos Backup.app
+Grammarly.app
+Growl.app
+Hemingway.app
+Image Capture.app
+ImageOptim.app
+Install OS X El Capitan.app
+Kaleidoscope.app
+Karabiner.app
+Keynote.app
+Kindle.app
+Last.fm.app
+Launchpad.app
+LimeChat.app
+MAMP
+MacVim.app
+Mail.app
+Mailbox (Beta).app
+Maps.app
+Messages.app
+MindNode Pro.app
+Mission Control.app
+Momentum.app
+Noizio.app
+Notes.app
+Numbers.app
+OmniFocus Clip-o-Tron.app
+OmniFocus.app
+OmniGraffle.app
+PSequel.app
+Pages.app
+Panels.app
+Paprika Recipe Manager.app
+Paw.app
+Photo Booth.app
+Photos.app
+Piezo.app
+PivotalTracker.app
+Pixelmator.app
+PocketCasts.app
+Polymail.app
+Pomodoro Time.app
+Pomodoro.app
+Popcorn-Time.app
+Preview.app
+QuickBooks.app
+QuickTime Player.app
+Rdio.app
+ReadKit.app
+Reeder.app
+Reminders.app
+RescueTime.app
+Safari.app
+ScreenFlow.app
+Screenhero.app
+Screeny.app
+Seil.app
+Sequel Pro.app
+ShrinkIt.app
+Sketch DevTools Assistant.app
+Sketch.app
+Skitch.app
+Skype.app
+Slack.app
+Snapselect.app
+Soulver.app
+Spotify.app
+Steam.app
+Stickies.app
+Sunrise Calendar.app
+SuperDuper!.app
+System Preferences.app
+Tadam.app
+TextEdit.app
+TextExpander 4.3.6.app
+TextExpander.app
+Textual 5.app
+The Unarchiver.app
+Time Machine.app
+Todoist.app
+Transmission.app
+Transmit.app
+Trello.app
+Tweetbot.app
+Twitter.app
+Typed.app
+Utilities
+VLC.app
+VirtualBox.app
+Viscosity.app
+Xcode.app
+calibre.app
+cypress.app
+iA Writer.app
+iBooks.app
+iMovie.app
+iPhoto Library Manager.app
+iPhoto.app
+iStat Menus.app
+iTerm.app
+iTunes.app
