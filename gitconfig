@@ -1,6 +1,7 @@
 [user]
   name = Matt McManus
   email = matt@mcmanus.io
+	signingkey = EDB8F457
 
 [hub]
   protocol = https
@@ -13,6 +14,7 @@
 [alias]
   ap = add -p
   aa = add --all
+  c = commit
   ca = commit --amend
   ci = commit -v
   cob = checkout -b
@@ -96,3 +98,5 @@
 	clean = git lfs clean %f
 	smudge = git lfs smudge %f
 	required = true
+[commit]
+	gpgsign = true
