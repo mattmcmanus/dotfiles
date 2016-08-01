@@ -1,9 +1,10 @@
-1Password 5.app
+1Password 6.app
 Adium.app
 Adobe
 Airfoil
 Airmail 2.app
 Alfred 2.app
+Alfred 3.app
 Alternote.app
 Amazon
 Amazon Cloud Drive App.app
@@ -15,20 +16,22 @@ Atom.app
 Auditri.app
 Automator.app
 Bartender 2.app
+Brave.app
 Byword.app
 Calculator.app
 Calendar.app
 Chess.app
 CloudApp.app
 CloudMagic Email.app
+Cloudup.app
 ColorSnapper.app
 Contacts.app
+CraftManager.app
 DNSCrypt Menubar.app
 DVD Player.app
 DaisyDisk.app
 Dash.app
 Dashboard.app
-Day One Classic.app
 Day One.app
 DeDRM.app
 Deliveries.app
@@ -45,23 +48,19 @@ Fantastical 2.app
 Fantastical.app
 Firefox.app
 FirefoxDeveloperEdition.app
-Flickr Uploadr.app
-Flow.app
 Fluid Apps
 Fluid.app
 Flux.app
 Focus.app
 Font Book.app
 Fonts.app
+GIPHY CAPTURE.app
 GPG Keychain.app
 Game Center.app
 Gifwit.app
 GitHub.app
 GitUp.app
-Gitter.app
 Gmail.app
-GoToMeeting
-GoToMeeting.app
 Google Chrome Canary.app
 Google Chrome.app
 Google Drive.app
@@ -69,25 +68,29 @@ Google Photos Backup.app
 Grammarly.app
 Growl.app
 Hemingway.app
+HyperLightDrifter.app
+IconJar.app
 Image Capture.app
 ImageOptim.app
 Install OS X El Capitan.app
-Kaleidoscope.app
+Instapaper.app
 Karabiner.app
 Keynote.app
 Kindle.app
+KnockKnock.app
 Last.fm.app
 Launchpad.app
 LimeChat.app
+Lingo.app
+Lockdown.app
 MAMP
 MacVim.app
+Magnet.app
 Mail.app
-Mailbox (Beta).app
 Maps.app
 Messages.app
 MindNode Pro.app
 Mission Control.app
-Momentum.app
 Noizio.app
 Notes.app
 Numbers.app
@@ -96,8 +99,8 @@ OmniFocus.app
 OmniGraffle.app
 PSequel.app
 Pages.app
-Panels.app
 Paprika Recipe Manager.app
+Patterns.app
 Paw.app
 Photo Booth.app
 Photos.app
@@ -105,19 +108,19 @@ Piezo.app
 PivotalTracker.app
 Pixelmator.app
 PocketCasts.app
-Polymail.app
-Pomodoro Time.app
 Pomodoro.app
 Popcorn-Time.app
+PowerPhotos.app
 Preview.app
 QuickBooks.app
 QuickTime Player.app
-Rdio.app
-ReadKit.app
+RecordIt.app
 Reeder.app
 Reminders.app
 RescueTime.app
+Safari Technology Preview.app
 Safari.app
+ScreenFlow 5.0.5.app
 ScreenFlow.app
 Screenhero.app
 Screeny.app
@@ -138,13 +141,15 @@ Sunrise Calendar.app
 SuperDuper!.app
 System Preferences.app
 Tadam.app
+TaskExplorer.app
 TextEdit.app
 TextExpander 4.3.6.app
 TextExpander.app
 Textual 5.app
 The Unarchiver.app
 Time Machine.app
-Todoist.app
+Toggl.app
+TogglDesktop.app
 Transmission.app
 Transmit.app
 Trello.app
@@ -155,10 +160,13 @@ Utilities
 VLC.app
 VirtualBox.app
 Viscosity.app
+Visual Studio Code.app
+Wagon.app
 Xcode.app
+YakYak.app
 calibre.app
 cypress.app
-iA Writer.app
+iA Writer Classic.app
 iBooks.app
 iMovie.app
 iPhoto Library Manager.app
@@ -166,3 +174,4 @@ iPhoto.app
 iStat Menus.app
 iTerm.app
 iTunes.app
+teensy.app
