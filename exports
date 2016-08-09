@@ -15,9 +15,10 @@ export HISTCONTROL=ignoredups
 export HISTIGNORE="cd:cd -:pwd;exit:date"
 
 ### Added by the Heroku Toolbelt
-### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
-PATH="/usr/local/heroku/bin:$PATH"
+
+#Android
+export PATH="~/Library/Android/sdk/tools/:$PATH"
 
 # Node Config
 PATH=~/local/bin:$PATH
@@ -33,3 +34,5 @@ export NODE_ENV="development"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 export DOCKER_HOST=tcp://192.168.59.103:2375
+
+# export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH" # postgres.app
