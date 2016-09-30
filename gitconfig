@@ -32,7 +32,7 @@
   pl = pull
   pr = pull-request
   gap = add -p
-  l = log
+  l = log origin/master..
   ll = log --stat --abbrev-commit
   d = diff
   su = "!f() { git submodule sync; git submodule update --init; }; f"
@@ -40,6 +40,7 @@
   up = !sh -c 'git pull --rebase --prune && git log --pretty=format:\"%C(bold blue)%an %Creset(%ar) %C(yellow)%s\" HEAD@{1}..'
   upm = !sh -c 'git fetch && git rebase origin/master'
   shove = commit --amend --no-edit
+  tidy-up = !sh -c 'git rebase -i `git rev-parse origin/master`'
 
 [format]
   pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset
