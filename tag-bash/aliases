@@ -27,6 +27,7 @@ alias s="subl ."
 alias o="open"
 alias oo="open ."
 
+alias yapp="cd ~/yapp/projects"
 alias ym="cd ~/yapp/projects/yapp-mobile"
 alias yi="cd ~/yapp/projects/yapp-ios"
 alias yy="cd ~/yapp/projects/yapp"
@@ -145,10 +146,11 @@ function nodeb() {
   nodemon $1 | bunyan -l debug -o short
 }
 
-alias ember-deps='npm install && bower install'
-alias ember-clean='rm -rf tmp dist'
-alias ember-wipe='rm -rf tmp dist bower_components node_modules'
-alias ember-reset='ember-wipe && ember-deps'
+alias e='ember'
+alias e-deps='npm install && bower install'
+alias e-clean='rm -rf tmp dist'
+alias e-wipe='rm -rf tmp dist bower_components node_modules'
+alias e-reset='e-wipe && e-deps'
 
 # Vagrant Special Sauce
 
