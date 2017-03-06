@@ -5,7 +5,7 @@ export MANPAGER="less -X"
 # Highlight section titles in manual pages
 export LESS_TERMCAP_md="$ORANGE"
 
-export CDPATH=.:~:~/www:~/www/waytohealth:~/www/waytohealth/versions
+export CDPATH=.:~:~/yapp/projects
 
 # Larger bash history (allow 32³ entries; default is 500)
 export HISTSIZE=32768
@@ -36,3 +36,6 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export DOCKER_HOST=tcp://192.168.59.103:2375
 
 export PATH="./bin:$PATH"
+export PATH="$PATH:`yarn global bin`"
+
+export YAPP_ROOT="/Users/matt/yapp/projects"
