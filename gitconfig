@@ -12,38 +12,44 @@
 [pull]
   rebase = true
 [alias]
-  ap = add -p
-  aa = add --all
+  a = add -p
   c = commit
-  ca = commit --amend
+  amend = commit --amend
   ci = commit -v
   cob = checkout -b
   cop = checkout -p
   co = checkout
   cb = !sh -c 'git branch | cut -c 3- | pick | xargs git checkout' -
   br = branch
-  create-branch = !sh -c 'git push origin HEAD:refs/heads/$1 --no-verify && git fetch origin && git branch --track $1 origin/$1 && cd . && git checkout $1' -
+  rc = rebase --continue
+  new-branch = !sh -c 'git checkout master && git pull --rebase && cd . && git checkout -b $1' -
+  set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
   delete-branch = !sh -c 'git push origin :refs/heads/$1 && git branch -D $1' -
   merge-branch = !git checkout master && git merge @{-1}
   st = status
   s = status -sb
+  fp = push -f
   pu = push
+  poh = push origin HEAD
   yolo = push -f --no-verify
   pl = pull
   pr = pull-request
-  gap = add -p
-  l = log origin/master..
+  l = log
+  lm = log origin/master..
   ll = log --stat --abbrev-commit
+  history = log -p -M --follow --stat --
+  recap = log --no-merges --author=matt@mcmanus.io
   d = diff
   su = "!f() { git submodule sync; git submodule update --init; }; f"
   graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  unstage = reset HEAD
   up = !sh -c 'git pull --rebase --prune && git log --pretty=format:\"%C(bold blue)%an %Creset(%ar) %C(yellow)%s\" HEAD@{1}..'
   upm = !sh -c 'git fetch && git rebase origin/master'
   shove = commit --amend --no-edit
   tidy-up = !sh -c 'git rebase -i `git rev-parse origin/master`'
 
 [format]
-  pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset
+  pretty=format:%C(yellow)%h%Creset - %Cgreen(%ai)%Creset - %s  %C(bold blue)<%ae>%Creset%C(red)%d%Creset 
 
 [credential]
   helper = osxkeychain
