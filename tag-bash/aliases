@@ -33,6 +33,8 @@ alias yi="cd ~/yapp/projects/yapp-ios"
 alias yy="cd ~/yapp/projects/yapp"
 alias ys="cd ~/yapp/projects/yapp-server"
 
+alias restart="touch tmp/restart.txt"
+
 # List all files colorized in long format
 alias l="ls -1Ap"
 
@@ -139,6 +141,8 @@ alias ngc='npm test && git commit'
 
 alias ni='npm install --save'
 
+alias linked='find node_modules -maxdepth 1 -type la'
+
 function nt() {
   nodemon -w ../ $1 | bunyan -l warn -o short
 }
@@ -146,8 +150,10 @@ function nodeb() {
   nodemon $1 | bunyan -l debug -o short
 }
 
+alias yarn-lock-resolve="git reset yarn.lock && git checkout yarn.lock && yarn"
+
 alias e='ember'
-alias e-deps='npm install && bower install'
+alias e-deps='yarn install && bower install'
 alias e-clean='rm -rf tmp dist'
 alias e-wipe='rm -rf tmp dist bower_components node_modules'
 alias e-reset='e-wipe && e-deps'

@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+modified = `git ls-files -m` != ""
+uncommitted = `git diff-index --cached HEAD` != ""
+master = `git branch | grep \* | cut -d ' ' -f2` == 'master'
+
+if modified || uncommitted
+  exit 1
+end
+
+if master
+  exit 0
+else
+  exit 1
+end

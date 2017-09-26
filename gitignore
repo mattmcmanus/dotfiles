@@ -1,5 +1,8 @@
 # Thanks! https://help.github.com/articles/ignoring-files
 
+#TEMP
+jsconfig.json
+
 # Compiled source #
 ###################
 *.com

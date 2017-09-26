@@ -36,6 +36,5 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export DOCKER_HOST=tcp://192.168.59.103:2375
 
 export PATH="./bin:$PATH"
-export PATH="$PATH:`yarn global bin`"
 
 export YAPP_ROOT="/Users/matt/yapp/projects"

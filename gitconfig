@@ -19,6 +19,7 @@
   cob = checkout -b
   cop = checkout -p
   co = checkout
+  m = !sh -c 'git checkout master && git pull --rebase && cd .' -
   cb = !sh -c 'git branch | cut -c 3- | pick | xargs git checkout' -
   br = branch
   rc = rebase --continue
@@ -47,6 +48,7 @@
   upm = !sh -c 'git fetch && git rebase origin/master'
   shove = commit --amend --no-edit
   tidy-up = !sh -c 'git rebase -i `git rev-parse origin/master`'
+	list-branches = branch --sort=committerdate
 
 [format]
   pretty=format:%C(yellow)%h%Creset - %Cgreen(%ai)%Creset - %s  %C(bold blue)<%ae>%Creset%C(red)%d%Creset 
@@ -107,3 +109,5 @@
 	required = true
 [commit]
 	gpgsign = true
+[merge]
+	conflictstyle = diff3
