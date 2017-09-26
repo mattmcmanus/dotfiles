@@ -1,64 +1,61 @@
 1Password 6.app
-Adium.app
-Adobe
-Airfoil
-Airmail 2.app
-Alfred 2.app
+Abstract.app
+Airfoil Satellite.app
+Airfoil.app
+Airmail 3.app
 Alfred 3.app
 Alternote.app
-Amazon
-Amazon Cloud Drive App.app
-Amazon Music.app
-Aperture.app
+Amazon Drive.app
+Android Studio.app
+Annotate.app
 App Store.app
 Arq.app
+Atom Beta.app
 Atom.app
 Auditri.app
 Automator.app
-Bartender 2.app
+Backup and Sync.app
+Bartender 3.app
+Beam.app
+Bear.app
 Brave.app
 Byword.app
+CCMenu.app
 Calculator.app
 Calendar.app
 Chess.app
 CloudApp.app
-CloudMagic Email.app
 Cloudup.app
+ColorPicker.app
 ColorSnapper.app
 Contacts.app
 CraftManager.app
-DNSCrypt Menubar.app
+Cyberduck.app
 DVD Player.app
 DaisyDisk.app
 Dash.app
+Dash.localized
 Dashboard.app
 Day One.app
-DeDRM.app
 Deliveries.app
 Dictionary.app
-DiskMaker X 5.app
+DiskMaker X 7 for High Sierra.app
 Divvy.app
 Dropbox.app
-Due.app
-Duo.app
+Ethereum Wallet.app
 Evernote.app
-ExpanDrive.app
 FaceTime.app
 Fantastical 2.app
-Fantastical.app
 Firefox.app
 FirefoxDeveloperEdition.app
-Fluid Apps
 Fluid.app
 Flux.app
-Focus.app
+Focused.app
 Font Book.app
 Fonts.app
-GIPHY CAPTURE.app
 GPG Keychain.app
-Game Center.app
 Gifwit.app
-GitHub.app
+GitHub Desktop.app
 GitUp.app
 Gmail.app
 Google Chrome Canary.app
@@ -66,112 +63,96 @@ Google Chrome.app
 Google Drive.app
 Google Photos Backup.app
 Grammarly.app
+Graphic.app
 Growl.app
-Hemingway.app
-HyperLightDrifter.app
+HazeOver.app
+Hemingway Editor.app
 IconJar.app
 Image Capture.app
 ImageOptim.app
-Install OS X El Capitan.app
-Instapaper.app
-Karabiner.app
+Inkscape.app
+Install macOS High Sierra.app
 Keynote.app
 Kindle.app
-KnockKnock.app
 Last.fm.app
 Launchpad.app
-LimeChat.app
-Lingo.app
-Lockdown.app
-MAMP
-MacVim.app
-Magnet.app
+Little Snitch Configuration.app
 Mail.app
 Maps.app
+Medis.app
 Messages.app
-MindNode Pro.app
+Micro Snitch.app
+MindNode-Demo.app
 Mission Control.app
-Noizio.app
 Notes.app
+Notion.app
 Numbers.app
-OmniFocus Clip-o-Tron.app
 OmniFocus.app
-OmniGraffle.app
+Opera Neon.app
 PSequel.app
 Pages.app
 Paprika Recipe Manager.app
-Patterns.app
+Patchwork.app
 Paw.app
+Paws for Trello.app
 Photo Booth.app
 Photos.app
-Piezo.app
-PivotalTracker.app
+PixelStick.app
+PixelStick.appdownload
 Pixelmator.app
-PocketCasts.app
-Pomodoro.app
-Popcorn-Time.app
+PopcornTime.app
 PowerPhotos.app
 Preview.app
-QuickBooks.app
 QuickTime Player.app
 RecordIt.app
 Reeder.app
 Reminders.app
 RescueTime.app
-Safari Technology Preview.app
 Safari.app
-ScreenFlow 5.0.5.app
 ScreenFlow.app
 Screenhero.app
-Screeny.app
 Seil.app
 Sequel Pro.app
 ShrinkIt.app
-Sketch DevTools Assistant.app
+Siri.app
 Sketch.app
+SketchUp 2017
 Skitch.app
 Skype.app
 Slack.app
 Snapselect.app
+SoftU2F.app
 Soulver.app
+Spark.app
 Spotify.app
-Steam.app
 Stickies.app
-Sunrise Calendar.app
 SuperDuper!.app
+Suspicious Package.app
 System Preferences.app
 Tadam.app
-TaskExplorer.app
 TextEdit.app
-TextExpander 4.3.6.app
-TextExpander.app
-Textual 5.app
 The Unarchiver.app
+Things3.app
 Time Machine.app
-Toggl.app
-TogglDesktop.app
 Transmission.app
 Transmit.app
 Trello.app
+Trello.localized
 Tweetbot.app
-Twitter.app
-Typed.app
+UlyssesMac.app
 Utilities
 VLC.app
 VirtualBox.app
 Viscosity.app
 Visual Studio Code.app
-Wagon.app
+WMail.app
+Wallcat.app
+Wavebox.app
 Xcode.app
-YakYak.app
 calibre.app
-cypress.app
-iA Writer Classic.app
 iBooks.app
-iMovie.app
 iPhoto Library Manager.app
-iPhoto.app
 iStat Menus.app
 iTerm.app
 iTunes.app
-teensy.app
+zoom.us.app
