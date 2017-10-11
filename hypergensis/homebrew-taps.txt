@@ -3,13 +3,9 @@ caskroom/fonts
 caskroom/versions
 homebrew/completions
 homebrew/core
-homebrew/dupes
 homebrew/nginx
-homebrew/php
 homebrew/services
 homebrew/versions
 neovim/neovim
-osx-cross/avr
 puma/puma
 thoughtbot/formulae
-tomanthony/brews
