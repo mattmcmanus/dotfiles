@@ -28,6 +28,9 @@ snippet andt
 	andThen(function(){
 		${1}
 	})
+	
+snippet pause
+	await pauseTest();
 
 snippet aeq
 	assert.equal(${1:actual},${2:expected});
@@ -65,6 +68,7 @@ snippet mixin
 	export default Ember.Mixin.create({
 		${1}
 	});
+
 snippet controller
 	import Ember from "ember";
 
@@ -72,4 +76,8 @@ snippet controller
 		${1}
 	});
 
+snippet wait
+	await waitUntil(() => {
+	  return ${1}
+	});
 
