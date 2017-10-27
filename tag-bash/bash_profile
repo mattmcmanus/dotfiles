@@ -37,6 +37,7 @@ export NVM_DIR="/Users/matt/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
+export PYTHONHOME=/usr/local/lib/python3.6/
 
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
