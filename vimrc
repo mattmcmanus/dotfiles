@@ -11,11 +11,14 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'gko/vim-coloresque'
 Plug 'benizi/vim-automkdir'
 Plug 'leafgarland/typescript-vim'
+Plug 'tpope/vim-eunuch'
+Plug 'justinmk/vim-dirvish'
 Plug 'w0rp/ale'
+Plug 'tacahiroy/ctrlp-funky'
 
 " Essentials
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tpope/vim-vinegar'
+" Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
@@ -56,7 +59,7 @@ Plug 'tpope/vim-markdown', { 'for': ['md', 'markdown'] }
 
 " Ember
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
 Plug 'joukevandermaas/vim-ember-hbs'
 Plug 'AndrewRadev/ember_tools.vim'
 
@@ -89,8 +92,6 @@ if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
-
-
 
 " -----------------
 " Text Formatting
@@ -243,10 +244,10 @@ cnoremap <M-BS> <C-w>
 "nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 "nmap  <silent> K :Ag <cword><CR>   
 " Search for character under word
-nnoremap <Leader><Leader> :Ag <cword><CR>
-nnoremap \ :Ag<SPACE>
-nnoremap <Leader>F :%s/\<<C-r><C-w>\>/
-nnoremap <Leader>f :%s/<C-r><C-w>/
+nnoremap <Leader><Leader> :Rg <cword><CR>
+nnoremap \ :Rg<SPACE>
+nnoremap <Leader>R :%s/\<<C-r><C-w>\>/
+nnoremap <Leader>r :%s/<C-r><C-w>/
 
 nnoremap <Leader>a :ALEToggle<cr>
 
@@ -293,11 +294,6 @@ endif
 augroup NewSyntaxes
   au!
   " rabl is ruby
-  au BufRead,BufNewFile *.rabl setf ruby
-  au BufRead,BufNewFile *.hamlc set ft=haml
-  au BufRead,BufNewFile *.skim set ft=slim
-  autocmd FileType css setlocal iskeyword+=-
-  autocmd FileType scss setlocal iskeyword+=-
   au BufNewFile,BufRead *.scss set ft=scss.css
 augroup end
 
@@ -309,9 +305,13 @@ endif
 " The Silver Searcher
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  let g:ctrlp_use_caching = 0
+  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+
+nnoremap <leader>f :CtrlPFunky<CR>
+let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+let g:ctrlp_use_caching = 0
+let g:ctrlp_funky_syntax_highlight = 1
 
 " Open new split panes to right and bottom, which feels more natural
 let g:netrw_liststyle=0
@@ -426,7 +426,7 @@ endfunction
 
 " BUFFERS
 nnoremap <Leader>b :ls<CR>:b<Space>
-nnoremap <silent> <Leader>r :Bclose<CR>
+nnoremap <silent> <Leader>B :Bclose<CR>
 " Command ':Bclose' executes ':bd' to delete buffer in current window.
 " The window will show the alternate buffer (Ctrl-^) if it exists,
 " or the previous buffer (:bp), or a blank buffer if no previous.
