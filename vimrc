@@ -303,6 +303,8 @@ let g:ale_sign_warning = '👎'
 let g:ale_echo_msg_error_str = '💥'
 let g:ale_echo_msg_warning_str = '🤢'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
 
 
 set t_Co=256
