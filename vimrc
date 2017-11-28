@@ -50,6 +50,7 @@ Plug 'airblade/vim-gitgutter'
 " Languages
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 Plug 'tpope/vim-markdown', { 'for': ['md', 'markdown'] }
+Plug 'sheerun/vim-polyglot'
 
 " Ember
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
