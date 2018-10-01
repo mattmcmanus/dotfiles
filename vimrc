@@ -12,6 +12,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'justinmk/vim-dirvish'
 Plug 'w0rp/ale'
 Plug 'tacahiroy/ctrlp-funky'
+Plug 'jiangmiao/auto-pairs'
 
 " Essentials
 Plug 'ctrlpvim/ctrlp.vim'
