@@ -1,45 +1,47 @@
 snippet iE		
 	import Ember from 'ember';		
+endsnippet
  		
 snippet imp		
 	import ${1} from '${2}';		
+endsnippet
  		
 snippet cp		
 	${1:name}: function (${3:prop, value}) {		
 		${5}		
 	}.property(${2})${4}		
+endsnippet
+
 snippet tg		
 	${1:this}.get("${2}")${3}		
+endsnippet
+
 snippet ts		
 	${1:this}.set("${2}", ${3});		
+endsnippet
  		
 snippet er		
 	Ember.run(function() {		
 		${1}		
 	});		
+endsnippet
  		
 #  TESTS		
-snippet test		
-	test('${1:test_name}', function() {		
-		${2}		
-	});		
- 		
-snippet andt		
-	andThen(function(){		
-		${1}		
-	})		
-			
 snippet pause		
 	await pauseTest();		
+endsnippet
  		
 snippet aeq		
 	assert.equal(${1:actual},${2:expected});		
+endsnippet
  		
 snippet vis		
 	visit('${1}');		
+endsnippet
  		
 snippet fin		
 	find('${1}');		
+endsnippet
  		
 # BOILERPLATE		
 snippet route		
@@ -48,6 +50,8 @@ snippet route
 	export default Ember.Route.extend({		
 		${1}		
 	});		
+endsnippet
+
 snippet model		
 	import DS from "ember-data";		
  		
@@ -56,18 +60,23 @@ snippet model
 	export default DS.Model.extend({		
 		${1}		
 	});		
+endsnippet
+
 snippet helper		
 	import Ember from "ember";		
  		
 	export default Ember.Handlebars.makeBoundHelper(function (${1}) {		
 		${2}		
 	});		
+endsnippet
+
 snippet mixin		
 	import Ember from "ember";		
  		
 	export default Ember.Mixin.create({		
 		${1}		
 	});		
+endsnippet
  		
 snippet controller		
 	import Ember from "ember";		
@@ -75,9 +84,11 @@ snippet controller
 	export default Ember.Controller.extend({		
 		${1}		
 	});		
+endsnippet
  		
 snippet wait		
 	await waitUntil(() => {		
 	  return ${1}		
 	});		
+endsnippet
  

@@ -145,14 +145,16 @@ function nt() {
 function nodeb() {
   nodemon $1 | bunyan -l debug -o short
 }
+function yarn-refresh() {
+  yarn unlink $1 && yarn --force && yarn link $1
+}
 
 alias yarn-lock-resolve="git reset yarn.lock && git checkout yarn.lock && yarn"
 
 alias e='ember'
-alias e-deps='yarn install && bower install'
 alias e-clean='rm -rf tmp dist'
 alias e-wipe='rm -rf tmp dist bower_components node_modules'
-alias e-reset='e-wipe && e-deps'
+alias e-reset='e-wipe && yarn install'
 
 # Vagrant Special Sauce
 
