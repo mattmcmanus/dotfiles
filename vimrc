@@ -55,10 +55,11 @@ Plug 'sheerun/vim-polyglot'
 
 " Ember
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-"Plug 'mustache/vim-mustache-handlebars'
-Plug 'joukevandermaas/vim-ember-hbs'
+Plug 'mustache/vim-mustache-handlebars'
+"Plug 'joukevandermaas/vim-ember-hbs'
 Plug 'elzr/vim-json'
 Plug 'leafgarland/typescript-vim'
+Plug 'sukima/vim-ember-imports'
 
 call plug#end()
 
@@ -227,7 +228,6 @@ vnoremap <Leader>g :<C-U>!git blame -w <C-R>=expand("%:p") <CR> \| sed -n <C-R>=
 
 " Index ctags from any project, including those outside Rails
 map <Leader>ct :!ctags -R .<CR>
-nnoremap <leader>. :CtrlPTag<cr>
 
 """"""""""""""""""""""""""""""
 """" *** AUTO COMMANDS *** """
@@ -259,10 +259,15 @@ if has("persistent_undo")
 endif
 
 " CtrlP
-nnoremap <leader>f :CtrlPFunky<CR>
 let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_funky_syntax_highlight = 1
+
+nnoremap <leader>f :CtrlPFunky<CR>
+nnoremap <Leader>F :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+nnoremap <leader>. :CtrlPTag<cr>
+
+" narrow the list down with a word under cursor
 
 
 " MISC Plugin config
@@ -278,22 +283,22 @@ vnoremap <Leader>" :Tabularize /"<cr>
 
 " utilsnips
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 " Tab completion
 " will insert tab at beginning of line,
 " will use completion if not at beginning
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
+" function! InsertTabWrapper()
+"     let col = col('.') - 1
+"     if !col || getline('.')[col - 1] !~ '\k'
+"         return "\<tab>"
+"     else
+"         return "\<c-p>"
+"     endif
+" endfunction
+" inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <S-Tab> <c-n>
 
 " ale

@@ -1,6 +1,6 @@
 [user]
-  name = Matt McManus
-  email = matt@mcmanus.io
+	name = Matt McManus
+	email = matt@mcmanus.io
 	signingkey = EDB8F457
 
 [hub]
@@ -80,6 +80,7 @@
   excludesfile = ~/.gitignore
   autocrlf     = input
   editor       = vim
+	hooksPath = .githooks
 [fetch]
   prune = true
 [difftool "sourcetree"]
