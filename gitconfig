@@ -19,7 +19,7 @@
   cob = checkout -b
   cop = checkout -p
   co = checkout
-  m = !sh -c 'git checkout master && git pull --rebase && cd .' -
+  m = !sh -c 'git checkout master && git pull --rebase --autostash && cd .' -
   cb = !sh -c 'git branch | cut -c 3- | pick | xargs git checkout' -
   br = branch
   rc = rebase --continue
@@ -44,8 +44,8 @@
   su = "!f() { git submodule sync; git submodule update --init; }; f"
   graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
   unstage = reset HEAD
-  up = !sh -c 'git pull --rebase --prune && git log --pretty=format:\"%C(bold blue)%an %Creset(%ar) %C(yellow)%s\" HEAD@{1}..'
-  upm = !sh -c 'git fetch && git rebase origin/master'
+  up = !sh -c 'git pull --rebase --prune --autostash && git log --pretty=format:\"%C(bold blue)%an %Creset(%ar) %C(yellow)%s\" HEAD@{1}..'
+  upm = !sh -c 'git fetch && git rebase origin/master --autostash'
   shove = commit --amend --no-edit
   tidy-up = !sh -c 'git rebase -i `git rev-parse origin/master`'
 	list-branches = branch --sort=committerdate
