@@ -18,19 +18,9 @@
                         "description": "Right Shift Key Delete",
                         "manipulators": [
                             {
-                                "from": {
-                                    "key_code": "right_shift"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_shift"
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "delete_or_backspace"
-                                    }
-                                ],
+                                "from": { "key_code": "right_shift" },
+                                "to": [ { "key_code": "right_shift" } ],
+                                "to_if_alone": [ { "key_code": "delete_or_backspace" } ],
                                 "type": "basic"
                             }
                         ]
@@ -39,138 +29,52 @@
                         "description": "Hyper Escape",
                         "manipulators": [
                             {
-                                "from": {
-                                    "key_code": "caps_lock"
-                                },
-                                "to": [
-                                    {
-                                        "set_variable": {
-                                            "name": "hyper_escape",
-                                            "value": 1
-                                        }
-                                    }
-                                ],
-                                "to_after_key_up": [
-                                    {
-                                        "set_variable": {
-                                            "name": "hyper_escape",
-                                            "value": 0
-                                        }
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "caps_lock"
-                                    }
-                                ],
+                                "from": { "key_code": "caps_lock" },
+                                "to": [ { "set_variable": { "name": "hyper_escape", "value": 1 } } ],
+                                "to_after_key_up": [ { "set_variable": { "name": "hyper_escape", "value": 0 } } ],
+                                "to_if_alone": [ { "key_code": "caps_lock" } ], 
                                 "type": "basic"
                             },
                             {
-                                "conditions": [
-                                    {
-                                        "name": "hyper_escape",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "s"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "page_down"
-                                    }
-                                ],
+                                "conditions": [ { "name": "hyper_escape", "type": "variable_if", "value": 1 } ],
+                                "from": { "key_code": "s" },
+                                "to": [ { "key_code": "page_down" } ],
                                 "type": "basic"
                             },
                             {
-                                "conditions": [
-                                    {
-                                        "name": "hyper_escape",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "w"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "page_up"
-                                    }
-                                ],
+                                "conditions": [ { "name": "hyper_escape", "type": "variable_if", "value": 1 } ],
+                                "from": { "key_code": "w" },
+                                "to": [ { "key_code": "page_up" } ],
                                 "type": "basic"
                             },
                             {
-                                "conditions": [
-                                    {
-                                        "name": "hyper_escape",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "j"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "down_arrow"
-                                    }
-                                ],
+                                "conditions": [ { "name": "hyper_escape", "type": "variable_if", "value": 1 } ],
+                                "from": { "key_code": "d" },
+                                "to": [ { "key_code": "page_up" } ],
                                 "type": "basic"
                             },
                             {
-                                "conditions": [
-                                    {
-                                        "name": "hyper_escape",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "k"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "up_arrow"
-                                    }
-                                ],
+                                "conditions": [ { "name": "hyper_escape", "type": "variable_if", "value": 1 } ],
+                                "from": { "key_code": "j" },
+                                "to": [ { "key_code": "down_arrow" } ],
                                 "type": "basic"
                             },
                             {
-                                "conditions": [
-                                    {
-                                        "name": "hyper_escape",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "h"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "left_arrow"
-                                    }
-                                ],
+                                "conditions": [ { "name": "hyper_escape", "type": "variable_if", "value": 1 } ],
+                                "from": { "key_code": "k" },
+                                "to": [ { "key_code": "up_arrow" } ],
                                 "type": "basic"
                             },
                             {
-                                "conditions": [
-                                    {
-                                        "name": "hyper_escape",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "l"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_arrow"
-                                    }
-                                ],
+                                "conditions": [ { "name": "hyper_escape", "type": "variable_if", "value": 1 } ],
+                                "from": { "key_code": "h" },
+                                "to": [ { "key_code": "left_arrow" } ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [ { "name": "hyper_escape", "type": "variable_if", "value": 1 } ],
+                                "from": { "key_code": "l" },
+                                "to": [ { "key_code": "right_arrow" } ],
                                 "type": "basic"
                             }
                         ]
