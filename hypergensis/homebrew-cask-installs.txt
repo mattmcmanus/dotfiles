@@ -13,14 +13,18 @@ google-chrome
 google-chrome-canary
 gpgtools
 grammarly
+hammerspoon
 hazel
 iconjar
+imageoptim
 istat-menus
 iterm2
+java8
 lastfm
 launchrocket
 omnifocus
 paw
+powerphotos
 qlcolorcode
 qlmarkdown
 qlprettypatch
@@ -42,4 +46,6 @@ suspicious-package
 transmission
 vagrant
 viscosity
+visual-studio-code
 vlc
+wkhtmltopdf
