@@ -4,14 +4,12 @@ arq
 bartender
 dropbox
 evernote
-firefoxdeveloperedition
 fluid
 font-bitstream-vera
 font-lato
 gitup
 google-chrome
 google-chrome-canary
-gpgtools
 grammarly
 hammerspoon
 hazel
@@ -24,7 +22,6 @@ lastfm
 launchrocket
 omnifocus
 paw
-powerphotos
 qlcolorcode
 qlmarkdown
 qlprettypatch
@@ -33,7 +30,6 @@ quicklook-csv
 quicklook-json
 rescuetime
 screenflow
-screenhero
 sequel-pro
 shrinkit
 sketch
@@ -44,7 +40,6 @@ steam
 superduper
 suspicious-package
 transmission
-vagrant
 viscosity
 visual-studio-code
 vlc
