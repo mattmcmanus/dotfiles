@@ -2,11 +2,8 @@ heroku/brew
 homebrew/cask
 homebrew/cask-fonts
 homebrew/cask-versions
-homebrew/completions
 homebrew/core
-homebrew/nginx
 homebrew/services
-homebrew/versions
 neovim/neovim
 puma/puma
 thoughtbot/formulae

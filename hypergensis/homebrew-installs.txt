@@ -27,7 +27,6 @@ nmap
 node
 openssl
 parity
-phantomjs
 pkg-config
 postgresql@9.5
 puma-dev
