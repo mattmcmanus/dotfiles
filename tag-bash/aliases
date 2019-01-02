@@ -146,7 +146,7 @@ function nodeb() {
   nodemon $1 | bunyan -l debug -o short
 }
 function yarn-refresh() {
-  yarn unlink $1 && yarn --force && yarn link $1
+  yarn unlink $1 && yarn --force && cd $1 && yarn --force && cd - && yarn link $1
 }
 
 alias yarn-lock-resolve="git reset yarn.lock && git checkout yarn.lock && yarn"
