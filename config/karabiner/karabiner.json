@@ -15,17 +15,6 @@
               },
               "rules": [
                   {
-                      "description": "Right Shift Key Delete",
-                      "manipulators": [
-                          {
-                              "from": { "key_code": "right_shift" },
-                              "to": [ { "key_code": "right_shift" } ],
-                              "to_if_alone": [ { "key_code": "delete_or_backspace" } ],
-                              "type": "basic"
-                          }
-                      ]
-                  },
-                  {
                       "description": "Hyper Escape",
                       "manipulators": [
                           {
@@ -87,6 +76,12 @@
                               "conditions": [{ "name": "hyper_escape", "type": "variable_if", "value": 1 } ],
                               "from": { "key_code": "l" },
                               "to": [ { "key_code": "right_arrow" } ],
+                              "type": "basic"
+                          },
+                          {
+                              "conditions": [{ "name": "hyper_escape", "type": "variable_if", "value": 1 } ],
+                              "from": { "key_code": "right_shift" },
+                              "to": [ { "key_code": "delete_or_backspace" } ],
                               "type": "basic"
                           }
                       ]
