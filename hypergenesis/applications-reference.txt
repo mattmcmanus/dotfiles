@@ -1,19 +1,23 @@
 1Password 7.app
+AirBar.app
+Airfoil Satellite.app
+Airfoil.app
 Airmail 3.app
-Alfred 3.app
+Alfred 4.app
 Alternote.app
 Android Studio.app
 Annotate.app
 App Store.app
 Arq.app
-Atom Beta.app
 Atom.app
 Automator.app
 Backup and Sync.app
+Banktivity 7.app
 Bartender 3.app
+Battery Stats for AirPods.app
 Bear.app
+BetterTouchTool.app
 Books.app
-Brave Browser.app
 Calculator.app
 Calendar.app
 Chess.app
@@ -27,23 +31,28 @@ Day One.app
 Dictionary.app
 Discord.app
 Divvy.app
-Docker.app
+Drafts.app
+Dragon.app
 Dropbox.app
+Duplicate Photos Fixer Pro.app
 Evernote.app
 FaceTime.app
 Fantastical 2.app
-Feedbin.app
+Firefox Developer Edition.app
 Firefox.app
-FirefoxDeveloperEdition.app
 Fluid.app
 Font Book.app
+Fonts.app
 Fork.app
 Freedom.app
 GPG Keychain.app
+GarageBand.app
+Gemini 2.app
 Gifwit.app
 GitUp.app
 Google Chrome Canary.app
 Google Chrome.app
+Grammarly.app
 Hammerspoon.app
 HazeOver.app
 Hemingway Editor.app
@@ -51,23 +60,17 @@ Home.app
 IconJar.app
 Image Capture.app
 ImageOptim.app
-InVision Studio.app
-Inkscape.app
-Intercom.app
 Kap.app
 Karabiner-Elements.app
 Karabiner-EventViewer.app
-Keybase.app
 Keynote.app
 Kindle.app
 Last.fm.app
 Launchpad.app
 Little Snitch Configuration.app
-Logi Options.app
+Loom.app
 Mail.app
 Maps.app
-Mastodon.app
-Medis.app
 Messages.app
 Micro.blog.app
 MindNode.app
@@ -78,20 +81,20 @@ Notes.app
 Notion.app
 Numbers.app
 OmniFocus.app
-OnyX.app
+Opera.app
 PSequel.app
 Pages.app
 Paprika Recipe Manager.app
 Paw.app
 Photo Booth.app
 Photos.app
-Piezo.app
-Pinafore.app
-PingMenu.app
+Ping Menu Bar.appdownload
 PixelStick.app
 Pixelmator.app
 Plex Media Player.app
+Plex Media Player.app.new
 Plex Media Server.app
+Pock.app
 Popcorn-Time.app
 PowerPhotos.app
 Preview.app
@@ -101,7 +104,6 @@ Reminders.app
 RescueTime.app
 Safari.app
 ScreenFlow.app
-Screenhero.app
 Sequel Pro.app
 ShrinkIt.app
 Shush.app
@@ -109,33 +111,33 @@ Siri.app
 Sketch.app
 Skype.app
 Slack.app
+Soulver.app
 Spark.app
 Spotify.app
-Steam.app
 Stickies.app
 Stocks.app
 SuperDuper!.app
 Suspicious Package.app
 System Preferences.app
+Tadam Stay focused at work.appdownload
 Tadam.app
+Talon.app
 TextEdit.app
 Things3.app
 Time Machine.app
 Transmission.app
-Trello.localized
-Tweetbot.localized
+Trello.app
+Tweetbot.app
 Twitterrific.app
 Utilities
 VLC.app
-VimR.app
-VirtualBox.app
 Viscosity.app
 Visual Studio Code.app
 VoiceMemos.app
 WiFi Explorer.app
+Wireshark.app
 Xcode.app
-calibre.app
-coconutBattery.app
+iMovie.app
 iStat Menus.app
 iTerm.app
 iTunes.app
