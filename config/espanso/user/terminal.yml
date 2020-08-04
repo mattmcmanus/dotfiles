@@ -1,0 +1,13 @@
+filter_title: 'com.googlecode.iterm2'
+name: terminal
+parent: default
+
+matches:
+  - trigger: ";gf"
+    replace: "git push -f\n"
+
+  - trigger: ";gp"
+    replace: "git push\n"
+
+  - trigger: ";yf"
+    replace: "yarn --force\n"
