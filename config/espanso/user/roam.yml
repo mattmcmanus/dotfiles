@@ -1,0 +1,56 @@
+name: roam
+parent: default
+
+matches: 
+  - trigger: ":today"
+    force_clipboard: true
+    replace: |
+      [[Morning Pages]]
+
+      #Yapp
+      
+      Discovered::
+
+      Thoughts::
+
+      [[Daily Review]]
+        [[What happened today that you want to remember?]]
+        [[What were some of your emotions?]]
+        [[Where was your head today? What did you think about or avoid thinking about?]]
+        [[How’s your body? Any Pain? How’s your Energy?]]
+
+  - trigger: ":month"
+    force_clipboard: true
+    replace: |
+      - Goals::
+      - People I want to keep top of mind
+      - Books I'd like to read
+      - **Dates**
+
+  - trigger: ":scripture"
+    force_clipboard: true
+    replace: |
+      Translation::
+      URL::
+      Tags:: #Scripture #Book
+      Themes::
+      Interpretation::
+       *
+
+  - trigger: ":book"
+    force_clipboard: true
+    replace: |
+      Author::
+      Status:: #to-read
+      Tags:: #Book
+      Recommended By::
+      URL::
+      Highlights::
+
+  - trigger: ":content"
+    force_clipboard: true
+    replace: |
+      URL::
+      Tags:: #Article
+      Highlights::
+       *
