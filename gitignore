@@ -49,3 +49,5 @@ rerun.txt
 tmp/**/*
 !tmp/cache/.keep
 zeus.json
+.vscode
+*.code-workspace
