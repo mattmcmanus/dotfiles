@@ -1,0 +1,27 @@
+name: dates
+parent: default
+
+matches: 
+  - trigger: ":now"
+    replace: "{{now}}"
+    vars:
+      - name: now
+        type: date
+        params:
+          format: "%H:%M"
+
+  - trigger: "wwo"
+    replace: "{{week}}"
+    vars:
+      - name: week
+        type: date
+        params:
+          format: "%Y::W%W"
+
+  - trigger: "ddate"
+    replace: "{{today}}"
+    vars:
+      - name: today
+        type: date
+        params:
+          format: "%Y-%m-%d"

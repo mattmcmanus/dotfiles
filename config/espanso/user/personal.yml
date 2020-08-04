@@ -1,0 +1,14 @@
+name: emails
+parent: default
+
+matches:
+  - trigger: "m@m"
+    replace: "matt@mcmanus.io"
+    word: true
+
+  - trigger: "m@y"
+    replace: "matt@yapp.us"
+    word: true
+
+  - trigger: ";zoom"
+    replace: "https://us02web.zoom.us/j/2155655379"
