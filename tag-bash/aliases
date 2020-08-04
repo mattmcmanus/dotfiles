@@ -26,6 +26,7 @@ alias v="vim"
 alias s="subl ."
 alias o="open"
 alias oo="open ."
+alias gpr="git push && git pull-request"
 
 alias yapp="cd ~/yapp/projects"
 
@@ -167,3 +168,4 @@ alias editvim="vim ~/.vimrc"
 
 alias be='bundle exec'
 
+alias rolling-restart='production restart web.1 && sleep 60 && production restart web.2 && sleep 60 && production restart web.3 && sleep 60 && production restart sidekiq.1 && sleep 60 && production restart sidekiq.2'
