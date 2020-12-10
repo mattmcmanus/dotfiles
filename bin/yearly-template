@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'date'
+require 'fiscally'
+
+DATE_FORMAT = '%Y-%m-%d'
+WEEK_FORMAT = '%Y::W%U'
+
+today = Date.today
+
+current_month_num = nil
+current_week_num = nil
+
+def print_month(date)
+  puts "\n## [[monthly/#{date.strftime('%Y-%m')}|#{date.strftime('%B')}]]"
+end
+
+def print_week_no(date)
+  print "- [[#{date.year}-W#{date.cweek}]]: "
+end
+
+def day_link(date)
+  print "[[#{date.strftime(DATE_FORMAT)}|#{date.strftime('%-d')}]]"
+end
+
+puts "# #{today.year}"
+
+Date.new(today.year, 1, 1).upto(Date.new(today.year, -1, -1)) do |date|
+  if date.month != current_month_num
+    current_month_num = date.month
+    current_week_num = date.cweek
+
+    print_month(date)
+    print_week_no(date)
+    print day_link(date)
+
+  elsif date.cweek != current_week_num
+    current_week_num = date.cweek
+    print "\n"
+    print_week_no(date)
+    print day_link(date)
+  else
+    print ', '
+    print day_link(date)
+  end
+end
