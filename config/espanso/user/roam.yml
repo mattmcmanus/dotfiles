@@ -2,7 +2,23 @@ name: roam
 parent: default
 
 matches: 
-  - trigger: ":today"
+  - trigger: ";rw"
+    replace: |
+      ## Overview
+      ### Morning Pages
+
+      ### Discovered
+
+      ### Thoughts
+
+      ## Review
+      ### What were some of this weeks highlights?
+
+      ### Where did you spend a lot of your emotional and physical resources?
+
+      ### What surprised you this week?
+
+  - trigger: ";today"
     force_clipboard: true
     replace: |
       [[Morning Pages]]
@@ -13,13 +29,7 @@ matches:
 
       Thoughts::
 
-      [[Daily Review]]
-        [[What happened today that you want to remember?]]
-        [[What were some of your emotions?]]
-        [[Where was your head today? What did you think about or avoid thinking about?]]
-        [[How’s your body? Any Pain? How’s your Energy?]]
-
-  - trigger: ":month"
+  - trigger: ";month"
     force_clipboard: true
     replace: |
       - Goals::
@@ -27,30 +37,42 @@ matches:
       - Books I'd like to read
       - **Dates**
 
-  - trigger: ":scripture"
+  - trigger: ";scripture"
     force_clipboard: true
     replace: |
-      Translation::
-      URL::
-      Tags:: #Scripture #Book
-      Themes::
-      Interpretation::
-       *
+      ---
 
-  - trigger: ":book"
+      ---
+      #Scripture
+      Themes:
+      Interpretation:
+      Passage:
+
+  - trigger: ";book"
     force_clipboard: true
     replace: |
-      Author::
-      Status:: #to-read
-      Tags:: #Book
+      ---
+      url: 
+      tags: []
+      ---
+      Author:
+      Status: #to-read
       Recommended By::
-      URL::
       Highlights::
 
-  - trigger: ":content"
+  - trigger: ";content"
     force_clipboard: true
     replace: |
-      URL::
-      Tags:: #Article
-      Highlights::
-       *
+      ---
+      url: []
+      tags: []
+      ---
+
+  - trigger: ";person"
+    replace: |
+      ---
+      aliases: []
+      ---
+      #Person
+
+      # $|$

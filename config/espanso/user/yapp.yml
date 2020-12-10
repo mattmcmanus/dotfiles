@@ -23,7 +23,7 @@ matches:
   - trigger: "yym"
     replace: "yapp-mobile"
 
-  - trigger: "yym"
+  - trigger: "ymu"
     replace: "mobile-ui"
 
   - trigger: "yyek"

@@ -1,0 +1,20 @@
+name: markdown
+parent: default
+
+matches:
+  - trigger: ";mdi"
+    replace: "![]({{cb}})"
+    vars:
+      - name: "cb"
+        type: "clipboard"
+
+  - trigger: ";mdl"
+    replace: "[]({{cb}})"
+    vars:
+      - name: "cb"
+        type: "clipboard"
+  - trigger: ";mdf"
+    replace: |
+      ---
+      $|$ 
+      ---
