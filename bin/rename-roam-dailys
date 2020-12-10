@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'date'
+require 'fiscally'
+require 'active_support/core_ext/integer/inflections'
+
+# Obsidian format
+DATE_FORMAT = '%Y-%m-%d'
+#
+# Roam format
+WEEK_FORMAT = '%Y::W%U'
+
+today = Date.today
+year = today.year
+month = today.month
+
+current_week_num = nil
+
+puts " - [[#{year}::Q#{today.fiscal_quarter}]]"
+
+Date.new(year, month, 1).upto(Date.new(year, month, -1)) do |date|
+  if date.cweek != current_week_num
+    puts " - [[#{date.strftime(WEEK_FORMAT)}]]"
+    current_week_num = date.cweek
+  end
+
+  puts "    - [[#{date.strftime(DATE_FORMAT)}]]"
+end
