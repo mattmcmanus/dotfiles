@@ -26,7 +26,6 @@ Plug 'honza/vim-snippets'
 Plug 'tmhedberg/matchit'
 Plug 'itchyny/lightline.vim'
 Plug 'justincampbell/vim-eighties'
-Plug 'editorconfig/editorconfig-vim'
 
 " " Ruby
 Plug 'tpope/vim-rails', { 'for' : 'ruby' }
@@ -56,10 +55,10 @@ Plug 'sheerun/vim-polyglot'
 " Ember
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'mustache/vim-mustache-handlebars'
-"Plug 'joukevandermaas/vim-ember-hbs'
 Plug 'elzr/vim-json'
 Plug 'leafgarland/typescript-vim'
-Plug 'sukima/vim-ember-imports'
+" Plug 'sukima/vim-ember-imports'
+
 
 call plug#end()
 

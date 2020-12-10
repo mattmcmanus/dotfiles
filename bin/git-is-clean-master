@@ -1,12 +1,11 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
-modified = `git ls-files -m` != ""
-uncommitted = `git diff-index --cached HEAD` != ""
+modified = `git ls-files -m` != ''
+uncommitted = `git diff-index --cached HEAD` != ''
 master = `git branch | grep \* | cut -d ' ' -f2` == 'master'
 
-if modified || uncommitted
-  exit 1
-end
+exit 1 if modified || uncommitted
 
 if master
   exit 0
