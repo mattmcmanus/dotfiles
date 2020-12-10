@@ -1,144 +1,149 @@
 1Password 7.app
-AirBar.app
+AdGuard for Safari.app
 Airfoil Satellite.app
 Airfoil.app
 Airmail 3.app
 Alfred 4.app
-Alternote.app
 Android Studio.app
+Anki.app
 Annotate.app
-App Store.app
 Arq.app
 Atom.app
-Automator.app
 Backup and Sync.app
 Banktivity 7.app
+Banktivity.app
 Bartender 3.app
-Battery Stats for AirPods.app
+Bartender 4.app
+Basecamp 3.app
+Battle.net.app
 Bear.app
 BetterTouchTool.app
-Books.app
-Calculator.app
-Calendar.app
-Chess.app
+Brother
+Canary Mail.app
+Choosy.app
 CloudApp.app
-Contacts.app
 CraftManager.app
+Culrs.app
 Cyberduck.app
+DB Browser for SQLite.app
 DaisyDisk.app
-Dashboard.app
+Dark Sky.app
 Day One.app
-Dictionary.app
+Deliveries.app
 Discord.app
+DiskMaker X 9 for macOS Catalina.app
 Divvy.app
 Drafts.app
 Dragon.app
+Dropbox Paper.app
 Dropbox.app
+Due.app
 Duplicate Photos Fixer Pro.app
+Endurance.app
 Evernote.app
-FaceTime.app
-Fantastical 2.app
+FSNotes.app
+Fantastical.app
+Fastmail.app
+Figma.app
 Firefox Developer Edition.app
 Firefox.app
+Flotato.app
+Flow.app
 Fluid.app
-Font Book.app
-Fonts.app
+FontForge.app
 Fork.app
 Freedom.app
 GPG Keychain.app
-GarageBand.app
-Gemini 2.app
 Gifwit.app
 GitUp.app
+Gmail.app
 Google Chrome Canary.app
 Google Chrome.app
 Grammarly.app
 Hammerspoon.app
 HazeOver.app
+Hazel.app
 Hemingway Editor.app
-Home.app
+Highlights.app
 IconJar.app
-Image Capture.app
 ImageOptim.app
+Instagram.app
+Instapaper Save.app
+Instapaper Web.app
+Instapaper.app
 Kap.app
-Karabiner-Elements.app
-Karabiner-EventViewer.app
+Keybase.app
 Keynote.app
 Kindle.app
 Last.fm.app
-Launchpad.app
-Little Snitch Configuration.app
+Linear.app
 Loom.app
-Mail.app
-Maps.app
-Messages.app
+Magnet.app
 Micro.blog.app
 MindNode.app
-Mission Control.app
-News.app
+Minecraft.app
 Noizio.app
-Notes.app
+Note2Txt.app
 Notion.app
+Nova.app
 Numbers.app
+Obsidian.app
 OmniFocus.app
-Opera.app
+OpenRA - Dune 2000.app
+OpenRA - Red Alert.app
+OpenRA - Tiberian Dawn.app
+PDFOptim.app
 PSequel.app
 Pages.app
 Paprika Recipe Manager.app
 Paw.app
-Photo Booth.app
-Photos.app
-Ping Menu Bar.appdownload
 PixelStick.app
 Pixelmator.app
-Plex Media Player.app
-Plex Media Player.app.new
 Plex Media Server.app
 Pock.app
+Pocket Casts.app
 Popcorn-Time.app
 PowerPhotos.app
-Preview.app
-QuickTime Player.app
+Private Internet Access.app
 Reeder.app
-Reminders.app
 RescueTime.app
+Roam.app
+SF Symbols.app
 Safari.app
-ScreenFlow.app
 Sequel Pro.app
 ShrinkIt.app
-Shush.app
-Siri.app
 Sketch.app
 Skype.app
 Slack.app
-Soulver.app
+Soulver 3.app
 Spark.app
 Spotify.app
-Stickies.app
-Stocks.app
+StarCraft
+StartUp.app
+Steam.app
 SuperDuper!.app
 Suspicious Package.app
-System Preferences.app
-Tadam Stay focused at work.appdownload
 Tadam.app
 Talon.app
-TextEdit.app
+TextExpander.app
+The Unarchiver.app
 Things3.app
-Time Machine.app
+Time Out.app
 Transmission.app
+Transmit.app
 Trello.app
 Tweetbot.app
+Twitter.app
 Twitterrific.app
 Utilities
 VLC.app
+VirtualBox.app
 Viscosity.app
 Visual Studio Code.app
-VoiceMemos.app
+WhatsApp.app
 WiFi Explorer.app
 Wireshark.app
 Xcode.app
-iMovie.app
 iStat Menus.app
 iTerm.app
-iTunes.app
 zoom.us.app

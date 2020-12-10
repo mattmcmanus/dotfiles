@@ -1,3 +1,4 @@
+federico-terzi/espanso
 heroku/brew
 homebrew/cask
 homebrew/cask-fonts
