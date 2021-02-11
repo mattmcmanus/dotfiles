@@ -1,3 +1,2 @@
-EXCLUDES="README.md LICENSE Brewfile *:*zsh*"
+EXCLUDES="README.md Brewfile LICENSE *:*zsh*"
 DOTFILES_DIRS="$HOME/.dotfiles"
-TAGS="bash rails"
