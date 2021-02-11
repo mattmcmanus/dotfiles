@@ -2,3 +2,34 @@
 # [ ! -d ~/.vim/autoload ] && curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 #
 # vim -c 'PlugUpdate'
+log() {
+  echo ""
+  echo " ==> $1"
+  echo ""
+}
+
+# Install node
+[[ ! $(which volta) ]] && (
+  log "Installing volta"
+  curl https://get.volta.sh | bash
+  volta install node
+  volta install yarn
+)
+
+[ ! -d $HOME/.pyenv/versions ] && (
+  log "Installing system python version"
+  pyenv install -s `~/.python-version`
+)
+
+[ ! -d $HOME/.rbenv ] && (
+  log "Installing system ruby version"
+  rbenv install -s `~/.ruby-version`
+)
+
+[[ ! $(which bundler) ]] && (
+  log "Configuring ruby environment"
+  gem update --system
+  gem install bundler --no-document --pre
+  number_of_cores=$(sysctl -n hw.ncpu)
+  bundle config --global jobs $((number_of_cores - 1))
+ )
