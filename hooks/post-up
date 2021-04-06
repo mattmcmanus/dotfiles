@@ -1,12 +1,16 @@
 #!/bin/sh
-# [ ! -d ~/.vim/autoload ] && curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-#
-# vim -c 'PlugUpdate'
+
 log() {
   echo ""
   echo " ==> $1"
   echo ""
 }
+
+[ ! -d ~/.vim/autoload ] && (
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  vim -c 'PlugUpdate'
+)
 
 # Install node
 [[ ! $(which volta) ]] && (
