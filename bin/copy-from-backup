@@ -3,12 +3,15 @@
 BACKUP_DIR="/Volumes/HD\ Clone/Users/matt/"
 DEST="/Users/matt/"
 dirs=(
+    ".secrets"
     ".aws"
     ".vscode"
     ".offlineimap"
     ".puma-dev"
     ".talon"
     ".vscode"
+    ".gnupg"
+    ".ssh"
     "code"
     "Downloads"
     "Dropbox"
@@ -24,6 +27,7 @@ dirs=(
     "Library/Application\ Support/com.panic.Transmit"
     "Library/Application\ Support/com.pointum.hazeover"
     "Library/Application\ Support/com.privateinternetaccess.vpn"
+    "Library/Application\ Support/Choosy"
     "Library/Application\ Support/discord"
     "Library/Application\ Support/Dragon"
     "Library/Application\ Support/Hazel"
@@ -34,6 +38,9 @@ dirs=(
     "Library/Application\ Support/VMware\ Fusion"
 )
 
+# # Also
+# /usr/local/var/postgres
+
 for d in ${!dirs[@]}; do
-    echo "rsync -avz --dry-run $BACKUP_DIR${dirs[$d]} $DEST${dirs[$d]}"
+    rsync -avz --dry-run $BACKUP_DIR${dirs[$d]} $DEST${dirs[$d]}
 done
