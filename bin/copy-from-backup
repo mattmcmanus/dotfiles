@@ -36,9 +36,10 @@ dirs=(
     "Library/Application\ Support/Plex\ Media\ Server"
     "Library/Application\ Support/Transmission"
     "Library/Application\ Support/VMware\ Fusion"
+    "Library/Containers/Gifwit/Data/Library/Application/ Support/stevesmith"
 )
 
-# # Also
+# Also
 # /usr/local/var/postgres
 
 for d in ${!dirs[@]}; do
