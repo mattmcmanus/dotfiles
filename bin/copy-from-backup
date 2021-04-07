@@ -1,6 +1,6 @@
 #!/bin/sh
 
-BACKUP_DIR="/Volumes/HD\ Clone/Users/matt/"
+BACKUP_DIR="/Volumes/HD\ Clone\ -\ Data/Users/matt/"
 DEST="/Users/matt/"
 dirs=(
     ".secrets"
@@ -43,5 +43,5 @@ dirs=(
 # /usr/local/var/postgres
 
 for d in ${!dirs[@]}; do
-    rsync -avz --dry-run $BACKUP_DIR${dirs[$d]} $DEST${dirs[$d]}
+    echo "rsync -avz $BACKUP_DIR${dirs[$d]} $DEST${dirs[$d]}"
 done
