@@ -1,7 +1,0 @@
-bower
-ember
-grunt
-jshint
-jsinspect
-keybase-installer
-phantomjs

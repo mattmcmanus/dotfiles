@@ -10,7 +10,6 @@ alias -- -="cd -"
 # alias go="cd $(find . -type d | pick)"
 
 
-alias git=hub
 alias gb="git branch | cut -c 3- | pick | xargs git checkout"
 alias gbu="gb && git up"
 alias fresh="git co master && git up && bundle && rake db:migrate"
