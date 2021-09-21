@@ -7,4 +7,6 @@
 enable_passive: true
 passive_key: CTRL
 
+toggle_key: OFF
 show_notifications: false
+show_icon: false

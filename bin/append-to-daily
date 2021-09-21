@@ -1,0 +1,8 @@
+#!/bin/sh
+for file in ~/Library/Mobile\ Documents/iCloud~is~workflow~my~workflows/Documents/Notes/*; do
+  day=$(basename "$file" .md)
+  [ "$day" == "*" ] && continue
+  read Y M D <<< ${day//[-]/ }
+  cat "$file" >> ~/Notes/Daily/$Y/$Y-$M/$Y-$M-$D.md
+  rm "$file"
+done

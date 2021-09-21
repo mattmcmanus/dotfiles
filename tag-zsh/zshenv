@@ -20,3 +20,16 @@
 source ~/.secrets
 
 export YAPP_ROOT="/Users/matt/yapp/projects"
+
+export VOLTA_HOME="$HOME/.volta"
+PATH="$PATH:~/.bin"
+PATH="$VOLTA_HOME/bin:$PATH"
+PATH="/usr/local/bin:$PATH"
+PATH="/usr/local/sbin:$PATH"
+PATH="$HOME/.yarn/bin:$PATH"
+export PATH
+
+export EDITOR="vim"
+
+export LDFLAGS="-L/usr/local/opt/sqlite/lib"
+export CPPFLAGS="-I/usr/local/opt/sqlite/include"
