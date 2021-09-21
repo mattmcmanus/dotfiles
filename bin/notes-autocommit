@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd ~/Dropbox/Notes
+cd ~/Notes
 
 git up
 

@@ -10,7 +10,7 @@ matches:
         params:
           format: "%H:%M"
 
-  - trigger: ";ddate"
+  - trigger: ";date"
     replace: "{{today}}"
     vars:
       - name: today
@@ -18,7 +18,7 @@ matches:
         params:
           format: "%Y-%m-%d"
 
-  - trigger: ";dddate"
+  - trigger: ";ddate"
     replace: "{{now}}"
     vars:
       - name: now
@@ -26,7 +26,7 @@ matches:
         params:
           format: "%A, %B %e, %Y"
 
-  - trigger: ";yesterday"
+  - trigger: ";yes"
     replace: "{{yesterday}}"
     vars: 
       - name: yesterday
@@ -34,7 +34,7 @@ matches:
         params: 
           cmd: "date -v-1d +%Y-%m-%d"
 
-  - trigger: ";tomorrow"
+  - trigger: ";tom"
     replace: "{{tomorrow}}"
     vars: 
       - name: tomorrow
