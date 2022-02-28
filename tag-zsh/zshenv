@@ -19,14 +19,15 @@
 
 source ~/.secrets
 
-export YAPP_ROOT="/Users/matt/yapp/projects"
+export YAPP_ROOT="/Users/matt/code/yapp/projects"
 
 export VOLTA_HOME="$HOME/.volta"
-PATH="$PATH:~/.bin"
+PATH="$PATH:$HOME/.bin"
 PATH="$VOLTA_HOME/bin:$PATH"
 PATH="/usr/local/bin:$PATH"
 PATH="/usr/local/sbin:$PATH"
 PATH="$HOME/.yarn/bin:$PATH"
+PATH="./bin:$PATH"
 export PATH
 
 export EDITOR="vim"

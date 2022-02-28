@@ -167,5 +167,6 @@ alias editalias="vim ~/.aliases"
 alias editvim="vim ~/.vimrc"
 
 alias be='bundle exec'
+alias b='yarn'
 
 alias rolling-restart='production restart web.1 && sleep 60 && production restart web.2 && sleep 60 && production restart web.3 && sleep 60 && production restart sidekiq.1 && sleep 60 && production restart sidekiq.2'

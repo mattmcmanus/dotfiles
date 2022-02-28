@@ -3,7 +3,7 @@ parent: default
 
 matches: 
   - trigger: ";now"
-    replace: "({{now}})"
+    replace: "*({{now}})*"
     vars:
       - name: now
         type: date

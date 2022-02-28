@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# Output the default branch for the current repository.
+
+git remote show origin | grep 'HEAD branch' | cut -d' ' -f5
