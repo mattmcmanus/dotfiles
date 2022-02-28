@@ -9,46 +9,45 @@
 [push]
   default = current
 
-[pull]
-  rebase = true
 [alias]
   a = add -p
   c = commit
   amend = commit --amend
+  shove = commit --amend --no-edit
   ci = commit -v
   cob = checkout -b
   cop = checkout -p
   co = checkout
-  m = !sh -c 'git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@') && git pull --rebase --autostash && cd .' -
+  m = !sh -c 'git checkout $(git default) && git pull --rebase --autostash && cd .' -
   cb = !sh -c 'git branch | cut -c 3- | pick | xargs git checkout' -
   br = branch
   rc = rebase --continue
-  new-branch = !sh -c 'git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@') && git pull --rebase && cd . && git checkout -b $1' -
+	list-branches = branch --sort=committerdate
+  new-branch = !git checkout $(git default) && git pull --rebase && cd . && git checkout -b $1
   set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
   delete-branch = !sh -c 'git push origin :refs/heads/$1 && git branch -D $1' -
-  merge-branch = !git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@') && git merge @{-1}
+  merge-branch = !git checkout $(git default) && git merge @{-1}
   st = status
   s = status -sb
+
   fp = push -f
   pu = push
   poh = push origin HEAD
   yolo = push -f --no-verify
+
   pl = pull
   pr = pull-request
+
   l = log
-  lm = log origin/$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')..
+  lm = !git log origin/$(git default)..
   ll = log --stat --abbrev-commit
-  history = log -p -M --follow --stat --
   recap = log --no-merges --author=matt@mcmanus.io
   d = diff
   su = "!f() { git submodule sync; git submodule update --init; }; f"
-  graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
   unstage = reset HEAD
   up = !sh -c 'git pull --rebase --prune --autostash && git log --pretty=format:\"%C(bold blue)%an %Creset(%ar) %C(yellow)%s\" HEAD@{1}..'
-  upm = !sh -c 'git fetch && git rebase origin/$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@') --autostash'
-  shove = commit --amend --no-edit
-  tidy-up = !sh -c 'git rebase -i `git rev-parse origin/$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')`'
-	list-branches = branch --sort=committerdate
+  upm = !sh -c 'git fetch && git rebase origin/$(git default) --autostash'
+  tidy-up = !git rebase -i `git rev-parse origin/$(git default)`
 
 [format]
   pretty=format:%C(yellow)%h%Creset - %Cgreen(%ai)%Creset - %s  %C(bold blue)<%ae>%Creset%C(red)%d%Creset 
@@ -112,3 +111,5 @@
 	gpgsign = true
 [merge]
 	conflictstyle = diff3
+[init]
+	defaultBranch = main

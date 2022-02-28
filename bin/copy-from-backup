@@ -16,10 +16,9 @@ dirs=(
     "Downloads"
     "Dropbox"
     "Movies"
-    "p"
     "Pictures"
     "TV Shows"
-    "yapp"
+    "Movies"
     "Library/Arq"
     "Library/Application\ Support/Alfed"
     "Library/Application\ Support/beekeeper-studio"
@@ -43,5 +42,6 @@ dirs=(
 # /usr/local/var/postgres
 
 for d in ${!dirs[@]}; do
-    echo "rsync -avz $BACKUP_DIR${dirs[$d]} $DEST${dirs[$d]}"
+    echo "Copying ${dirs[$d]}..."
+    rsync -avz $BACKUP_DIR${dirs[$d]} $DEST${dirs[$d]}
 done

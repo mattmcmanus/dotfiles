@@ -7,7 +7,6 @@ call plug#begin('~/.vim/bundle')
 Plug 'tpope/vim-sensible'
 
 " " New
-Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-eunuch'
 Plug 'justinmk/vim-dirvish'
 Plug 'w0rp/ale'
