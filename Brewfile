@@ -38,7 +38,6 @@ brew "rbenv-bundler"
 brew "redis", restart_service: true
 brew "rename"
 brew "ripgrep"
-brew "sphinx-doc"
 brew "terminal-notifier"
 brew "the_silver_searcher"
 brew "tldr"
@@ -56,11 +55,11 @@ brew "thoughtbot/formulae/rcm"
 brew "tomanthony/brews/itermocil"
 
 cask "1password"
+cask "airfoil"
 cask "alfred"
 cask "android-studio"
 cask "backblaze"
 cask "bartender"
-cask "beekeeper-studio"
 cask "brave-browser"
 cask "carbon-copy-cloner"
 cask "choosy"
@@ -90,8 +89,6 @@ cask "hazel"
 cask "imageoptim"
 cask "iterm2"
 cask "kap"
-cask "keybase"
-cask "keyboard-maestro"
 cask "kindle"
 cask "loom"
 cask "minecraft"
@@ -101,9 +98,7 @@ cask "obsidian"
 cask "openra"
 cask "phantomjs"
 cask "plex-media-player"
-cask "plex-media-server"
-cask "rectangle"
-cask "rescuetime"
+cask "raycast"
 cask "sketch"
 cask "skype"
 cask "slack"
@@ -119,14 +114,12 @@ cask "zoom"
 
 mas "1Blocker", id: 1365531024
 mas "Banktivity", id: 1480779512
-mas "Charmstone", id: 1563735522
 mas "DaisyDisk", id: 411643860
 mas "Day One", id: 1055511498
 mas "Deliveries", id: 924726344
 mas "Drafts", id: 1435957248
 mas "Gifwit", id: 871200983
 mas "Harvest", id: 506189836
-mas "Instapaper Save", id: 1481302432
 mas "Keynote", id: 409183694
 mas "MarkDownload - Markdown Web Clipper", id: 1554029832
 mas "Mastonaut", id: 1450757574
@@ -136,16 +129,15 @@ mas "Noizio", id: 928871589
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Paprika Recipe Manager", id: 451907568
-mas "Patterns", id: 429449079
 mas "PDFOptim", id: 621276561
 mas "Peek", id: 1554235898
 mas "Pins", id: 1547106997
 mas "Pixelmator Pro", id: 1289583905
 mas "Reeder", id: 1529448980
-mas "Sasquatch", id: 1465346522
 mas "Spark", id: 1176895641
 mas "The Unarchiver", id: 425424353
 mas "Things", id: 904280696
+mas "Time Out", id: 402592703
 mas "Timery", id: 1425368544
 mas "Tweetbot", id: 1384080005
 mas "Xcode", id: 497799835
