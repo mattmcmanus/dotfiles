@@ -1,41 +1,53 @@
 #!/bin/sh
-
-BACKUP_DIR="/Volumes/HD\ Clone\ -\ Data/Users/matt/"
-DEST="/Users/matt/"
-dirs=(
-    "code"
-    "Downloads"
-    "Dropbox"
-    "Movies"
-    "Pictures"
-    "TV Shows"
-    "Movies"
-    ".secrets"
+BACKUP_DIR="/Volumes/HD Clone/Users/matt"
+DEST="/Users/matt"
+userdirs=(
+    # "code"
+    # "Notes"
+    # "Downloads"
+    # "Dropbox"
+    # "Movies"
+    # "Pictures"
+    # "TV Shows"
+    # ".secrets"
     ".aws"
-    ".vscode"
-    ".offlineimap"
+    # ".offlineimap"
     ".puma-dev"
     ".talon"
-    ".vscode"
+    # ".vscode"
     ".gnupg"
-    ".ssh"
-    "Library/Application\ Support/com.bombich.ccc"
-    "Library/Application\ Support/com.panic.Transmit"
-    "Library/Application\ Support/com.pointum.hazeover"
-    "Library/Application\ Support/com.privateinternetaccess.vpn"
-    "Library/Application\ Support/Choosy"
-    "Library/Application\ Support/discord"
-    "Library/Application\ Support/Dragon"
-    "Library/Application\ Support/Hazel"
-    "Library/Application\ Support/minecraft"
-    "Library/Application\ Support/Transmission"
-    "Library/Containers/Gifwit/Data/Library/Application/ Support/stevesmith"
+    # ".ssh"
 )
 
 # Also
 # /usr/local/var/postgres
+#rsync -avz /Volumes/HD\ Clone/usr/local/var/postgres /usr/local/var/postgres
 
-for d in ${!dirs[@]}; do
-    echo "Copying ${dirs[$d]}..."
-    rsync -avz --exclude={'*/node_modules/*', '*/dist/*', '*/log/*', '*/tmp/*'} $BACKUP_DIR${dirs[$d]} $DEST${dirs[$d]}
+for d in ${!userdirs[@]}; do
+    echo "\n\nCopying '${userdirs[$d]}'"
+    rsync -az --info=progress2 --exclude '*/node_modules/*' --exclude '*/dist/*' --exclude '*/log/*' --exclude '*/tmp/*' "$BACKUP_DIR/${userdirs[$d]}" "$DEST/"
+done
+
+settingsdir=(
+    # "com.bombich.ccc"
+    # "com.panic.Transmit"
+    # "com.pointum.hazeover"
+    # "com.privateinternetaccess.vpn"
+    # "Choosy"
+    # "discord"
+    # "Dragon"
+    # "Hazel"
+    # "minecraft"
+    # "Transmission"
+    # "Slack"
+    # "Bartender"
+    # "Airfoil"
+    # "Toggl"
+    # "iTerm2"
+)
+
+for d in ${!settingsdir[@]}; do
+    echo "\n\nCopying '${settingsdir[$d]}'"
+    rm -rf "$DEST/Library/Application Support/${settingsdir[$d]}"
+    rsync -az --info=progress2 --exclude '*/node_modules/*' --exclude '*/dist/*' --exclude '*/log/*' --exclude '*/tmp/*' "$BACKUP_DIR/Library/Application Support/${settingsdir[$d]}" "$DEST/Library/Application Support/"
 done
