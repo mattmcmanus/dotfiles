@@ -1,7 +1,7 @@
 [user]
 	name = Matt McManus
 	email = matt@mcmanus.io
-	signingkey = EDB8F457
+	signingkey = E9AFB3F4EDB8F457
 
 [hub]
   protocol = https

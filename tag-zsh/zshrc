@@ -3,10 +3,11 @@
 # User configuration sourced by interactive shells
 #
 
+export GPG_TTY=$(tty)
+
 # -----------------
 # Zsh configuration
 # -----------------
-
 #
 # History
 #
