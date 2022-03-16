@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 BACKUP_DIR="/Volumes/HD Clone/Users/matt"
 DEST="/Users/matt"
 userdirs=(
@@ -10,44 +10,27 @@ userdirs=(
     # "Pictures"
     # "TV Shows"
     # ".secrets"
-    ".aws"
-    # ".offlineimap"
-    ".puma-dev"
-    ".talon"
+    # ".zsh_history"
+    # ".aws"
+    # ".puma-dev"
+    # ".talon"
     # ".vscode"
-    ".gnupg"
+    # ".gnupg"
     # ".ssh"
+    "Library/Fonts"
+    "Library/Application Support/com.panic.Transmit"
+    "Library/Application Support/Choosy"
+    "Library/Application Support/Dragon"
+    "Library/Application Support/Hazel"
+    "Library/Application Support/Transmission"
+    "Library/Application Support/Bartender"
+    "Library/Application Support/com.raycast.macos"
 )
 
-# Also
-# /usr/local/var/postgres
-#rsync -avz /Volumes/HD\ Clone/usr/local/var/postgres /usr/local/var/postgres
-
-for d in ${!userdirs[@]}; do
-    echo "\n\nCopying '${userdirs[$d]}'"
-    rsync -az --info=progress2 --exclude '*/node_modules/*' --exclude '*/dist/*' --exclude '*/log/*' --exclude '*/tmp/*' "$BACKUP_DIR/${userdirs[$d]}" "$DEST/"
-done
-
-settingsdir=(
-    # "com.bombich.ccc"
-    # "com.panic.Transmit"
-    # "com.pointum.hazeover"
-    # "com.privateinternetaccess.vpn"
-    # "Choosy"
-    # "discord"
-    # "Dragon"
-    # "Hazel"
-    # "minecraft"
-    # "Transmission"
-    # "Slack"
-    # "Bartender"
-    # "Airfoil"
-    # "Toggl"
-    # "iTerm2"
-)
-
-for d in ${!settingsdir[@]}; do
-    echo "\n\nCopying '${settingsdir[$d]}'"
-    rm -rf "$DEST/Library/Application Support/${settingsdir[$d]}"
-    rsync -az --info=progress2 --exclude '*/node_modules/*' --exclude '*/dist/*' --exclude '*/log/*' --exclude '*/tmp/*' "$BACKUP_DIR/Library/Application Support/${settingsdir[$d]}" "$DEST/Library/Application Support/"
+for d in "${!userdirs[@]}"; do
+    echo "######################################"
+    printf "Copying %s\n" "${userdirs[$d]}"
+    rsync -az --info=progress2 \
+        --exclude '*/node_modules/*' --exclude '*/dist/*' --exclude '*/log/*' --exclude '*/tmp/*' \
+        "$BACKUP_DIR/${userdirs[$d]}" "$DEST/${userdirs[$d]}/.."
 done
