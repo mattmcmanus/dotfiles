@@ -22,6 +22,7 @@ source ~/.secrets
 export YAPP_ROOT="/Users/matt/code/yapp/projects"
 
 export VOLTA_HOME="$HOME/.volta"
+PATH="$PATH:$HOME/.cargo/bin"
 PATH="$PATH:$HOME/.bin"
 PATH="$VOLTA_HOME/bin:$PATH"
 PATH="/usr/local/bin:$PATH"
