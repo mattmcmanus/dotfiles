@@ -46,6 +46,7 @@
   ll = log --stat --abbrev-commit
   recap = log --no-merges --author=matt@mcmanus.io
   d = diff
+  dft = difftool
   su = "!f() { git submodule sync; git submodule update --init; }; f"
   up = !sh -c 'git pull --rebase --prune --autostash && git log --pretty=format:\"%C(bold blue)%an %Creset(%ar) %C(yellow)%s\" HEAD@{1}..'
   upm = !sh -c 'git fetch && git rebase origin/$(git default) --autostash'
@@ -54,6 +55,12 @@
 [format]
   pretty=format:%C(yellow)%h%Creset - %Cgreen(%ai)%Creset - %s  %C(bold blue)<%ae>%Creset%C(red)%d%Creset 
 
+[diff]
+	external = difft
+[difftool "difftastic"]
+        cmd = difft "$LOCAL" "$REMOTE"
+[pager]
+        difftool = true
 [credential]
   helper = osxkeychain
 [rerere]
