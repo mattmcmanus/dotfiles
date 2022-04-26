@@ -17,3 +17,8 @@ matches:
       ---
       $|$ 
       ---
+
+  - trigger: ;call
+    replace: |
+      > [!TIP]+ Title
+      > Body

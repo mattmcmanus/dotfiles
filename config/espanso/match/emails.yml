@@ -3,7 +3,5 @@
 
 matches:
   - trigger: ;recruit
-    form: |
-      Hey [[name]],
-      
+    replace: |
       Thanks for the email. I'm currently not looking to change jobs. Good luck filling the position!
