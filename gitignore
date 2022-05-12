@@ -3,6 +3,8 @@
 #TEMP
 jsconfig.json
 
+config/espanso/match/personal.yml
+
 # Compiled source #
 ###################
 *.com
