@@ -1,5 +1,11 @@
 #!/bin/sh
 #
+# A useful script for when you committed to the wrong branch. It will
+# create the new branch and remove the commits from the old
+#
+# If this file is in your PATH, then git will allow usage such as: 
+#     git move-local-to <new-branch>
+
 BRANCH=$1;
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD);
 
