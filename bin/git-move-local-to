@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+BRANCH=$1;
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD);
+
+[ -z "$BRANCH" ] && {
+	echo "Usage: $0 <branch>";
+	exit 1;
+}
+
+if [ $(git rev-parse --verify --quiet $BRANCH) ]; then
+	 echo "$BRANCH already exists";
+	 exit 1
+fi
+
+REMOTE_SHA=$(git rev-parse --verify --quiet origin/"$CURRENT_BRANCH");
+
+if [ ! "$REMOTE_SHA" ]; then
+	echo "ERROR: This branch does not exist on origin";
+	echo ""
+	echo "You can just rename this branch with: git branch -m $BRANCH $CURRENT_BRANCH";
+fi
+
+git switch -qc "$BRANCH";
+git checkout - -q # checkout previous branch
+git reset --hard "$REMOTE_SHA"; # reset to remote branch
+git checkout - # checkout the desired branch
