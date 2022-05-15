@@ -6,6 +6,6 @@ git up
 
 if [ ! -z "$(git status --porcelain)" ]; then 
   git add .
-  git commit -m"$(date +%Y-%m-%dT%H:%M:%S%z)"
+  git commit -m"$(date +%Y-%m-%dT%H:%M:%S%z)" --no-gpg-sign
   git push
 fi
