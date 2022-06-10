@@ -1,7 +1,6 @@
 [user]
 	name = Matt McManus
 	email = matt@mcmanus.io
-	signingkey = E9AFB3F4EDB8F457
 
 [hub]
   protocol = https
@@ -18,7 +17,8 @@
   cob = checkout -b
   cop = checkout -p
   co = checkout
-  m = !sh -c 'git checkout $(git default) && git pull --rebase --autostash && cd .' -
+  default = !git remote show origin | grep 'HEAD branch' | cut -d' ' -f5
+  m = !git checkout $(git default) && git pull --rebase --autostash && cd .
   br = branch
   rc = rebase --continue
 
@@ -113,11 +113,9 @@
 	smudge = git hawser smudge %f
 	required = true
 [filter "lfs"]
-	clean = git lfs clean %f
+	clean = git-lfs clean -- %f
 	smudge = git lfs smudge %f
 	required = true
-[commit]
-	gpgsign = true
 [merge]
 	conflictstyle = diff3
 [init]
