@@ -28,3 +28,5 @@ PATH="/usr/local/sbin:$PATH"
 PATH="$HOME/.yarn/bin:$PATH"
 PATH="/usr/local/opt/postgresql/bin:$PATH"
 export PATH
+
+export DIRENV_LOG_FORMAT=

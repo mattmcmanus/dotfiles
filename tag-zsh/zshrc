@@ -131,16 +131,16 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-#export SSH_AUTH_SOCK=~/.1password/agent.sock
+export DIRENV_LOG_FORMAT=
+eval "$(direnv hook zsh)"
 
 # CDPATH config
-typeset -U path cdpath fpath
-setopt auto_cd
-cdpath=($HOME/code/yapp/projects $HOME/p)
+typeset -gU path cdpath fpath # Ensure path arrays do not contain duplicates.
+setopt auto_cd # If cd is absent, but path is a directory, cd to it.
+cdpath=($HOME/code/auditboard)
 
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:descriptions' format %d
 zstyle ':completion:*:descriptions' format %B%d%b
 zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
         'local-directories named-directories'
-eval "$(direnv hook zsh)"
