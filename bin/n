@@ -1,0 +1,14 @@
+#!/bin/sh
+
+BASE_DIR=$(readlink -f "$(git rev-parse --git-dir)"/..)
+
+if [ -f "$BASE_DIR/package-log.json" ]; then
+	npm "$@"
+elif [ -f "$BASE_DIR/yarn.lock" ]; then
+	yarn "$@"
+elif [ -f "$BASE_DIR/pnpm-lock.yaml" ]; then
+	pnpm "$@"
+else
+	 echo "No lock file found, unknown package manager"
+	 exit 1
+fi

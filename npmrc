@@ -1,4 +1,4 @@
-***REMOVED***
+progress=false
 @fortawesome:registry=https://npm.fontawesome.com/
 //npm.fontawesome.com/:_authToken=${FONTAWESOME_NPM_AUTH_TOKEN}
 
