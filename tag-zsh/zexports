@@ -1,0 +1,21 @@
+export YAPP_ROOT="/Users/matt/code/yapp/projects"
+
+# pnpm
+export PNPM_HOME="/Users/mattmcmanus/Library/pnpm"
+path+=("$PNPM_HOME")
+# pnpm end
+
+export VOLTA_HOME="$HOME/.volta"
+path+=("$VOLTA_HOME/bin")
+
+path+=("$HOME/.cargo/bin")
+path+=("$HOME/.bin")
+path+=("/usr/local/bin")
+path+=("/usr/local/sbin")
+path+=("$HOME/.yarn/bin")
+path=("./bin" "$PATH")
+
+export PATH
+export EDITOR="vim"
+export LDFLAGS="-L/usr/local/opt/sqlite/lib"
+export CPPFLAGS="-I/usr/local/opt/sqlite/include"

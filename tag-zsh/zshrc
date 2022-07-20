@@ -1,9 +1,12 @@
+source ~/.secrets
+source ~/.zexports
+export PATH
+
 # Start configuration added by Zim install {{{
 #
 # User configuration sourced by interactive shells
 #
 
-export GPG_TTY=$(tty)
 eval "$(/opt/homebrew/bin/brew shellenv)"
 # -----------------
 # Zsh configuration
@@ -91,7 +94,7 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 # ------------------
 # Initialize modules
 # ------------------
-
+export ZIM_HOME=~/.zim
 if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
   # Update static initialization script if it does not exist or it's outdated, before sourcing it
   source ${ZIM_HOME}/zimfw.zsh init -q
@@ -144,3 +147,4 @@ zstyle ':completion:*:descriptions' format %d
 zstyle ':completion:*:descriptions' format %B%d%b
 zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
         'local-directories named-directories'
+
