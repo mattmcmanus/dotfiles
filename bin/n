@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# Figure out the basedir for the repo you're current in
 BASE_DIR=$(readlink -f "$(git rev-parse --git-dir)"/..)
 
 if [ -f "$BASE_DIR/package-log.json" ]; then
