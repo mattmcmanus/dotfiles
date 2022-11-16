@@ -3,7 +3,7 @@
 # Figure out the basedir for the repo you're currently in
 BASE_DIR=$(readlink -f "$(git rev-parse --git-dir)"/..)
 
-if [ -f "$BASE_DIR/package-log.json" ]; then
+if [ -f "$BASE_DIR/package-lock.json" ]; then
 	npm "$@"
 elif [ -f "$BASE_DIR/yarn.lock" ]; then
 	yarn "$@"
