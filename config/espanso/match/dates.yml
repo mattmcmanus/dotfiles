@@ -2,20 +2,6 @@
 # Original file: user/dates.yml
 
 matches:
-  - trigger: ;now
-    replace: "*({{now}})*"
-    vars:
-      - name: now
-        type: date
-        params:
-          format: "%H:%M"
-  - trigger: ;date
-    replace: "{{today}}"
-    vars:
-      - name: today
-        type: date
-        params:
-          format: "%Y-%m-%d"
   - trigger: ;ddate
     replace: "{{now}}"
     vars:
