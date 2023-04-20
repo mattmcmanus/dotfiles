@@ -152,10 +152,10 @@ function yarn-refresh() {
 alias yarn-lock-resolve="git reset yarn.lock && git checkout yarn.lock && yarn"
 
 alias y='yarn'
-alias e='yarn run ember'
+alias e='n run ember'
 alias e-clean='rm -rf tmp dist'
 alias e-wipe='rm -rf tmp dist bower_components node_modules'
-alias e-reset='e-wipe && yarn install'
+alias e-reset='e-wipe && n install'
 
 # Vagrant Special Sauce
 

@@ -40,7 +40,6 @@ brew "tree"
 brew "vim"
 brew "watchman"
 brew "wget"
-brew "youtube-dl"
 brew "federico-terzi/espanso/espanso"
 brew "thoughtbot/formulae/parity"
 brew "thoughtbot/formulae/rcm"
@@ -53,7 +52,6 @@ cask "bartender"
 cask "carbon-copy-cloner"
 cask "choosy"
 cask "discord"
-cask "dropbox"
 cask "fantastical"
 cask "figma"
 cask "firefox"
@@ -72,18 +70,13 @@ cask "font-inter"
 cask "font-lato"
 cask "font-source-code-pro"
 cask "fork"
-cask "google-chrome"
-cask "hazel"
 cask "imageoptim"
 cask "iterm2"
-cask "kap"
 cask "kindle"
 cask "loom"
-cask "minecraft"
 cask "notion"
 cask "numi"
 cask "obsidian"
-cask "openra"
 cask "phantomjs"
 cask "plex-media-player"
 cask "raycast"
@@ -93,12 +86,10 @@ cask "steam"
 cask "transmission"
 cask "transmit"
 cask "visual-studio-code"
-cask "vlc"
 cask "whatsapp"
 cask "zoom"
 
 mas "1Blocker", id: 1365531024
-mas "Banktivity", id: 1480779512
 mas "DaisyDisk", id: 411643860
 mas "Day One", id: 1055511498
 mas "Drafts", id: 1435957248
@@ -107,7 +98,6 @@ mas "Harvest", id: 506189836
 mas "MarkDownload - Markdown Web Clipper", id: 1554029832
 mas "Mastonaut", id: 1450757574
 mas "Medis", id: 1579200037
-mas "NextDNS", id: 1464122853
 mas "Noizio", id: 928871589
 mas "Paprika Recipe Manager", id: 451907568
 mas "PDFOptim", id: 621276561

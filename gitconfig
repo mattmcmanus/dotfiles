@@ -1,6 +1,7 @@
 [user]
 	name = Matt McManus
-	email = matt@mcmanus.io
+	email = mmcmanus@auditboard.com
+	signingkey = 6231AA94A9B1B428
 
 [hub]
   protocol = https
@@ -18,6 +19,7 @@
   cop = checkout -p
   co = checkout
   default = !git remote show origin | grep 'HEAD branch' | cut -d' ' -f5
+  clean = !git fsck && git gc --prune=now
   m = !git checkout $(git default) && git pull --rebase --autostash && cd .
   br = branch
   rc = rebase --continue
@@ -51,6 +53,7 @@
   up = !sh -c 'git pull --rebase --prune --autostash && git log --pretty=format:\"%C(bold blue)%an %Creset(%ar) %C(yellow)%s\" HEAD@{1}..'
   upm = !sh -c 'git fetch && git rebase origin/$(git default) --autostash'
   tidy-up = !git rebase -i `git rev-parse origin/$(git default)`
+	rm-merged = !git branch --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" { print $1 }' | xargs -r git branch -D
 
 [format]
   pretty=format:%C(yellow)%h%Creset - %Cgreen(%ai)%Creset - %s  %C(bold blue)<%ae>%Creset%C(red)%d%Creset 
@@ -114,9 +117,12 @@
 	required = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
-	smudge = git lfs smudge %f
+	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
 [merge]
 	conflictstyle = diff3
 [init]
 	defaultBranch = main
+[commit]
+	gpgsign = true
