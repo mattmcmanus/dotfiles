@@ -152,16 +152,9 @@ function yarn-refresh() {
 alias yarn-lock-resolve="git reset yarn.lock && git checkout yarn.lock && yarn"
 
 alias y='yarn'
-alias e='n run ember'
-alias e-clean='rm -rf tmp dist'
-alias e-wipe='rm -rf tmp dist bower_components node_modules'
-alias e-reset='e-wipe && n install'
-
-# Vagrant Special Sauce
+alias nuke="find -E . -regex '.*/node_modules|declarations|.turbo|dist|tmp' -type d -prune -exec rm -rf '{}' +"
 
 alias vagrantgo='vagrant up && vagrant ssh -c tmuxgo'
-
-alias datafart='curl --data-binary @- datafart.com'
 
 alias editalias="vim ~/.aliases"
 alias editvim="vim ~/.vimrc"

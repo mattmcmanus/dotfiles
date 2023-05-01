@@ -1,1 +1,2 @@
 export GPG_TTY=$(tty)
+export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=true
