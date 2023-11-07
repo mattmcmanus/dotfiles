@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# Parse arguments
+while getopts ":grep-messages:prefix:help" opt; do
+  case ${opt} in
+    grep-messages )
+      grep_messages=$OPTARG
+      ;;
+    prefix )
+      prefix=$OPTARG
+      ;;
+    help )
+      echo "Usage: $0 [-grep-messages <grep>] [-prefix <prefix>] [-help]"
+      echo "  -grep-messages: conditionally filter the list of commits that are cherry-picked"
+      echo "  -prefix: specify the prefix that is used in the branch name and used in the PR title"
+      echo "  -help"
+      exit 0
+      ;;
+    \? )
+      echo "Invalid option: $OPTARG" 1>&2
+      ;;
+    : )
+      echo "Invalid option: $OPTARG requires an argument" 1>&2
+      ;;
+  esac
+done
+shift $((OPTIND -1))
+
+# Name of the branch to cherry-pick from
+source_branch=$(git rev-parse --abbrev-ref HEAD)
+
+# Name of the branch to cherry-pick to
+target_branch="develop"
+
+# Get all commit hashes from the source branch that are not in the target branch 
+if [ -z "$grep_messages" ]
+then
+  commits=$(git log --format=format:%H $target_branch..$source_branch)
+else
+  commits=$(git log --format=format:%H --grep="${grep_messages}" $target_branch..$source_branch)
+fi
+
+index=0
+for commit in $commits
+do
+  # Create a new branch from develop
+  git checkout -b ${prefix}$index $target_branch 
+
+  # Cherry-pick the commit
+  git cherry-pick $commit
+
+	git push
+
+  # Get the commit message
+  commit_message=$(git log -1 --pretty=%B $commit)
+
+  # Create a new draft PR
+	title="${prefix} $commit_message"
+  gh pr create --title "$title" --body "${prefix}" --draft -a "@me" -l "tech-story"
+
+  index=$((index+1))
+
+	echo ""
+	echo "#########################################################################"
+	echo ""
+done
