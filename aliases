@@ -152,7 +152,7 @@ function yarn-refresh() {
 alias yarn-lock-resolve="git reset yarn.lock && git checkout yarn.lock && yarn"
 
 alias y='yarn'
-alias nuke="find -E . -regex '.*/node_modules|declarations|.turbo|dist|tmp' -type d -prune -exec rm -rf '{}' +"
+alias nuke="find -E . -regex '.*/(node_modules|declarations|.turbo|dist|tmp)' -type d -prune -exec rm -rf '{}' + && pnpm store prune"
 
 alias vagrantgo='vagrant up && vagrant ssh -c tmuxgo'
 
@@ -160,6 +160,5 @@ alias editalias="vim ~/.aliases"
 alias editvim="vim ~/.vimrc"
 
 alias be='bundle exec'
-alias b='yarn'
 
 alias rolling-restart='production restart web.1 && sleep 60 && production restart web.2 && sleep 60 && production restart web.3 && sleep 60 && production restart sidekiq.1 && sleep 60 && production restart sidekiq.2'
