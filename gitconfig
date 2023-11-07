@@ -18,13 +18,15 @@
   cob = checkout -b
   cop = checkout -p
   co = checkout
-  default = !git remote show origin | grep 'HEAD branch' | cut -d' ' -f5
   clean = !git fsck && git gc --prune=now
   m = !git checkout $(git default) && git pull --rebase --autostash && cd .
   br = branch
   rc = rebase --continue
 
-	list-branches = branch --sort=committerdate
+  track        = update-index --no-assume-unchanged
+  untrack      = update-index --assume-unchanged
+
+  list-branches = branch --sort=committerdate
   new-branch = !git checkout $(git default) && git pull --rebase && cd . && git checkout -b $1
   set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
   delete-branch = !sh -c 'git push origin :refs/heads/$1 && git branch -D $1' -
@@ -50,10 +52,11 @@
   d = diff
   dft = difftool
   su = "!f() { git submodule sync; git submodule update --init; }; f"
-  up = !sh -c 'git pull --rebase --prune --autostash && git log --pretty=format:\"%C(bold blue)%an %Creset(%ar) %C(yellow)%s\" HEAD@{1}..'
+  up = pull --rebase --prune --autostash
   upm = !sh -c 'git fetch && git rebase origin/$(git default) --autostash'
+  default = !git remote show origin | grep 'HEAD branch' | cut -d' ' -f5
   tidy-up = !git rebase -i `git rev-parse origin/$(git default)`
-	rm-merged = !git branch --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" { print $1 }' | xargs -r git branch -D
+  rm-merged = !git branch --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" { print $1 }' | xargs -r git branch -D
 
 [format]
   pretty=format:%C(yellow)%h%Creset - %Cgreen(%ai)%Creset - %s  %C(bold blue)<%ae>%Creset%C(red)%d%Creset 
