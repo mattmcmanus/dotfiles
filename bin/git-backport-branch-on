@@ -19,7 +19,9 @@ if [ -z "$release_version" ]; then
     exit 1
 fi
 
+# Print out a space separated list of of commit shas ie: 'sha1 sha2 sha3'
 branch_commits=`git rev-list origin/develop..  | tr '\n' ' ' |  sed 's/ *$//'`
+
 current_branch=`git branch --show-current`
 
 release_branch="release/v$release_version"
@@ -27,7 +29,12 @@ backport_branch="v$release_version-$current_branch"
 git fetch -q
 
 if ! git show-ref --quiet --verify refs/heads/$release_branch; then
+		major=${release_version%%.*}
+		echo ""
     echo "Error: $release_branch does not exist in the git repository."
+		echo ""
+		echo "Current known branches for the major '$major' are:"
+		git branch -r | grep "^  origin/release/v$major"
     exit 1
 fi
 
@@ -48,4 +55,4 @@ git checkout -b $backport_branch -q
 git cherry-pick $branch_commits -q
 git push -q
 
-echo "Success! The brach '$backport_branch' has been created and pushed"
+echo "Success! The branch '$backport_branch' has been created and pushed"
