@@ -1,0 +1,51 @@
+#!/bin/sh
+
+# This script is used to backport all commits from the current branch to a release branch.
+# It creates a new branch named after the release version and the current branch, then cherry-picks all commits from the current branch.
+#
+# Usage:
+# ./git-backport-branch-on <release_version>
+#
+# Arguments:
+# release_version - The version of the release to backport commits to. This should be provided without the 'v' prefix.
+#
+# Example:
+# ./git-backport-branch-on 21.3
+
+
+release_version=$1
+if [ -z "$release_version" ]; then
+    echo "Error: release_version is required as the first argument"
+    exit 1
+fi
+
+branch_commits=`git rev-list origin/develop..  | tr '\n' ' ' |  sed 's/ *$//'`
+current_branch=`git branch --show-current`
+
+release_branch="release/v$release_version"
+backport_branch="v$release_version-$current_branch"
+git fetch -q
+
+if ! git show-ref --quiet --verify refs/heads/$release_branch; then
+    echo "Error: $release_branch does not exist in the git repository."
+    exit 1
+fi
+
+read -p "Do you want to create the branch '$backport_branch' and cherry-pick all commits from '$current_branch'? (y/n) " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    echo "Proceeding with creating $backport_branch and cherry-picking commits."
+else
+    echo "Fine. I won't. "
+    exit 1
+fi
+
+git checkout $release_branch -q
+git pull -q
+cd . 
+git checkout -b $backport_branch -q
+git cherry-pick $branch_commits -q
+git push -q
+
+echo "Success! The brach '$backport_branch' has been created and pushed"
