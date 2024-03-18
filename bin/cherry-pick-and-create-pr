@@ -1,30 +1,64 @@
 #!/bin/bash
 
+usage() { 
+  echo "Usage: $0 [-g <grep>] -p <prefix> [-b <body>] [-l <gh label>] [-d] [-h]"
+  echo "  -g: conditionally grep the list of commits that are cherry-picked"
+  echo "  -p: specify the prefix that is used in the branch name and used in the PR title"
+  echo "  -b: specify the body that is used in the PR. Defaults to the prefix if not provided"
+  echo "  -d: Print out the commands that will be run rather than run them"
+  echo "  -l: The label to use in the PR. Defaults to tech-story. Accepts user-story, tech-story, chore"
+  echo "  -h"
+  exit 0
+}
+
+label="tech-story"
+body=""
+
 # Parse arguments
-while getopts ":grep-messages:prefix:help" opt; do
+while getopts "g::p:b:dl:" opt; do
   case ${opt} in
-    grep-messages )
+    g )
       grep_messages=$OPTARG
       ;;
-    prefix )
+    p )
       prefix=$OPTARG
       ;;
-    help )
-      echo "Usage: $0 [-grep-messages <grep>] [-prefix <prefix>] [-help]"
-      echo "  -grep-messages: conditionally filter the list of commits that are cherry-picked"
-      echo "  -prefix: specify the prefix that is used in the branch name and used in the PR title"
-      echo "  -help"
-      exit 0
+    b )
+      body=$OPTARG
       ;;
-    \? )
-      echo "Invalid option: $OPTARG" 1>&2
+    d )
+      dry_run=true
       ;;
-    : )
-      echo "Invalid option: $OPTARG requires an argument" 1>&2
+    l )
+      label=$OPTARG
+      if [[ "$label" != "chore" && "$label" != "user-story" && "$label" != "tech-story" ]]; then
+        echo "Error: Invalid label. Accepts only chore, user-story, or tech-story."
+        exit 1
+      fi
+      ;;
+    *)
+      usage
       ;;
   esac
 done
 shift $((OPTIND -1))
+
+if [ -z "$body" ]
+then
+  body=$prefix
+fi
+
+function run() {
+    local command="$1"
+
+    echo ""
+    echo "-> $command"
+    echo ""
+
+    if [ "$dry_run" != "true" ]; then
+        eval "$command"
+    fi
+}
 
 # Name of the branch to cherry-pick from
 source_branch=$(git rev-parse --abbrev-ref HEAD)
@@ -44,23 +78,24 @@ index=0
 for commit in $commits
 do
   # Create a new branch from develop
-  git checkout -b ${prefix}$index $target_branch 
+  run "git checkout -b ${prefix}-$index $target_branch"
 
   # Cherry-pick the commit
-  git cherry-pick $commit
+  run "git cherry-pick $commit"
 
-	git push
+	run "git push"
 
   # Get the commit message
   commit_message=$(git log -1 --pretty=%B $commit)
 
   # Create a new draft PR
-	title="${prefix} $commit_message"
-  gh pr create --title "$title" --body "${prefix}" --draft -a "@me" -l "tech-story"
+	title="${prefix}: $commit_message"
+  run "gh pr create --title \"$title\" --body \"$body\" --draft -a \"@me\" -l \"$label\"" 
 
   index=$((index+1))
 
 	echo ""
 	echo "#########################################################################"
 	echo ""
+  sleep 5
 done
