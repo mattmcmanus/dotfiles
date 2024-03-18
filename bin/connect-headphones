@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Bluetooth connect my headsphones
+blueutil --wait-connect 88-c9-e8-dd-0f-5a
+
+# Reset audio output to macbook speakers
+SwitchAudioSource -u BuiltInSpeakerDevice
+
+sleep 1
+
+# Restore to bluetooth 
+SwitchAudioSource -u 88-C9-E8-DD-0F-5A:output
