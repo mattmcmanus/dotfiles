@@ -58,7 +58,7 @@ windows:
         - pnpm launch:tests
         - pnpm launch:server
   - luna:
-      root: ~/code/auditboard/auditboard-frontend/addons/luna
+      root: ~/code/auditboard/auditboard-frontend/libraries/luna-core
       panes:
-        - n start
-        - cd ../../tests/luna;n dt
+        - cd package && n start
+        - cd test-app && n dt

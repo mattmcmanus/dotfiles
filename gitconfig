@@ -18,6 +18,7 @@
   cob = checkout -b
   cop = checkout -p
   co = checkout
+  cp = cherry-pick
   clean = !git fsck && git gc --prune=now
   m = !git checkout $(git default) && git pull --rebase --autostash && cd .
   br = branch
@@ -44,6 +45,8 @@
   yolo = push -f --no-verify
 
   pl = pull
+
+  wt = worktree
 
   l = log
   lm = !git log origin/$(git default)..

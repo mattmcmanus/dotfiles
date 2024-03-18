@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Figure out the basedir for the repo you're currently in
-BASE_DIR=$(readlink -f "$(git rev-parse --git-dir)"/..)
+BASE_DIR=$(readlink -f "$(git rev-parse --show-toplevel)")
 
 if [ -f "$BASE_DIR/package-lock.json" ]; then
 	npm "$@"
@@ -10,6 +10,7 @@ elif [ -f "$BASE_DIR/yarn.lock" ]; then
 elif [ -f "$BASE_DIR/pnpm-lock.yaml" ]; then
 	pnpm "$@"
 else
-	 echo "No lock file found, unknown package manager"
-	 exit 1
+	echo "No lock file found, unknown package manager"
+
+	exit 1
 fi
