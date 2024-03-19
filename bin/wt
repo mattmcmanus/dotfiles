@@ -31,32 +31,28 @@ goto_main_worktree() {
 
 # New function to get the relative path from the current worktree root
 get_relative_path() {
-    current_worktree_root=$(git rev-parse --show-toplevel)
-    current_path=$(pwd)
-    if [ "$current_worktree_root" = "$current_path" ]; then
-        relative_path="."
-    else
-        relative_path=${current_path#$current_worktree_root/}
-    fi
-    echo $relative_path
+	current_worktree_root=$(git rev-parse --show-toplevel)
+	current_path=$(pwd)
+	if [ "$current_worktree_root" = "$current_path" ]; then
+		relative_path="."
+	else
+		relative_path=${current_path#$current_worktree_root/}
+	fi
+	echo $relative_path
 }
 
 # Modified change_worktree function to preserve the current working directory
 change_worktree() {
-    relative_path=$(get_relative_path)
-    echo Changing to worktree at: "$worktree_dir"
-    cd "$worktree_dir"
-    # Check if the relative path exists in the new worktree and navigate if it does
-    if [ -d "$relative_path" ]; then
-        cd "$relative_path"
-    fi
-    exec $SHELL
+	relative_path=$(get_relative_path)
+	echo Changing to worktree at: "$worktree_dir"
+	cd "$worktree_dir"
+	# Check if the relative path exists in the new worktree and navigate if it does
+	if [ -d "$relative_path" ]; then
+		cd "$relative_path"
+	fi
+	exec $SHELL
 }
 
-if [ -z "${args[0]}" ]; then
-	help_message
-	exit 0
-fi
 
 case "${args[0]}" in
 list)
@@ -75,7 +71,12 @@ version)
 	goto_main_worktree
 	;;
 *)
-	worktree_dir=$(git worktree list --porcelain | grep -E 'worktree ' | awk '/'"$arg"'/ {print; exit}' | cut -d ' ' -f2-)
+	SELECTION=$(git worktree list | sed -r 's/^(.*\/([^[:space:]]* ))/\1 \2/g' | fzf --with-nth=2,4 --height 10 --border --prompt "tree: " --query=$arg)
+	if [ "$SELECTION" = "" ]; then
+		exit 0
+	fi
+	worktree_dir=$(cut -d" " -f1 <<<"$SELECTION")
+	# worktree_dir=$(git worktree list --porcelain | grep -E 'worktree ' | awk '/'"$arg"'/ {print; exit}' | cut -d ' ' -f2-)
 	;;
 esac
 
