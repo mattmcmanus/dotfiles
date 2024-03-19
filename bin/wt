@@ -7,10 +7,6 @@ args=("$@")
 VERSION="0.1.1"
 TMP_PATH=$(mktemp)
 BINARY_PATH=$(which wt)
-JQ_URL="https://stedolan.github.io/jq/download"
-RELEASE_URL="https://github.com/yankeexe/git-worktree-switcher/releases/latest"
-RELEASE_API_URL="https://api.github.com/repos/yankeexe/git-worktree-switcher/releases/latest"
-
 
 # Escape forward slash
 arg=$(echo "${args[0]}" | sed 's/\//\\\//g')
@@ -25,56 +21,36 @@ help_message() {
 	echo "Usage:"
 	echo -e "\twt <worktree-name>: search for worktree names and change to that directory."
 	echo -e "\twt list: list out all the git worktrees."
-	echo -e "\twt update: update to the latest release of worktree switcher."
-	echo -e "\twt version: show the CLI version."
 	echo -e "\twt help: shows this help message."
 }
 
 goto_main_worktree() {
-	main_worktree=$(git worktree list --porcelain | grep -E 'worktree ' | awk '{print $0; exit}' | cut -d ' ' -f2-)
-
-	if [ -z "$main_worktree" ]; then
-		:
-	else
-		echo Changing to main worktree at: "$main_worktree"
-		cd "$main_worktree"
-		exec $SHELL
-	fi
+	worktree_dir=$(git worktree list --porcelain | grep -E 'worktree ' | awk '{print $0; exit}' | cut -d ' ' -f2-)
+	change_worktree
 }
 
-download_latest_update() {
-	download_url=$(curl -sL $RELEASE_API_URL | jq -r '.assets[0].browser_download_url')
-
-	echo "Downloading latest version $fetched_tag_name"
-	curl -sL -o "$TMP_PATH" "$download_url"
-
-	echo "Updating to latest version..."
-	chmod +x "$TMP_PATH"
-	sudo mv "$TMP_PATH" "$BINARY_PATH"
-	rm -f "$TMP_PATH"
-
-	echo "You are using the latest version of worktree switcher: $fetched_tag_name"
+# New function to get the relative path from the current worktree root
+get_relative_path() {
+    current_worktree_root=$(git rev-parse --show-toplevel)
+    current_path=$(pwd)
+    if [ "$current_worktree_root" = "$current_path" ]; then
+        relative_path="."
+    else
+        relative_path=${current_path#$current_worktree_root/}
+    fi
+    echo $relative_path
 }
 
-check_release_version() {
-	fetched_tag_name=$(curl -sL $RELEASE_API_URL | jq -r '.tag_name')
-
-	if [ "$fetched_tag_name" == $VERSION ]; then
-		echo "You have the latest version of worktree switcher!"
-		echo "Version: $VERSION"
-	else
-		download_latest_update
-	fi
-}
-
-update() {
-	if [ -z "$(command -v jq)" ]; then
-		echo "jq is required for updating worktree switcher via this command."
-		echo -e "Install jq:\n$JQ_URL.\n"
-		echo -e "Or visit:\n$RELEASE_URL"
-	else
-		check_release_version
-	fi
+# Modified change_worktree function to preserve the current working directory
+change_worktree() {
+    relative_path=$(get_relative_path)
+    echo Changing to worktree at: "$worktree_dir"
+    cd "$worktree_dir"
+    # Check if the relative path exists in the new worktree and navigate if it does
+    if [ -d "$relative_path" ]; then
+        cd "$relative_path"
+    fi
+    exec $SHELL
 }
 
 if [ -z "${args[0]}" ]; then
@@ -99,19 +75,12 @@ version)
 	goto_main_worktree
 	;;
 *)
-	directory=$(git worktree list --porcelain | grep -E 'worktree ' | awk '/'"$arg"'/ {print; exit}' | cut -d ' ' -f2-)
+	worktree_dir=$(git worktree list --porcelain | grep -E 'worktree ' | awk '/'"$arg"'/ {print; exit}' | cut -d ' ' -f2-)
 	;;
 esac
 
-# Change worktree based on user argument.
-change_worktree() {
-	echo Changing to worktree at: "$directory"
-	cd "$directory"
-	exec $SHELL
-}
-
 # If directory variable is not empty then change worktree
-if [ -z "$directory" ]; then
+if [ -z "$worktree_dir" ]; then
 	:
 else
 	change_worktree
