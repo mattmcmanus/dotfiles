@@ -50,9 +50,34 @@ change_worktree() {
 	if [ -d "$relative_path" ]; then
 		cd "$relative_path"
 	fi
-	exec $SHELL
+	# exec $SHELL
 }
 
+# Add this function to handle adding a new worktree
+add_new_worktree() {
+	local name="$1"
+	goto_main_worktree
+	git worktree add "../$name"
+	cd ../$name
+	post_add_worktree
+}
+
+# Custom code to run after the worktree is created
+post_add_worktree() {
+	if [ -d "../vscode-defaults" ]; then
+		echo "Copying vscode defaults"
+		cp ../vscode-defaults/* .vscode/
+	fi
+
+	if [ -f ".vscode/extensions.json" ]; then
+		echo "Installing extensions"
+		jq -r '.recommendations[]' .vscode/extensions.json | while read extension; do
+			code --install-extension $extension
+		done
+	fi
+
+	code .
+}
 
 case "${args[0]}" in
 list)
@@ -70,13 +95,20 @@ version)
 -)
 	goto_main_worktree
 	;;
+add)
+	if [ -z "${args[1]}" ]; then
+		echo "Error: No name provided for the new worktree."
+		exit 1
+	else
+		add_new_worktree "${args[1]}"
+	fi
+	;;
 *)
 	SELECTION=$(git worktree list | sed -r 's/^(.*\/([^[:space:]]* ))/\1 \2/g' | fzf --with-nth=2,4 --height 10 --border --prompt "tree: " --query=$arg)
 	if [ "$SELECTION" = "" ]; then
 		exit 0
 	fi
 	worktree_dir=$(cut -d" " -f1 <<<"$SELECTION")
-	# worktree_dir=$(git worktree list --porcelain | grep -E 'worktree ' | awk '/'"$arg"'/ {print; exit}' | cut -d ' ' -f2-)
 	;;
 esac
 
@@ -86,3 +118,4 @@ if [ -z "$worktree_dir" ]; then
 else
 	change_worktree
 fi
+exec $SHELL
