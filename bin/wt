@@ -50,7 +50,7 @@ change_worktree() {
 	if [ -d "$relative_path" ]; then
 		cd "$relative_path"
 	fi
-	# exec $SHELL
+	exec $SHELL
 }
 
 # Add this function to handle adding a new worktree
@@ -64,18 +64,11 @@ add_new_worktree() {
 
 # Custom code to run after the worktree is created
 post_add_worktree() {
+	pnpm install
 	if [ -d "../vscode-defaults" ]; then
 		echo "Copying vscode defaults"
 		cp ../vscode-defaults/* .vscode/
 	fi
-
-	if [ -f ".vscode/extensions.json" ]; then
-		echo "Installing extensions"
-		jq -r '.recommendations[]' .vscode/extensions.json | while read extension; do
-			code --install-extension $extension
-		done
-	fi
-
 	code .
 }
 
@@ -109,13 +102,6 @@ add)
 		exit 0
 	fi
 	worktree_dir=$(cut -d" " -f1 <<<"$SELECTION")
+	change_worktree
 	;;
 esac
-
-# If directory variable is not empty then change worktree
-if [ -z "$worktree_dir" ]; then
-	:
-else
-	change_worktree
-fi
-exec $SHELL
