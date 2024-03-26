@@ -1,0 +1,11 @@
+# /Users/mattmcmanus/.config/tmuxinator/ab.yml
+
+name: ab
+root: ~/code/auditboard/soxhub-api
+on_project_start: tmux -CC attach
+
+windows:
+  - api: 
+      panes:
+        - git m && n install && n db:sync && n start
+        - tail -f /opt/homebrew/var/log/postgresql@14.log

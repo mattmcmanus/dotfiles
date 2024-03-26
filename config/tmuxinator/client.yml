@@ -1,0 +1,14 @@
+enable_pane_titles: true
+on_project_start: tmux -CC attach
+
+name: <%= @args[0] %>
+root: ~/code/auditboard/frontend/develop
+
+windows:
+  - client: 
+      root: ~/code/auditboard/frontend/<%= @args[0] %>/apps/client
+      layout: main-horizontal
+      panes:
+        - pnpm launch:build
+        - pnpm launch:server
+        - pnpm launch:tests
