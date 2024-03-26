@@ -64,6 +64,7 @@ remove_worktree() {
 		exit 0
 	fi
 	worktree_dir=$(cut -d" " -f1 <<<"$SELECTION")
+
 	echo "You are about to remove the worktree at: $worktree_dir"
 	read -p "Are you sure? (y/N): " confirmation
 	case "$confirmation" in
