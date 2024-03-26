@@ -22,14 +22,10 @@ help_message() {
 	echo -e "\twt <worktree-name>: search for worktree names and change to that directory."
 	echo -e "\twt list: list out all the git worktrees."
 	echo -e "\twt help: shows this help message."
+	echo -e "\twt add <worktree-name>: add a new worktree and switch to it."
+	echo -e "\twt remove [worktree-name]: remove an existing worktree."
 }
 
-goto_main_worktree() {
-	worktree_dir=$(git worktree list --porcelain | grep -E 'worktree ' | awk '{print $0; exit}' | cut -d ' ' -f2-)
-	change_worktree
-}
-
-# New function to get the relative path from the current worktree root
 get_relative_path() {
 	current_worktree_root=$(git rev-parse --show-toplevel)
 	current_path=$(pwd)
@@ -41,7 +37,6 @@ get_relative_path() {
 	echo $relative_path
 }
 
-# Modified change_worktree function to preserve the current working directory
 change_worktree() {
 	relative_path=$(get_relative_path)
 	echo Changing to worktree at: "$worktree_dir"
@@ -53,7 +48,6 @@ change_worktree() {
 	exec $SHELL
 }
 
-# Add this function to handle adding a new worktree
 add_new_worktree() {
 	local name="$1"
 	goto_main_worktree
@@ -61,6 +55,28 @@ add_new_worktree() {
 	cd ../$name
 	exec $SHELL
 	post_add_worktree
+}
+
+remove_worktree() {
+	SELECTION=$(select_worktree "$1")
+	if [ -z "$SELECTION" ]; then
+		echo "No worktree selected for removal."
+		exit 0
+	fi
+	worktree_dir=$(cut -d" " -f1 <<<"$SELECTION")
+	echo "You are about to remove the worktree at: $worktree_dir"
+	read -p "Are you sure? (y/N): " confirmation
+	case "$confirmation" in
+	[yY][eE][sS] | [yY])
+		echo "Removing..."
+		git worktree remove "$worktree_dir"
+		git worktree prune
+		echo "Worktree removed and pruned."
+		;;
+	*)
+		echo "Worktree removal cancelled."
+		;;
+	esac
 }
 
 # Custom code to run after the worktree is created
@@ -75,24 +91,12 @@ post_add_worktree() {
 
 # Function to select a worktree using fzf
 select_worktree() {
-    git worktree list | sed -r 's/^(.*\/([^[:space:]]* ))/\1 \2/g' | fzf --with-nth=2,4 --height 10 --border --prompt "tree: " --query="$1"
+	git worktree list | sed -r 's/^(.*\/([^[:space:]]* ))/\1 \2/g' | fzf --with-nth=2,4 --height 10 --border --prompt "tree: " --query="$1"
 }
 
 case "${args[0]}" in
 list)
 	worktree_list
-	;;
-update)
-	update
-	;;
-help)
-	help_message
-	;;
-version)
-	echo Version: $VERSION
-	;;
--)
-	goto_main_worktree
 	;;
 add)
 	if [ -z "${args[1]}" ]; then
@@ -103,26 +107,11 @@ add)
 	fi
 	;;
 remove)
-    SELECTION=$(select_worktree "${args[1]}")
-    if [ -z "$SELECTION" ]; then
-        echo "No worktree selected for removal."
-        exit 0
-    fi
-    worktree_dir=$(cut -d" " -f1 <<<"$SELECTION")
-    echo "You are about to remove the worktree at: $worktree_dir"
-    read -p "Are you sure? (y/N): " confirmation
-    case "$confirmation" in
-        [yY][eE][sS]|[yY])
-						echo "Removing..."
-            git worktree remove "$worktree_dir"
-            git worktree prune
-            echo "Worktree removed and pruned."
-            ;;
-        *)
-            echo "Worktree removal cancelled."
-            ;;
-    esac
-    ;;
+	remove_worktree "${args[1]}"
+	;;
+help)
+	help_message
+	;;
 *)
 	SELECTION=$(select_worktree $arg)
 	if [ "$SELECTION" = "" ]; then
