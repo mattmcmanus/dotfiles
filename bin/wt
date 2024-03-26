@@ -59,17 +59,23 @@ add_new_worktree() {
 	goto_main_worktree
 	git worktree add "../$name"
 	cd ../$name
+	exec $SHELL
 	post_add_worktree
 }
 
 # Custom code to run after the worktree is created
 post_add_worktree() {
 	pnpm install
-	if [ -d "../vscode-defaults" ]; then
+	if [ -d "../vscode-prefs" ]; then
 		echo "Copying vscode defaults"
 		cp ../vscode-defaults/* .vscode/
 	fi
 	code .
+}
+
+# Function to select a worktree using fzf
+select_worktree() {
+    git worktree list | sed -r 's/^(.*\/([^[:space:]]* ))/\1 \2/g' | fzf --with-nth=2,4 --height 10 --border --prompt "tree: " --query="$1"
 }
 
 case "${args[0]}" in
@@ -96,8 +102,29 @@ add)
 		add_new_worktree "${args[1]}"
 	fi
 	;;
+remove)
+    SELECTION=$(select_worktree "${args[1]}")
+    if [ -z "$SELECTION" ]; then
+        echo "No worktree selected for removal."
+        exit 0
+    fi
+    worktree_dir=$(cut -d" " -f1 <<<"$SELECTION")
+    echo "You are about to remove the worktree at: $worktree_dir"
+    read -p "Are you sure? (y/N): " confirmation
+    case "$confirmation" in
+        [yY][eE][sS]|[yY])
+						echo "Removing..."
+            git worktree remove "$worktree_dir"
+            git worktree prune
+            echo "Worktree removed and pruned."
+            ;;
+        *)
+            echo "Worktree removal cancelled."
+            ;;
+    esac
+    ;;
 *)
-	SELECTION=$(git worktree list | sed -r 's/^(.*\/([^[:space:]]* ))/\1 \2/g' | fzf --with-nth=2,4 --height 10 --border --prompt "tree: " --query=$arg)
+	SELECTION=$(select_worktree $arg)
 	if [ "$SELECTION" = "" ]; then
 		exit 0
 	fi
