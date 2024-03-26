@@ -26,6 +26,11 @@ help_message() {
 	echo -e "\twt remove [worktree-name]: remove an existing worktree."
 }
 
+goto_main_worktree() {
+	worktree_dir=$(git worktree list --porcelain | grep -E 'worktree ' | awk '{print $0; exit}' | cut -d ' ' -f2-)
+	change_worktree
+}
+
 get_relative_path() {
 	current_worktree_root=$(git rev-parse --show-toplevel)
 	current_path=$(pwd)
