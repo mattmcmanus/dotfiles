@@ -1,0 +1,48 @@
+#!/bin/sh
+
+from_version=$1
+to_version=$2
+
+# Check if "from" version is installed
+if brew list postgresql@$from_version > /dev/null 2>&1; then
+    echo "PostgreSQL version $from_version is installed."
+else
+    echo "PostgreSQL version $from_version is not installed."
+    exit 1
+fi
+
+# Check if "to" version is installed, if not then install it
+if brew list postgresql@$to_version > /dev/null 2>&1; then
+    echo "PostgreSQL version $to_version is already installed."
+else
+    echo "Installing PostgreSQL version $to_version..."
+    brew install postgresql@$to_version
+fi
+
+# Prompt user to run pg_upgrade
+echo "\n\n\n"
+PREFIX=$(brew --prefix)
+UPGRADE_COMMAND="pg_upgrade \
+    -b $(ls -d $PREFIX/Cellar/postgresql@$from_version/* | sort -V | tail -n 1)/bin \
+    -d $PREFIX/var/postgresql@$from_version \
+    -B $(ls -d $PREFIX/Cellar/postgresql@$to_version/* | sort -V | tail -n 1)/bin \
+    -D $PREFIX/var/postgresql@$to_version"
+
+echo "The pg_upgrade command to be run is:"
+echo $UPGRADE_COMMAND
+
+read -p "Do you want to run pg_upgrade? (y/n): " confirm
+if [ "$confirm" = "y" ]; then
+    echo "Running pg_upgrade..."
+    brew services stop postgresql@$from_version
+    brew services stop postgresql@$to_version
+    eval $UPGRADE_COMMAND
+    echo "pg_upgrade completed."
+else
+    echo "pg_upgrade not run."
+fi
+
+brew link --overwrite postgresql@$to_version
+brew services start postgresql@$to_version
+
+echo "PostgreSQL has been upgraded from version $from_version to $to_version."
