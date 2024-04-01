@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# Usage:
+# ./brew-postgresql-upgrade <from_version> <to_version>
+#
+# Example:
+# ./brew-postgresql-upgrade 14 15
+
 from_version=$1
 to_version=$2
 
