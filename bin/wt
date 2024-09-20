@@ -50,7 +50,6 @@ change_worktree() {
 	if [ -d "$relative_path" ]; then
 		cd "$relative_path"
 	fi
-	exec $SHELL
 }
 
 add_new_worktree() {
@@ -58,8 +57,8 @@ add_new_worktree() {
 	goto_main_worktree
 	git worktree add "../$name"
 	cd ../$name
-	exec $SHELL
 	post_add_worktree
+	exec $SHELL
 }
 
 remove_worktree() {
@@ -86,13 +85,14 @@ remove_worktree() {
 }
 
 # Custom code to run after the worktree is created
+VSCODE_PREFS_PATH="../vscode-prefs"
 post_add_worktree() {
 	pnpm install
-	if [ -d "../vscode-prefs" ]; then
-		echo "Copying vscode defaults"
-		cp ../vscode-defaults/* .vscode/
+	if [ -d "$VSCODE_PREFS_PATH" ]; then
+		echo "Symlinking shared vscode project settings"
+		ln -s $VSCODE_PREFS_PATH/settings.json .vscode/settings.json
+		ln -s $VSCODE_PREFS_PATH/tasks.json .vscode/tasks.json
 	fi
-	code .
 }
 
 # Function to select a worktree using fzf
@@ -112,6 +112,9 @@ add)
 		add_new_worktree "${args[1]}"
 	fi
 	;;
+post-add)
+	post_add_worktree
+	;;
 remove)
 	remove_worktree "${args[1]}"
 	;;
@@ -125,5 +128,6 @@ help)
 	fi
 	worktree_dir=$(cut -d" " -f1 <<<"$SELECTION")
 	change_worktree
+	exec $SHELL
 	;;
 esac
