@@ -1,7 +1,7 @@
 #!/bin/sh
 
 BASE_DIR=$(dirname `git rev-parse --git-common-dir`)
-if [ "$BASE_DIR" != "$HOME/code/auditboard/frontend/develop" ]; then
+if [ "$BASE_DIR" != "$HOME/code/auditboard/frontend/develop" ] && [ "$BASE_DIR" != "." ]; then
     echo "Error: This script must be run from ~/code/auditboard/frontend/develop or a worktree created from that branch"
     exit 1
 fi

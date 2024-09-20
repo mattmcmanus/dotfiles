@@ -1,8 +1,8 @@
 # /Users/mattmcmanus/.config/tmuxinator/ab.yml
 
-name: ab
-root: ~/code/auditboard/soxhub-api
-on_project_start: tmux -CC attach
+name: api
+root: ~/code/auditboard/backend
+#on_project_start: tmux -CC attach
 
 windows:
   - api: 

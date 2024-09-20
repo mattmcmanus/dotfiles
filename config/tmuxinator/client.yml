@@ -1,5 +1,5 @@
 enable_pane_titles: true
-on_project_start: tmux -CC attach
+#on_project_start: tmux -CC attach
 
 name: <%= @args[0] %>
 root: ~/code/auditboard/frontend/develop
