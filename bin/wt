@@ -8,6 +8,9 @@ VERSION="0.1.1"
 TMP_PATH=$(mktemp)
 BINARY_PATH=$(which wt)
 
+VSCODE_PREFS_FOLDER="vscode-prefs"
+VSCODE_PREFS_PATH="~/code/auditboard/frontend/$VSCODE_PREFS_FOLDER"
+
 # Escape forward slash
 arg=$(echo "${args[0]}" | sed 's/\//\\\//g')
 
@@ -24,6 +27,7 @@ help_message() {
 	echo -e "\twt help: shows this help message."
 	echo -e "\twt add <worktree-name>: add a new worktree and switch to it."
 	echo -e "\twt remove [worktree-name]: remove an existing worktree."
+	echo -e "\twt clean: remove all worktrees that have been merged into develop."
 }
 
 goto_main_worktree() {
@@ -84,8 +88,40 @@ remove_worktree() {
 	esac
 }
 
+should_remove_worktree() {
+    local branch_name=$(git rev-parse --abbrev-ref HEAD)
+    if ! git rev-parse --verify "$branch_name" &>/dev/null; then
+        echo "non-existent branch"
+        return 0
+    elif git branch --contains develop | grep -q "^\* "; then
+        echo "merged into develop"
+        return 0
+    fi
+    return 1
+}
+
+clean_merged_worktrees() {
+    goto_main_worktree
+    local main_worktree=$(pwd)
+    cd ..
+    for dir in */; do
+        if [ "$dir" != "$(basename "$main_worktree")/" ] && [ "$dir" != "$VSCODE_PREFS_FOLDER/" ]; then
+            cd "$dir"
+            local removal_reason=$(should_remove_worktree)
+            if [ $? -eq 0 ]; then
+                echo "Removing worktree ($removal_reason): $dir"
+                git worktree remove ../$dir
+            else
+                echo "Skipping worktree: $dir"
+                cd ..
+            fi
+        fi
+    done
+    git worktree prune
+    echo "Cleaned up worktrees and pruned."
+}
+
 # Custom code to run after the worktree is created
-VSCODE_PREFS_PATH="../vscode-prefs"
 post_add_worktree() {
 	pnpm install
 	if [ -d "$VSCODE_PREFS_PATH" ]; then
@@ -118,6 +154,9 @@ post-add)
 remove)
 	remove_worktree "${args[1]}"
 	;;
+clean)
+   clean_merged_worktrees
+	 ;;
 help)
 	help_message
 	;;
