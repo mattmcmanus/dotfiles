@@ -1,7 +1,7 @@
 [user]
 	name = Matt McManus
 	email = mmcmanus@auditboard.com
-	signingkey = 6231AA94A9B1B428
+	signingkey = E9AFB3F4EDB8F457
 
 [hub]
   protocol = https

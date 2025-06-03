@@ -207,16 +207,11 @@ cask "whatsapp"
 cask "zoom"
 mas "1Blocker", id: 1365531024
 mas "1Password for Safari", id: 1569813296
-mas "Banktivity", id: 1480779512
 mas "DaisyDisk", id: 411643860
 mas "Day One", id: 1055511498
 mas "Drafts", id: 1435957248
-mas "Gifwit", id: 871200983
-mas "Goodnotes", id: 1444383602
-mas "Harvest", id: 506189836
 mas "Ivory", id: 6444602274
 mas "Keynote", id: 409183694
-mas "Kindle Classic", id: 405399194
 mas "MarkDownload - Markdown Web Clipper", id: 1554029832
 mas "Mastonaut", id: 1450757574
 mas "Medis", id: 1579200037
