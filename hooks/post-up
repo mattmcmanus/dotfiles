@@ -20,20 +20,24 @@ log() {
   volta install yarn
 )
 
-[ ! -d $HOME/.pyenv/versions ] && (
-  log "Installing system python version"
-  pyenv install -s `~/.python-version`
-)
+if grep -q '^TAGS=.*\bpython\b' ~/.rcrc; then
+  [ ! -d $HOME/.pyenv/versions ] && (
+    log "Installing system python version"
+    pyenv install -s `~/.python-version`
+  )
+fi
 
-[ ! -d $HOME/.rbenv ] && (
-  log "Installing system ruby version"
-  rbenv install -s `~/.ruby-version`
-)
+if grep -q '^TAGS=.*\bruby\b' ~/.rcrc; then
+  [ ! -d $HOME/.rbenv ] && (
+    log "Installing system ruby version"
+    rbenv install -s `~/.ruby-version`
+  )
 
-[[ ! $(which bundler) ]] && (
-  log "Configuring ruby environment"
-  gem update --system
-  gem install bundler --no-document --pre
-  number_of_cores=$(sysctl -n hw.ncpu)
-  bundle config --global jobs $((number_of_cores - 1))
- )
+  [[ ! $(which bundler) ]] && (
+    log "Configuring ruby environment"
+    gem update --system
+    gem install bundler --no-document --pre
+    number_of_cores=$(sysctl -n hw.ncpu)
+    bundle config --global jobs $((number_of_cores - 1))
+  )
+fi
