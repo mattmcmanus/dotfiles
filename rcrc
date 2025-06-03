@@ -1,3 +1,0 @@
-EXCLUDES="README.md Brewfile LICENSE"
-DOTFILES_DIRS="$HOME/.dotfiles"
-TAGS="zsh"
