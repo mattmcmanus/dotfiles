@@ -1,6 +1,6 @@
 [user]
 	name = Matt McManus
-	email = mmcmanus@auditboard.com
+	email = matt@mcmanus.io
 	signingkey = E9AFB3F4EDB8F457
 
 [hub]
@@ -132,5 +132,9 @@
 	defaultBranch = main
 [commit]
 	gpgsign = true
-[tag]
-	gpgSign = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
