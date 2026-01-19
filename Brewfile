@@ -1,10 +1,7 @@
 tap "1password/tap"
 tap "dart-lang/dart"
-tap "federico-terzi/espanso"
 tap "hashicorp/tap"
 tap "heroku/brew"
-tap "homebrew/bundle"
-tap "homebrew/services"
 tap "neovim/neovim"
 tap "puma/puma"
 tap "sass/sass"
@@ -91,10 +88,6 @@ brew "vim"
 brew "watchman"
 # Internet file retriever
 brew "wget"
-# Download YouTube videos from the command-line
-brew "youtube-dl"
-# Cross-platform Text Expander written in Rust
-brew "federico-terzi/espanso/espanso"
 # Supabase CLI
 brew "supabase/tap/supabase"
 # Shell commands for environment parity for Heroku apps
@@ -137,8 +130,6 @@ cask "discord"
 cask "docker-desktop"
 # Client for the Dropbox cloud storage service
 cask "dropbox"
-# Calendar software
-cask "fantastical"
 # Collaborative team software
 cask "figma"
 # Web browser
@@ -175,18 +166,12 @@ cask "imageoptim"
 cask "istat-menus"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
-# Offline AI chat tool
-cask "jan"
 # Open-source screen recorder built with web technology
 cask "kap"
 # Keyboard customiser
 cask "karabiner-elements"
-# Interface for reading and syncing eBooks
-cask "kindle"
 # Create, manage and debug system and user services
 cask "launchcontrol"
-# Screen and video recording software
-cask "loom"
 # Speech recognition tool
 cask "macwhisper"
 # Tool to control external monitor brightness & volume
@@ -197,30 +182,16 @@ cask "notion"
 cask "numi"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
-# Scheduling application focusing on organisation
-cask "omnifocus"
 # Real-time strategy game engine for Westwood games
 cask "openra"
 # Headless web browser
 cask "phantomjs"
-# Home media player
-cask "plex-media-player"
-# Home media server
-cask "plex-media-server"
-# VPN client
-cask "private-internet-access"
 # List out the contents of a zip file in the QuickLook preview
 cask "qlzipinfo"
 # Control your tools with a few keystrokes
 cask "raycast"
-# Email client
-cask "readdle-spark"
 # 3D CAD software
 cask "shapr3d"
-# Digital design and prototyping platform
-cask "sketch"
-# Video chat, voice call and instant messaging application
-cask "skype"
 # Team communication and collaboration software
 cask "slack"
 # Music streaming service
@@ -229,8 +200,6 @@ cask "spotify"
 cask "steam"
 # Unpacks archive files
 cask "the-unarchiver"
-# Music streaming service with high fidelity sound and hi-def video quality
-cask "tidal"
 # To-do list
 cask "todoist-app"
 # Open-source BitTorrent client
@@ -241,10 +210,6 @@ cask "transmit"
 cask "visual-studio-code"
 # Multimedia player
 cask "vlc"
-# Native desktop client for WhatsApp
-cask "whatsapp"
-# Wine wrapper built with SwiftUI
-cask "whisky"
 # Video communication and virtual meeting platform
 cask "zoom"
 mas "1Password for Safari", id: 1569813296
