@@ -139,20 +139,8 @@ alias ni='npm install --save'
 
 alias linked='find node_modules -maxdepth 1 -type la'
 
-function nt() {
-  nodemon -w ../ $1 | bunyan -l warn -o short
-}
-function nodeb() {
-  nodemon $1 | bunyan -l debug -o short
-}
-function yarn-refresh() {
-  yarn unlink $1 && yarn --force && cd $1 && yarn --force && cd - && yarn link $1
-}
-
-alias yarn-lock-resolve="git reset yarn.lock && git checkout yarn.lock && yarn"
-
-alias y='yarn'
-alias nuke="find -E . -regex '.*/(node_modules|declarations|.turbo|dist|tmp)' -type d -prune -exec rm -rf '{}' + && pnpm store prune"
+alias clean="find -E . -regex '.*/(node_modules|declarations|.turbo|dist|tmp)' -type d -prune -exec rm -rf '{}' +"
+alias nuke="clean && pnpm store prune"
 
 alias vagrantgo='vagrant up && vagrant ssh -c tmuxgo'
 
