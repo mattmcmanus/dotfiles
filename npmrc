@@ -5,4 +5,4 @@ progress=false
 //registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}
 
 @soxhub:registry=https://npm.pkg.github.com/
-//npm.pkg.github.com/:_authToken=${GITHUB_PERSONAL_ACCESS_TOKEN}
+//npm.pkg.github.com/:_authToken=${GITHUB_AUTH}

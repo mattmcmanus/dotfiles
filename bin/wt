@@ -27,12 +27,28 @@ help_message() {
 	echo -e "\twt help: shows this help message."
 	echo -e "\twt add <worktree-name>: add a new worktree and switch to it."
 	echo -e "\twt remove [worktree-name]: remove an existing worktree."
-	echo -e "\twt clean: remove all worktrees that have been merged into develop."
+	echo -e "\twt clean: remove all worktrees that have been merged into the main branch."
 }
 
 goto_main_worktree() {
 	worktree_dir=$(git worktree list --porcelain | grep -E 'worktree ' | awk '{print $0; exit}' | cut -d ' ' -f2-)
 	change_worktree
+}
+
+get_main_branch() {
+	local main_branch
+	main_branch=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null | sed 's@^origin/@@')
+	if [ -n "$main_branch" ]; then
+		echo "$main_branch"
+		return 0
+	fi
+	for candidate in main master develop; do
+		if git show-ref --verify --quiet "refs/heads/$candidate"; then
+			echo "$candidate"
+			return 0
+		fi
+	done
+	echo "develop"
 }
 
 get_relative_path() {
@@ -90,11 +106,12 @@ remove_worktree() {
 
 should_remove_worktree() {
     local branch_name=$(git rev-parse --abbrev-ref HEAD)
+    local main_branch=$(get_main_branch)
     if ! git rev-parse --verify "$branch_name" &>/dev/null; then
         echo "non-existent branch"
         return 0
-    elif git branch --contains develop | grep -q "^\* "; then
-        echo "merged into develop"
+    elif git branch --contains "$main_branch" | grep -q "^\* "; then
+        echo "merged into $main_branch"
         return 0
     fi
     return 1
