@@ -1,12 +1,10 @@
 source ~/.secrets
-export PATH
 
 # Start configuration added by Zim install {{{
 #
 # User configuration sourced by interactive shells
 #
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
 source ~/.zexports
 # -----------------
 # Zsh configuration
@@ -138,7 +136,7 @@ eval "$(direnv hook zsh)"
 # CDPATH config
 typeset -gU path cdpath fpath # Ensure path arrays do not contain duplicates.
 setopt auto_cd # If cd is absent, but path is a directory, cd to it.
-cdpath=($HOME/code/auditboard)
+cdpath=($HOME/code/yapp/projects)
 
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:descriptions' format %d
@@ -147,32 +145,14 @@ zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
         'local-directories named-directories'
 
 
-export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-export PUPPETEER_EXECUTABLE_PATH=`which chromium`
-
-export FORCE_NODE=true
-
-
 eval "$(fzf --zsh)"
 
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 
-# pnpm
-export PNPM_HOME="/Users/matt/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-# pnpm end
-export VOLTA_FEATURE_PNPM=1
-
 # bun completions
-[ -s "/Users/matt/.bun/_bun" ] && source "/Users/matt/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-export GPG_TTY=$(tty)
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
 export RUBYOPT="-r$HOME/.rubyopenssl_default_store.rb $RUBYOPT"

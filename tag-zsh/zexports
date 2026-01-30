@@ -1,23 +1,42 @@
+#!/bin/bash
+# Homebrew (sets PATH/MANPATH/etc.)
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+typeset -U path
+
+# Base PATH entries
+path=(
+  "$HOME/.cargo/bin"
+  "$HOME/.bin"
+  "$HOME/bin"
+  "/usr/local/bin"
+  "/usr/local/sbin"
+  "${path[@]}"
+)
+
 # pnpm
-export PNPM_HOME="/Users/matt/Library/pnpm"
-path+=("$PNPM_HOME")
-# pnpm end
+export PNPM_HOME="$HOME/Library/pnpm"
+path=("$PNPM_HOME" "${path[@]}")
 
-
-path+=("$HOME/.cargo/bin")
-path+=("$HOME/.bin")
-path+=("/usr/local/bin")
-path+=("/usr/local/sbin")
-path=("./bin" "$PATH")
-
+# Volta
 export VOLTA_HOME="$HOME/.volta"
-path=("$VOLTA_HOME/bin" "$PATH")
+path=("$VOLTA_HOME/bin" "${path[@]}")
+export VOLTA_FEATURE_PNPM=1
+
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+path=("$BUN_INSTALL/bin" "${path[@]}")
 
 export PATH
 export EDITOR="vim"
 
+export FORCE_NODE=true
+export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+PUPPETEER_EXECUTABLE_PATH="$(command -v chromium)"
+export PUPPETEER_EXECUTABLE_PATH
+
 export LDFLAGS="-L/opt/homebrew/opt/sqlite/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/sqlite/include"
 
- #export MONOTONIC_ACTIVE_WORKTREE="/feature/y-184-formkit-for-poll3"
- export MONOTONIC_ACTIVE_WORKTREE="/bug-social-feed-render-content"
+#export MONOTONIC_ACTIVE_WORKTREE="/feature/y-184-formkit-for-poll3"
+export MONOTONIC_ACTIVE_WORKTREE="/bug-social-feed-render-content"
