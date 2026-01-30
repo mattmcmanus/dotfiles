@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2155
 set -e
 
 # Switch between git worktrees with speed.
@@ -7,9 +8,6 @@ args=("$@")
 VERSION="0.1.1"
 TMP_PATH=$(mktemp)
 BINARY_PATH=$(which wt)
-
-VSCODE_PREFS_FOLDER="vscode-prefs"
-VSCODE_PREFS_PATH="~/code/auditboard/frontend/$VSCODE_PREFS_FOLDER"
 
 # Escape forward slash
 arg=$(echo "${args[0]}" | sed 's/\//\\\//g')
@@ -74,9 +72,15 @@ change_worktree() {
 
 add_new_worktree() {
 	local name="$1"
+	local dir_name
 	goto_main_worktree
-	git worktree add "../$name"
-	cd ../$name
+	dir_name=${name//\//-}
+	if git show-ref --verify --quiet "refs/heads/$name"; then
+		git worktree add "../$dir_name" "$name"
+	else
+		git worktree add --track -b "$name" "../$dir_name"
+	fi
+	cd ../$dir_name
 	post_add_worktree
 	exec $SHELL
 }
@@ -122,7 +126,7 @@ clean_merged_worktrees() {
     local main_worktree=$(pwd)
     cd ..
     for dir in */; do
-        if [ "$dir" != "$(basename "$main_worktree")/" ] && [ "$dir" != "$VSCODE_PREFS_FOLDER/" ]; then
+        if [ "$dir" != "$(basename "$main_worktree")/" ]; then
             cd "$dir"
             local removal_reason=$(should_remove_worktree)
             if [ $? -eq 0 ]; then
@@ -141,10 +145,14 @@ clean_merged_worktrees() {
 # Custom code to run after the worktree is created
 post_add_worktree() {
 	pnpm install
-	if [ -d "$VSCODE_PREFS_PATH" ]; then
-		echo "Symlinking shared vscode project settings"
-		ln -s $VSCODE_PREFS_PATH/settings.json .vscode/settings.json
-		ln -s $VSCODE_PREFS_PATH/tasks.json .vscode/tasks.json
+	local main_worktree
+	local container_dir
+	local post_add_script
+	main_worktree=$(git worktree list --porcelain | awk '/^worktree / {sub(/^worktree /, "", $0); print; exit}')
+	container_dir=$(dirname "$main_worktree")
+	post_add_script="$container_dir/post-add-worktree"
+	if [ -f "$post_add_script" ]; then
+		"$post_add_script"
 	fi
 }
 
