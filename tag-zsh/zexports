@@ -1,10 +1,8 @@
 # pnpm
-export PNPM_HOME="/Users/mattmcmanus/Library/pnpm"
+export PNPM_HOME="/Users/matt/Library/pnpm"
 path+=("$PNPM_HOME")
 # pnpm end
 
-export VOLTA_HOME="$HOME/.volta"
-path+=("$VOLTA_HOME/bin")
 
 path+=("$HOME/.cargo/bin")
 path+=("$HOME/.bin")
@@ -12,9 +10,14 @@ path+=("/usr/local/bin")
 path+=("/usr/local/sbin")
 path=("./bin" "$PATH")
 
+export VOLTA_HOME="$HOME/.volta"
+path=("$VOLTA_HOME/bin" "$PATH")
+
 export PATH
 export EDITOR="vim"
 
 export LDFLAGS="-L/opt/homebrew/opt/sqlite/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/sqlite/include"
 
+ #export MONOTONIC_ACTIVE_WORKTREE="/feature/y-184-formkit-for-poll3"
+ export MONOTONIC_ACTIVE_WORKTREE="/bug-social-feed-render-content"
