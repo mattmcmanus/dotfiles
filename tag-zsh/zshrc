@@ -1,5 +1,4 @@
 source ~/.secrets
-source ~/.zexports
 export PATH
 
 # Start configuration added by Zim install {{{
@@ -8,6 +7,7 @@ export PATH
 #
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
+source ~/.zexports
 # -----------------
 # Zsh configuration
 # -----------------
@@ -126,9 +126,7 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 # }}} End configuration added by Zim install
 
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
 source ~/.aliases
-eval "$(rbenv init - zsh)"
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -162,16 +160,20 @@ eval "$(fzf --zsh)"
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 
 # pnpm
-export PNPM_HOME="/Users/mattmcmanus/Library/pnpm"
+export PNPM_HOME="/Users/matt/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
 export VOLTA_FEATURE_PNPM=1
 
 # bun completions
-[ -s "/Users/mattmcmanus/.bun/_bun" ] && source "/Users/mattmcmanus/.bun/_bun"
+[ -s "/Users/matt/.bun/_bun" ] && source "/Users/matt/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 export GPG_TTY=$(tty)
+
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
+export RUBYOPT="-r$HOME/.rubyopenssl_default_store.rb $RUBYOPT"
+eval "$(rbenv init - zsh)"
