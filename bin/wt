@@ -114,7 +114,7 @@ should_remove_worktree() {
     if ! git rev-parse --verify "$branch_name" &>/dev/null; then
         echo "non-existent branch"
         return 0
-    elif git branch --contains "$main_branch" | grep -q "^\* "; then
+    elif git branch --merged "$main_branch" | grep -qw "$branch_name"; then
         echo "merged into $main_branch"
         return 0
     fi
@@ -128,10 +128,12 @@ clean_merged_worktrees() {
     for dir in */; do
         if [ "$dir" != "$(basename "$main_worktree")/" ]; then
             cd "$dir"
-            local removal_reason=$(should_remove_worktree)
+            local removal_reason
+            removal_reason=$(should_remove_worktree)
             if [ $? -eq 0 ]; then
                 echo "Removing worktree ($removal_reason): $dir"
-                git worktree remove ../$dir
+                cd ..
+                git worktree remove "$dir"
             else
                 echo "Skipping worktree: $dir"
                 cd ..
@@ -142,9 +144,8 @@ clean_merged_worktrees() {
     echo "Cleaned up worktrees and pruned."
 }
 
-# Custom code to run after the worktree is created
+# Run optional post-add-worktree script from the container directory
 post_add_worktree() {
-	pnpm install
 	local main_worktree
 	local container_dir
 	local post_add_script
@@ -152,7 +153,7 @@ post_add_worktree() {
 	container_dir=$(dirname "$main_worktree")
 	post_add_script="$container_dir/post-add-worktree"
 	if [ -f "$post_add_script" ]; then
-		"$post_add_script"
+		"$post_add_script" "$(pwd)"
 	fi
 }
 
