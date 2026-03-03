@@ -5,12 +5,7 @@ set -e
 # Switch between git worktrees with speed.
 
 args=("$@")
-VERSION="0.1.1"
-TMP_PATH=$(mktemp)
-BINARY_PATH=$(which wt)
-
-# Escape forward slash
-arg=$(echo "${args[0]}" | sed 's/\//\\\//g')
+arg="${args[0]}"
 
 # show worktree list
 worktree_list() {
@@ -28,8 +23,12 @@ help_message() {
 	echo -e "\twt clean: remove all worktrees that have been merged into the main branch."
 }
 
+get_main_worktree_dir() {
+	git worktree list --porcelain | grep -E 'worktree ' | awk '{print $0; exit}' | cut -d ' ' -f2-
+}
+
 goto_main_worktree() {
-	worktree_dir=$(git worktree list --porcelain | grep -E 'worktree ' | awk '{print $0; exit}' | cut -d ' ' -f2-)
+	worktree_dir=$(get_main_worktree_dir)
 	change_worktree
 }
 
@@ -57,7 +56,7 @@ get_relative_path() {
 	else
 		relative_path=${current_path#$current_worktree_root/}
 	fi
-	echo $relative_path
+	echo "$relative_path"
 }
 
 change_worktree() {
@@ -80,9 +79,9 @@ add_new_worktree() {
 	else
 		git worktree add --track -b "$name" "../$dir_name"
 	fi
-	cd ../$dir_name
+	cd "../$dir_name"
 	post_add_worktree
-	exec $SHELL
+	exec "$SHELL"
 }
 
 remove_worktree() {
@@ -122,15 +121,15 @@ should_remove_worktree() {
 }
 
 clean_merged_worktrees() {
-    goto_main_worktree
-    local main_worktree=$(pwd)
-    cd ..
+    local main_worktree
+    main_worktree=$(get_main_worktree_dir)
+    cd "$(dirname "$main_worktree")"
     for dir in */; do
-        if [ "$dir" != "$(basename "$main_worktree")/" ]; then
+        dir="${dir%/}"
+        if [ "$dir" != "$(basename "$main_worktree")" ]; then
             cd "$dir"
             local removal_reason
-            removal_reason=$(should_remove_worktree)
-            if [ $? -eq 0 ]; then
+            if removal_reason=$(should_remove_worktree); then
                 echo "Removing worktree ($removal_reason): $dir"
                 cd ..
                 git worktree remove "$dir"
@@ -159,7 +158,7 @@ post_add_worktree() {
 
 # Function to select a worktree using fzf
 select_worktree() {
-	git worktree list | sed -r 's/^(.*\/([^[:space:]]* ))/\1 \2/g' | fzf --with-nth=2,4 --height 10 --border --prompt "tree: " --query="$1"
+	git worktree list | sed -E 's/^(.*\/([^[:space:]]* ))/\1 \2/g' | fzf --with-nth=2,4 --height 10 --border --prompt "tree: " --query="$1"
 }
 
 case "${args[0]}" in
@@ -187,12 +186,12 @@ help)
 	help_message
 	;;
 *)
-	SELECTION=$(select_worktree $arg)
+	SELECTION=$(select_worktree "$arg")
 	if [ "$SELECTION" = "" ]; then
 		exit 0
 	fi
 	worktree_dir=$(cut -d" " -f1 <<<"$SELECTION")
 	change_worktree
-	exec $SHELL
+	exec "$SHELL"
 	;;
 esac
