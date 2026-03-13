@@ -123,22 +123,24 @@ should_remove_worktree() {
 clean_merged_worktrees() {
     local main_worktree
     main_worktree=$(get_main_worktree_dir)
-    cd "$(dirname "$main_worktree")"
+    local container_dir
+    container_dir="$(dirname "$main_worktree")"
+    cd "$container_dir"
     for dir in */; do
         dir="${dir%/}"
         if [ "$dir" != "$(basename "$main_worktree")" ]; then
-            cd "$dir"
+            cd "$container_dir/$dir"
             local removal_reason
             if removal_reason=$(should_remove_worktree); then
                 echo "Removing worktree ($removal_reason): $dir"
-                cd ..
-                git worktree remove "$dir"
+                cd "$main_worktree"
+                git worktree remove "$container_dir/$dir"
             else
                 echo "Skipping worktree: $dir"
-                cd ..
             fi
         fi
     done
+    cd "$main_worktree"
     git worktree prune
     echo "Cleaned up worktrees and pruned."
 }
