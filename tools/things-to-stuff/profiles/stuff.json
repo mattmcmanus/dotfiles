@@ -1,0 +1,67 @@
+{
+  "_comment": [
+    "UNVERIFIED TEMPLATE. The Stuff CLI docs are the source of truth:",
+    "https://www.themitycompany.com/docs/stuff-cli",
+    "Check each command below against `stuff --help` (and `stuff <cmd> --help`)",
+    "and edit the strings. Nothing else in this repo needs to change.",
+    "",
+    "Rules: {placeholders} are filled from the export. An option is only",
+    "emitted when every placeholder it mentions has a value, so unused fields",
+    "disappear on their own. Set capture_id on any command whose stdout prints",
+    "the new item's id; id_pattern pulls that id out and feeds it to children.",
+    "If the CLI has a --json/--porcelain flag, put it in global_args and point",
+    "id_pattern at the id field."
+  ],
+  "name": "stuff",
+  "binary": "stuff",
+  "global_args": [],
+  "id_pattern": "([0-9A-Za-z_-]{6,})\\s*$",
+  "script_id_filter": "grep -oE '[0-9A-Za-z_-]{6,}' | tail -1",
+  "when_map": {
+    "anytime": "anytime",
+    "someday": "someday"
+  },
+  "commands": {
+    "space": {
+      "args": ["space", "add", "{title}"],
+      "capture_id": true,
+      "options": {}
+    },
+    "list": {
+      "args": ["list", "add", "{title}"],
+      "capture_id": true,
+      "options": {
+        "space_id": ["--space", "{space_id}"],
+        "notes": ["--notes", "{notes}"],
+        "deadline": ["--deadline", "{deadline}"]
+      }
+    },
+    "task": {
+      "args": ["task", "add", "{title}"],
+      "capture_id": true,
+      "options": {
+        "list_id": ["--list", "{list_id}"],
+        "space_id": ["--space", "{space_id}"],
+        "parent_id": ["--parent", "{parent_id}"],
+        "notes": ["--notes", "{notes}"],
+        "when": ["--when", "{when}"],
+        "deadline": ["--deadline", "{deadline}"],
+        "tags": ["--tags", "{tags}"]
+      }
+    },
+    "subtask": {
+      "args": ["task", "add", "{title}"],
+      "capture_id": false,
+      "options": {
+        "parent_id": ["--parent", "{parent_id}"]
+      }
+    },
+    "complete": {
+      "args": ["task", "complete", "{id}"]
+    },
+    "_complete_list": {
+      "_comment": "Rename to complete_list if finishing a list needs its own command.",
+      "args": ["list", "complete", "{id}"]
+    }
+  }
+}
