@@ -1,4 +1,4 @@
-# /Users/mattmcmanus/.config/tmuxinator/ab.yml
+# /Users/matt/.config/tmuxinator/ab.yml
 
 name: api
 root: ~/code/auditboard/backend
