@@ -53,3 +53,4 @@ tmp/**/*
 zeus.json
 .vscode
 *.code-workspace
+.claude/settings.local.json
