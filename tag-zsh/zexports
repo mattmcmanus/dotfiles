@@ -23,6 +23,9 @@ path=("$PNPM_HOME" "${path[@]}")
 export BUN_INSTALL="$HOME/.bun"
 path=("$BUN_INSTALL/bin" "${path[@]}")
 
+# Obsidian
+path=("/Applications/Obsidian.app/Contents/MacOS" "${path[@]}")
+
 export PATH
 export EDITOR="vim"
 
@@ -34,5 +37,4 @@ export PUPPETEER_EXECUTABLE_PATH
 export LDFLAGS="-L/opt/homebrew/opt/sqlite/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/sqlite/include"
 
-#export MONOTONIC_ACTIVE_WORKTREE="/feature/y-184-formkit-for-poll3"
-export MONOTONIC_ACTIVE_WORKTREE="/bug-social-feed-render-content"
+export MONOTONIC_ACTIVE_WORKTREE="/feature/y-184-formkit-for-poll3"
