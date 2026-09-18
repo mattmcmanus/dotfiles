@@ -1,26 +1,28 @@
 # Things 3 → Stuff, one-time migration
 
-Stuff has no importer. These two scripts do a one-way dump: read the Things
+Stuff has no importer. These scripts do a one-way dump: read the Things
 database, then replay it through the Stuff CLI.
 
-They are deliberately split so the risky half is reviewable:
-
-| Script | What it does | Touches |
+| File | What it does | Touches |
 | --- | --- | --- |
 | `things_export.py` | Things SQLite → normalised JSON | Read-only |
-| `stuff_import.py` | JSON → `stuff` CLI commands | Writes, but only with `--execute` |
+| `things_repeats.py` | Decodes Things repeat rules | Pure function |
+| `stuff_import.py` | JSON → `stuff` CLI commands | Writes only with `--execute` |
+| `profiles/stuff.json` | Every command and flag the import issues | Data, not code |
+
+The models line up better than expected — Things areas, projects, headings and
+to-dos map onto Stuff spaces, lists, headings and tasks one for one.
 
 ## Before you start
 
-- macOS with Things 3 installed. Quit Things first so the database is flushed.
-- `pip install things.py` — reads the local Things SQLite file
-  ([thingsapi/things.py](https://github.com/thingsapi/things.py)).
-- The Stuff CLI on `$PATH` as `stuff`.
-- Ideally a fresh/empty Stuff account. There is no undo.
+- macOS with Things 3. Quit Things first so the database is flushed.
+- `pip install things.py` ([thingsapi/things.py](https://github.com/thingsapi/things.py)).
+- The Stuff CLI on `$PATH`. It needs an Extra Stuff membership.
+- Ideally an empty Stuff account. There is no undo.
 
 Things' [URL scheme](https://culturedcode.com/things/support/articles/2803573/)
-is not used here — it writes *into* Things, which is the wrong direction. It is
-the tool to reach for if you ever migrate back.
+is not used — it writes *into* Things, the wrong direction. It is the tool for
+migrating back.
 
 ## 1. Export
 
@@ -28,92 +30,127 @@ the tool to reach for if you ever migrate back.
 ./things_export.py --output things-dump.json
 ```
 
-Incomplete items only by default. Useful additions:
+Incomplete items only by default. Also available:
 
 ```sh
---include-completed --completed-since 2025-01-01   # bring some Logbook across
+--include-completed --completed-since 2025-01-01
 --include-canceled
 --include-trashed
---database ~/path/to/main.sqlite                   # or set $THINGSDB
+--explain-repeats                 # print decoded repeat rules and exit
+--database ~/path/main.sqlite     # or set $THINGSDB
 ```
 
-The dump keeps the Things shape — areas → projects → headings → to-dos →
-checklist items, plus `inbox`, loose `todos`, `tags` and a `stats` block. Read
-it; it is the last point where fixing something is cheap.
+## 2. Let the CLI check the profile
 
-## 2. Calibrate the profile
+`profiles/stuff.json` holds every command the import issues, written from
+`stuff --help`. A few flags are not in that help output and are marked
+`_unverified` in the file — chiefly whether `add task` takes `--heading`,
+`--space` and `--notes`.
 
-**This is the one manual step.** `profiles/stuff.json` holds every `stuff`
-command this migration issues, and it is written from a *guess* at the CLI's
-flags — the [Stuff CLI docs](https://www.themitycompany.com/docs/stuff-cli)
-could not be reached from where this was built. Open `stuff --help` and
-`stuff <command> --help`, fix the strings, and nothing else needs to change.
+You do not have to guess at them. Stuff has a global `--dry-run` that
+validates a mutation without committing it, so the CLI can check the whole
+plan for you:
 
-What the profile controls:
+```sh
+./stuff_import.py things-dump.json --validate
+```
 
-- `binary`, `global_args` — add `--json`/`--porcelain` here if the CLI has one.
-- `commands.<kind>.args` — the base invocation for `space`, `list`, `task`,
-  `subtask` and `complete`.
-- `commands.<kind>.options` — one entry per field. An option is only emitted
-  when every `{placeholder}` in it has a value, so empty fields drop out by
-  themselves. Delete an entry the CLI does not support and the importer will
-  tell you how many values it dropped as a result.
-- `capture_id` + `id_pattern` — how a new item's id is read back out of stdout
-  and handed to its children. Get this wrong and everything lands unparented.
-- `script_id_filter` — the shell equivalent, used by `--script`.
-- `when_map` — how `anytime` / `someday` are spelled.
+Every command runs through `--dry-run`, and failures are grouped by the exit
+codes Stuff documents. The distinction that matters:
+
+- **exit 4 / 64 → the profile is wrong.** An unknown flag or a bad value. Fix
+  it in `profiles/stuff.json` and re-run.
+- **exit 5 (not found) → expected.** Parents do not exist during validation.
+- **exit 3 (ambiguous match) → two items share a name.** The importer warns
+  about these before it starts; rename in Things first.
+- **exit 2 → not authenticated.** `stuff auth status`.
+
+`--validate` also runs `stuff doctor` and `stuff auth status` first.
 
 ## 3. Dry run, then commit
 
 ```sh
-./stuff_import.py things-dump.json                      # prints every command
-./stuff_import.py things-dump.json --script plan.sh     # runnable script, ids wired through
-./stuff_import.py things-dump.json --limit 5 --execute  # smoke test on five items
+./stuff_import.py things-dump.json                      # print every command
+./stuff_import.py things-dump.json --script plan.sh     # save for review
+./stuff_import.py things-dump.json --limit 5 --execute  # smoke test
 ./stuff_import.py things-dump.json --execute            # the real thing
 ```
 
-`--execute` writes a ledger (`stuff-import-ledger.json`) after every command,
-mapping Things uuid → created Stuff id. Re-running skips what is already there,
-so an interrupted or failed run resumes instead of duplicating. Delete the
-ledger to start over — after deleting the items in Stuff.
-
-Mapping choices, all with sane defaults:
+Parents are referenced by name (`--list Groceries`), the way the CLI's own
+examples do, so there is no id bookkeeping and the generated script is
+readable. `--execute` writes a ledger after every command; re-running skips
+what is already there, so an interrupted run resumes instead of duplicating.
 
 ```sh
---headings prefix|task|ignore    # Things headings have no obvious Stuff equivalent
---checklists subtask|notes|skip
+--repeats template|instance|both   # see below
+--checklists notes|task|skip
 --tags native|notes|skip
---completed skip|include         # what to do with done items in the dump
---stamp-source                   # append the Things uuid to each note
---sleep 0.2                      # throttle, if the CLI dislikes a firehose
+--completed skip|include           # replays via `stuff complete` / `stuff cancel`
+--stamp-source                     # append the Things uuid to each note
+--sleep 0.2
 ```
 
-## What survives, and what does not
+## Repeating to-dos
 
-Carried over: areas, projects, headings (flattened per `--headings`), to-dos,
-notes, checklist items, tags, start dates, deadlines, Someday/Anytime, Inbox,
-and completion state where the dump includes it.
+A repeating to-do exists twice in Things: the **template**, which carries the
+rule, and the **occurrence** Things has already generated. `things.py` hides
+templates from every query (`rt1_recurrenceRule IS NULL` is hardcoded into its
+WHERE clause), so a naive export silently loses the repeat and keeps only the
+occurrence.
 
-Left behind:
+`rt1_recurrenceRule` is an XML plist, not an opaque blob. `things_repeats.py`
+decodes it:
 
-- **Repeat rules.** Things stores them as an opaque blob and `things.py`
-  filters repeating templates out of every query. The export lists them under
-  `repeating_not_exported` so you can recreate them by hand — the already
-  generated instances do come across, which means a repeating to-do can appear
-  both in that list and as a normal task.
-- **Reminder times.** Exported as `reminder_time`, but no profile flag maps
-  them until the CLI is confirmed to support times.
-- **Today ordering.** `index` / `today_index` are in the dump; nothing replays
-  them.
-- **Attachments and images** in notes, and `things:///` links, which will point
-  at Things forever.
-- **Tag hierarchy.** Tags come across as flat names.
-- **Logbook and Trash**, unless you ask for them at export time.
+```
+{'fa': 1, 'fu': 256, 'of': [{'wd': 0}], 'ia': 1616889600.0, ...}
+  → "every week on Sunday, starting 2021-03-28"
+```
+
+`fa` is the interval, `of` the weekdays, `ia` the first instance, and `ed` is
+`4001-01-01` when the repeat never ends. `fu` holds Apple's NSCalendarUnit
+values; only 256 (weekly) has been confirmed against a real rule, so any other
+value is reported with `needs_review` and its raw number rather than guessed
+at. Check yours and extend `UNITS`:
+
+```sh
+./things_export.py --explain-repeats
+```
+
+Since nothing in the Stuff CLI mentions repeats, the rule is written into the
+task's note as a line you can act on:
+
+```
+Repeats in Things: every week on Sunday, starting 2021-03-28 (recreate by hand)
+```
+
+`--repeats template` (the default) imports the template and drops the
+already-generated occurrence, so you get one task per repeat rather than two.
+The link is `rt1_repeatingTemplate` on the occurrence.
+
+## What does not come across
+
+- **The repeat itself.** No repeat flag exists anywhere in the Stuff CLI, so
+  the rule is a note. Everything else about the task survives.
+- **Reminder times.** Exported as `reminder_time`; `--plan` takes a date.
+- **Today ordering.** `index` / `today_index` are in the dump, unused.
+- **Attachments, images, and `things:///` links**, which point at Things
+  forever.
+- **Tag hierarchy** — tags come across flat.
+- **Checklists** become note lines by default; Stuff has task *dependencies*,
+  not subtasks. `--checklists task` promotes them to real tasks instead.
+- **Logbook and Trash**, unless asked for at export time.
+
+## Notes
+
+`things_export.py` decodes Things' packed date integers itself rather than
+using things.py's SQL helper, whose bit mask truncates out-of-range years: a
+repeating template stores `4001-01-01` to mean "no deadline", and that helper
+renders it as `1953-01-01`.
 
 ## Testing
 
-Both scripts were exercised against the `things.py` test database
-(`tests/main.sqlite` from that repo), not just a live account:
+Both scripts run against the `things.py` test database, not just a live
+account:
 
 ```sh
 curl -sSLO https://raw.githubusercontent.com/thingsapi/things.py/main/tests/main.sqlite
@@ -121,5 +158,5 @@ curl -sSLO https://raw.githubusercontent.com/thingsapi/things.py/main/tests/main
 ./stuff_import.py dump.json --state "" --script plan.sh
 ```
 
-Point `binary` at `echo` in a copy of the profile to watch the whole thing run
-without touching Stuff.
+Point `binary` at a stub in a copy of the profile to exercise `--execute` and
+`--validate` without touching Stuff.

@@ -1,67 +1,72 @@
 {
   "_comment": [
-    "UNVERIFIED TEMPLATE. The Stuff CLI docs are the source of truth:",
-    "https://www.themitycompany.com/docs/stuff-cli",
-    "Check each command below against `stuff --help` (and `stuff <cmd> --help`)",
-    "and edit the strings. Nothing else in this repo needs to change.",
-    "",
-    "Rules: {placeholders} are filled from the export. An option is only",
-    "emitted when every placeholder it mentions has a value, so unused fields",
-    "disappear on their own. Set capture_id on any command whose stdout prints",
-    "the new item's id; id_pattern pulls that id out and feeds it to children.",
-    "If the CLI has a --json/--porcelain flag, put it in global_args and point",
-    "id_pattern at the id field."
+    "Written against the output of `stuff --help` (Stuff CLI, Sept 2026).",
+    "Commands and flags taken straight from its documented examples:",
+    "  stuff add task \"...\" --plan 2026-06-05 --tag Work",
+    "  stuff add list \"Launch Plan\" --space Work --tag Client",
+    "  stuff add heading \"Research\" --list \"Launch Plan\"",
+    "  stuff add space \"Work\" --notes \"Client projects\"",
+    "Entries marked UNVERIFIED below are not in that help output; run",
+    "`stuff_import.py --validate` to have the CLI itself confirm or reject",
+    "them via its global --dry-run."
   ],
-  "name": "stuff",
   "binary": "stuff",
   "global_args": [],
+  "dry_run_args": ["--dry-run"],
+  "preflight": [["doctor"], ["auth", "status"]],
+  "tags_style": "repeat",
+  "when_map": {
+    "Someday": "someday",
+    "Anytime": ""
+  },
   "id_pattern": "([0-9A-Za-z_-]{6,})\\s*$",
   "script_id_filter": "grep -oE '[0-9A-Za-z_-]{6,}' | tail -1",
-  "when_map": {
-    "anytime": "anytime",
-    "someday": "someday"
-  },
   "commands": {
     "space": {
-      "args": ["space", "add", "{title}"],
-      "capture_id": true,
-      "options": {}
+      "args": ["add", "space", "{title}"],
+      "options": {
+        "notes": ["--notes", "{notes}"],
+        "tags": ["--tag", "{tag}"]
+      }
     },
     "list": {
-      "args": ["list", "add", "{title}"],
-      "capture_id": true,
+      "args": ["add", "list", "{title}"],
       "options": {
-        "space_id": ["--space", "{space_id}"],
+        "space": ["--space", "{space}"],
         "notes": ["--notes", "{notes}"],
-        "deadline": ["--deadline", "{deadline}"]
+        "plan": ["--plan", "{plan}"],
+        "deadline": ["--deadline", "{deadline}"],
+        "tags": ["--tag", "{tag}"]
+      }
+    },
+    "heading": {
+      "args": ["add", "heading", "{title}"],
+      "options": {
+        "list": ["--list", "{list}"]
       }
     },
     "task": {
-      "args": ["task", "add", "{title}"],
-      "capture_id": true,
+      "args": ["add", "task", "{title}"],
       "options": {
-        "list_id": ["--list", "{list_id}"],
-        "space_id": ["--space", "{space_id}"],
-        "parent_id": ["--parent", "{parent_id}"],
+        "list": ["--list", "{list}"],
+        "heading": ["--heading", "{heading}"],
+        "space": ["--space", "{space}"],
         "notes": ["--notes", "{notes}"],
-        "when": ["--when", "{when}"],
+        "plan": ["--plan", "{plan}"],
         "deadline": ["--deadline", "{deadline}"],
-        "tags": ["--tags", "{tags}"]
+        "tags": ["--tag", "{tag}"]
       }
     },
-    "subtask": {
-      "args": ["task", "add", "{title}"],
-      "capture_id": false,
-      "options": {
-        "parent_id": ["--parent", "{parent_id}"]
-      }
-    },
-    "complete": {
-      "args": ["task", "complete", "{id}"]
-    },
-    "_complete_list": {
-      "_comment": "Rename to complete_list if finishing a list needs its own command.",
-      "args": ["list", "complete", "{id}"]
-    }
+    "complete": { "args": ["complete", "{ref}"] },
+    "cancel": { "args": ["cancel", "{ref}"] }
+  },
+  "_unverified": {
+    "task.--heading": "not in the help output; add heading exists, but no documented way to file a task under one",
+    "task.--space": "not documented for add task; needed for Things to-dos that sit in an area with no project",
+    "task.--notes": "--notes is documented for add space only",
+    "list.--plan / list.--deadline": "--deadline is documented for edit list, not add list",
+    "tags_style": "--tag is singular in every example; repeating it is an assumption",
+    "when_map.someday": "--plan takes a date in every example; 'someday' as a value is a guess",
+    "repeats": "no repeat/recurrence flag appears anywhere in the CLI"
   }
 }
