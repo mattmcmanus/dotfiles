@@ -131,11 +131,32 @@ decodes it:
   → "every week on Sunday, starting 2021-03-28"
 ```
 
-`fa` is the interval, `of` the weekdays, `ia` the first instance, and `ed` is
-`4001-01-01` when the repeat never ends. `fu` holds Apple's NSCalendarUnit
-values; only 256 (weekly) has been confirmed against a real rule, so any other
-value is reported with `needs_review` and its raw number rather than guessed
-at. Check yours and extend `UNITS`:
+`fa` is the interval, `ia` the first instance, `ed` is `4001-01-01` when the
+repeat never ends, and `fu` holds Apple's NSCalendarUnit value — all four of
+which (day 16, week 256, month 8, year 4) are confirmed against real rules.
+
+The `of` entries are zero-based, which is the easy thing to get wrong:
+
+| Entry | Means |
+| --- | --- |
+| `{'wd': 0}` | Sunday |
+| `{'dy': 17}` | the 18th |
+| `{'dy': -1}` | the last day of the month |
+| `{'wd': 2, 'wdo': 1}` | the 1st Tuesday |
+| `{'dy': 0, 'mo': 8}` | September 1 |
+
+`test_repeats.py` pins this down without relying on anyone's memory: for 52
+real rules it asserts that the occurrence Things actually generated (`ia`)
+lands on exactly the weekday, day-of-month, nth weekday, or month-and-day the
+`of` entry predicts. Run `python3 test_repeats.py`.
+
+Rules scheduled *after completion* (`tp == 0`) still carry an `of` entry.
+Whether it constrains the next occurrence or just records where the current
+one landed is not something the database says, so it is reported as "anchored
+to ..." — true either way, and worth keeping, since a "1st Tuesday" or
+"September" anchor cannot be derived from a completion date.
+
+To check the decoding against what Things shows you:
 
 ```sh
 ./things_export.py --explain-repeats
