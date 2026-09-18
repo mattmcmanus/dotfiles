@@ -16,9 +16,34 @@ to-dos map onto Stuff spaces, lists, headings and tasks one for one.
 ## Before you start
 
 - macOS with Things 3. Quit Things first so the database is flushed.
-- `pip install things.py` ([thingsapi/things.py](https://github.com/thingsapi/things.py)).
 - The Stuff CLI on `$PATH`. It needs an Extra Stuff membership.
 - Ideally an empty Stuff account. There is no undo.
+
+`things_export.py` needs [things.py](https://github.com/thingsapi/things.py).
+Both scripts carry PEP 723 inline metadata, so the simplest route installs
+nothing:
+
+```sh
+brew install uv          # if you do not have it
+uv run ./things_export.py --output things-dump.json
+```
+
+`uv` reads the dependency off the script header and builds a throwaway
+environment. Otherwise, a virtualenv:
+
+```sh
+python3 -m venv .venv && source .venv/bin/activate
+pip install things.py
+```
+
+Or, since you have pyenv, `pyenv shell 3.9.11 && pip install things.py` — a
+pyenv interpreter is not externally managed, so PEP 668 does not block it.
+Homebrew's `python3` does: `pip3 install` there fails with
+`externally-managed-environment`, and `--break-system-packages` is not worth
+the risk to your Homebrew install.
+
+Verified on Python 3.9.11 (the version `tag-python/python-version` pins) and
+3.11.
 
 Things' [URL scheme](https://culturedcode.com/things/support/articles/2803573/)
 is not used — it writes *into* Things, the wrong direction. It is the tool for
@@ -27,7 +52,7 @@ migrating back.
 ## 1. Export
 
 ```sh
-./things_export.py --output things-dump.json
+./things_export.py --output things-dump.json      # or: uv run ./things_export.py ...
 ```
 
 Incomplete items only by default. Also available:

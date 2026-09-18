@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# /// script
+# requires-python = ">=3.9"
+# dependencies = ["things.py"]
+# ///
 """Dump a Things 3 database to a normalised JSON file.
 
 Read-only. Talks to the local Things SQLite database through things.py

@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# /// script
+# requires-python = ">=3.9"
+# dependencies = []
+# ///
 """Turn a Things export (see things_export.py) into Stuff CLI commands.
 
 Stuff has no importer, so this walks the exported tree and renders one CLI
