@@ -6,6 +6,7 @@ typeset -U path
 
 # Base PATH entries
 path=(
+  "$HOME/.local/bin"
   "$HOME/.cargo/bin"
   "$HOME/.bin"
   "$HOME/bin"
@@ -17,11 +18,6 @@ path=(
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
 path=("$PNPM_HOME" "${path[@]}")
-
-# Volta
-export VOLTA_HOME="$HOME/.volta"
-path=("$VOLTA_HOME/bin" "${path[@]}")
-export VOLTA_FEATURE_PNPM=1
 
 # Bun
 export BUN_INSTALL="$HOME/.bun"

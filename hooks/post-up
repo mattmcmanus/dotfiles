@@ -16,14 +16,6 @@ log() {
   vim -c 'PlugUpdate'
 )
 
-# Install node
-[[ ! $(which volta) ]] && (
-  log "Installing volta"
-  curl https://get.volta.sh | bash
-  volta install node
-  volta install yarn
-)
-
 if grep -q '^TAGS=.*\bpython\b' ~/.rcrc; then
   [ ! -d $HOME/.pyenv/versions ] && (
     log "Installing system python version"

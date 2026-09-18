@@ -81,6 +81,7 @@ zstyle ':completion:*:descriptions' format %B%d%b
 zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
         'local-directories named-directories'
 
+eval "$(~/.local/bin/mise activate zsh)"
 
 eval "$(fzf --zsh)"
 
@@ -92,4 +93,3 @@ eval "$(fzf --zsh)"
 
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
 export RUBYOPT="-r$HOME/.rubyopenssl_default_store.rb $RUBYOPT"
-eval "$(rbenv init - zsh)"
