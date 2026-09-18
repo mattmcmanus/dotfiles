@@ -1,0 +1,250 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2155
+set -e
+
+# git-wt: A fast, interactive git worktree manager.
+# https://github.com/mattmcmanus/git-wt
+
+VERSION="0.1.0"
+
+args=("$@")
+arg="${args[0]}"
+
+# show worktree list
+worktree_list() {
+	git worktree list
+}
+
+help_message() {
+	echo -e "git-wt: A fast, interactive git worktree manager.\n"
+	echo "Usage:"
+	echo -e "\tgit wt <worktree-name>    Search for worktree and switch to it"
+	echo -e "\tgit wt add <name>         Add a new worktree and switch to it"
+	echo -e "\tgit wt remove [name]      Remove an existing worktree"
+	echo -e "\tgit wt clean              Remove merged/gone branch worktrees"
+	echo -e "\tgit wt list               List all worktrees"
+	echo -e "\tgit wt help               Show this help message"
+	echo -e "\tgit wt version            Show version"
+}
+
+get_main_worktree_dir() {
+	git worktree list --porcelain | grep -E 'worktree ' | awk '{print $0; exit}' | cut -d ' ' -f2-
+}
+
+goto_main_worktree() {
+	worktree_dir=$(get_main_worktree_dir)
+	change_worktree
+}
+
+get_main_branch() {
+	local main_branch
+	main_branch=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null | sed 's@^origin/@@')
+	if [ -n "$main_branch" ]; then
+		echo "$main_branch"
+		return 0
+	fi
+	for candidate in main master develop; do
+		if git show-ref --verify --quiet "refs/heads/$candidate"; then
+			echo "$candidate"
+			return 0
+		fi
+	done
+	echo "develop"
+}
+
+get_relative_path() {
+	current_worktree_root=$(git rev-parse --show-toplevel)
+	current_path=$(pwd)
+	if [ "$current_worktree_root" = "$current_path" ]; then
+		relative_path="."
+	else
+		relative_path=${current_path#$current_worktree_root/}
+	fi
+	echo "$relative_path"
+}
+
+change_worktree() {
+	relative_path=$(get_relative_path)
+	echo Changing to worktree at: "$worktree_dir"
+	cd "$worktree_dir"
+	# Check if the relative path exists in the new worktree and navigate if it does
+	if [ -d "$relative_path" ]; then
+		cd "$relative_path"
+	fi
+}
+
+add_new_worktree() {
+	local name="$1"
+	local dir_name
+	goto_main_worktree
+	dir_name=${name//\//-}
+	if git show-ref --verify --quiet "refs/heads/$name"; then
+		git worktree add "../$dir_name" "$name"
+	else
+		git worktree add --track -b "$name" "../$dir_name"
+	fi
+	cd "../$dir_name"
+	post_add_worktree
+	exec "$SHELL"
+}
+
+remove_worktree() {
+	SELECTION=$(select_worktree "$1")
+	if [ -z "$SELECTION" ]; then
+		echo "No worktree selected for removal."
+		exit 0
+	fi
+	worktree_dir=$(cut -d" " -f1 <<<"$SELECTION")
+
+	echo "You are about to remove the worktree at: $worktree_dir"
+	read -p "Are you sure? (y/N): " confirmation
+	case "$confirmation" in
+	[yY][eE][sS] | [yY])
+		echo "Removing..."
+		git worktree remove "$worktree_dir"
+		git worktree prune
+		echo "Worktree removed and pruned."
+		;;
+	*)
+		echo "Worktree removal cancelled."
+		;;
+	esac
+}
+
+should_remove_worktree() {
+	local branch_name=$(git rev-parse --abbrev-ref HEAD)
+	local main_branch=$(get_main_branch)
+	if ! git rev-parse --verify "$branch_name" &>/dev/null; then
+		echo "non-existent branch"
+		return 0
+	elif git branch --merged "$main_branch" | grep -qw "$branch_name"; then
+		echo "merged into $main_branch"
+		return 0
+	fi
+	return 1
+}
+
+clean_merged_worktrees() {
+	local main_worktree
+	main_worktree=$(get_main_worktree_dir)
+	local container_dir
+	container_dir="$(dirname "$main_worktree")"
+	cd "$container_dir"
+	for dir in */; do
+		dir="${dir%/}"
+		if [ "$dir" != "$(basename "$main_worktree")" ]; then
+			cd "$container_dir/$dir"
+			local removal_reason
+			if removal_reason=$(should_remove_worktree); then
+				if [ -n "$(git status --porcelain)" ]; then
+					echo "Worktree '$dir' has uncommitted changes ($removal_reason):"
+					git status --short
+					read -p "Force delete this worktree? (y/N): " confirmation
+					case "$confirmation" in
+					[yY][eE][sS] | [yY])
+						echo "Force removing worktree ($removal_reason): $dir"
+						cd "$main_worktree"
+						git worktree remove --force "$container_dir/$dir"
+						;;
+					*)
+						echo "Skipping worktree (uncommitted changes kept): $dir"
+						cd "$main_worktree"
+						;;
+					esac
+				else
+					echo "Removing worktree ($removal_reason): $dir"
+					cd "$main_worktree"
+					git worktree remove "$container_dir/$dir"
+				fi
+			else
+				echo "Skipping worktree: $dir"
+			fi
+		fi
+	done
+	cd "$main_worktree"
+	git worktree prune
+	echo "Cleaned up worktrees and pruned."
+}
+
+# Find and run post-add-worktree hook.
+# Walks up from the current directory looking for .wt/post-add-worktree,
+# stopping at $HOME. First match wins. ~/.wt/post-add-worktree is the
+# global default.
+post_add_worktree() {
+	local search_dir
+	search_dir="$(pwd)"
+	local worktree_path
+	worktree_path="$(pwd)"
+
+	while true; do
+		if [ -x "$search_dir/.wt/post-add-worktree" ]; then
+			"$search_dir/.wt/post-add-worktree" "$worktree_path"
+			return 0
+		fi
+
+		# Stop at HOME (already checked $HOME/.wt above if path passes through it)
+		if [ "$search_dir" = "$HOME" ]; then
+			break
+		fi
+
+		# Move to parent
+		local parent
+		parent="$(dirname "$search_dir")"
+
+		# Stop if we've hit the filesystem root
+		if [ "$parent" = "$search_dir" ]; then
+			break
+		fi
+
+		search_dir="$parent"
+	done
+
+	# Global fallback: check ~/.wt/ if we didn't already walk through $HOME
+	if [ -x "$HOME/.wt/post-add-worktree" ]; then
+		"$HOME/.wt/post-add-worktree" "$worktree_path"
+		return 0
+	fi
+}
+
+# Function to select a worktree using fzf
+select_worktree() {
+	git worktree list | sed -E 's/^(.*\/([^[:space:]]* ))/\1 \2/g' | fzf --with-nth=2,4 --height 10 --border --prompt "tree: " --query="$1"
+}
+
+case "${args[0]}" in
+list)
+	worktree_list
+	;;
+add)
+	if [ -z "${args[1]}" ]; then
+		echo "Error: No name provided for the new worktree."
+		exit 1
+	else
+		add_new_worktree "${args[1]}"
+	fi
+	;;
+post-add)
+	post_add_worktree
+	;;
+remove)
+	remove_worktree "${args[1]}"
+	;;
+clean)
+	clean_merged_worktrees
+	;;
+help | --help | -h)
+	help_message
+	;;
+version | --version | -v)
+	echo "git-wt $VERSION"
+	;;
+*)
+	SELECTION=$(select_worktree "$arg")
+	if [ "$SELECTION" = "" ]; then
+		exit 0
+	fi
+	worktree_dir=$(cut -d" " -f1 <<<"$SELECTION")
+	change_worktree
+	exec "$SHELL"
+	;;
+esac
